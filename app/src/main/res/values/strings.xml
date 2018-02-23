@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">VerwaltungsTest</string>
+    <string name="button_kunden">Kunden</string>
+    <string name="button_lager">Lager</string>
+    <string name="button_bestellungen">Bestellungen</string>
+    <string name="button_save">Speichern</string>
+    <string name="hint_kundennummer">Kundennummer</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_adresse">Adresse</string>
+
+    <string name="editText_errorMessage">The field should not be empty</string>
+    <string name="button_edit">Bearbeiten</string>
+    <string name="button_add">Anlegen</string>
+    <string name="hint_orders">zeige Bestellungen</string>
+    <string name="hint_save">Speichern</string>
+    <string name="kunde_editmode">EditMode</string>
+
+    <string-array name="kunden_arten">
+        <item>Privatkunde</item>
+        <item>Firmenkunde</item>
+    </string-array>
+</resources>
