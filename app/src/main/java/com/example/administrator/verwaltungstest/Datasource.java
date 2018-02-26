@@ -195,7 +195,7 @@ public class Datasource {
         database.update(DbHelper.TABLE_LAGER,values,
                 DbHelper.COLUMN_PRODUCT_ID + "=" + id,null);
         Cursor cursor = database.query(DbHelper.TABLE_LAGER,
-                columns,DbHelper.COLUMN_PRODUCT_ID + "=" + id,
+                columns_Lager,DbHelper.COLUMN_PRODUCT_ID + "=" + id,
                 null,null,null,null);
         cursor.moveToFirst();
         Product product = cursorToProduct(cursor);

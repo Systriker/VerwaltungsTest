@@ -81,13 +81,13 @@ public class ProductListeActivity extends AppCompatActivity {
     }
 
     public void productAnlegen(View view){
-        Intent intent = new Intent(this,KundeActivity.class);
+        Intent intent = new Intent(this,ProductActivity.class);
         intent.putExtra(getString(R.string.kunde_editmode),false);
         startActivity(intent);
     }
 
     public void productEdit(View view){
-        Intent intent = new Intent(this,KundeActivity.class);
+        Intent intent = new Intent(this,ProductActivity.class);
         intent.putExtra(getString(R.string.kunde_editmode),true);
         intent.putExtra(DbHelper.COLUMN_PRODUCT_ID,slectedProduct.getId());
         startActivity(intent);

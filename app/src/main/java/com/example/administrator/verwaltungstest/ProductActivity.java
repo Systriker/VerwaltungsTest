@@ -59,7 +59,7 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void activateButtons() {
-        Button saveButton = findViewById(R.id.button_save);
+        Button saveButton = findViewById(R.id.button_save_products);
 
         TooltipCompat.setTooltipText(saveButton,getString(R.string.hint_save));
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +114,7 @@ public class ProductActivity extends AppCompatActivity {
             Product product = datasource.getProduct(id);
             editTextProductNummer.setText(String.valueOf(id));
             editTextName.setText(product.getName());
-            editTextQuantity.setText(product.getQuantity());
+            editTextQuantity.setText(String.valueOf(product.getQuantity()));
         }
     }
 }
