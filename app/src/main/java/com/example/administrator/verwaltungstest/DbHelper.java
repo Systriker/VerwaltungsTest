@@ -15,6 +15,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_KUNDE = "kunde";
     public static final String TABLE_LAGER = "lager";
+    public static final String TABLE_BESTELLUNGEN = "bestellungen";
+    public static final String TABLE_LAGER_ZU_BESTELLUNGEN = "lager_zu_bestellungen";
 
     public static final String COLUMN_KUNDE_ID = "_id";
     public static final String COLUMN_KUNDE_NAME = "name";
@@ -23,7 +25,14 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public static final String COLUMN_PRODUCT_ID = "_id";
     public static final String COLUMN_PRODUCT_NAME = "name";
-    public static final String COLUMN_PRODUCT_QUANTITY = "adresse";
+    public static final String COLUMN_PRODUCT_QUANTITY = "quantity";
+
+    public static final String COLUMN_BESTELLUNG_ID = "_id";
+    public static final String COLUMN_BESTELLUNG_KUNDE = "kunde";
+
+    public static final String COLUMN_LAGER_ZU_BESTELLUNG_ID = "_id";
+    public static final String COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG = "bestellung";
+    public static final String COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT = "product";
 
     public static final String SQL_CREATE_KUNDE = "CREATE TABLE " + TABLE_KUNDE +
             "(" + COLUMN_KUNDE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -36,8 +45,24 @@ public class DbHelper extends SQLiteOpenHelper {
             COLUMN_PRODUCT_NAME + " TEXT NOT NULL, " +
             COLUMN_PRODUCT_QUANTITY + " INTEGER NOT NULL);";
 
+    public static final String SQL_CREATE_BESTELLUNGEN = "CREATE TABLE " + TABLE_BESTELLUNGEN +
+            "(" + COLUMN_BESTELLUNG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COLUMN_BESTELLUNG_KUNDE + " INTEGER NOT NULL," +
+            "FOREIGN KEY(" + COLUMN_BESTELLUNG_KUNDE + ") REFERENCES " +TABLE_KUNDE+"("+ COLUMN_KUNDE_ID +"));";
+
+    public static final String SQL_CREATE_LAGER_ZU_BESTELLUNGEN = "CREATE TABLE " + TABLE_LAGER_ZU_BESTELLUNGEN +
+            "(" + COLUMN_LAGER_ZU_BESTELLUNG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG + " INTEGER NOT NULL, " +
+            COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT + " INTEGER NOT NULL" +
+            "FOREIGN KEY(" + COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG + ") " +
+            "REFERENCES " +TABLE_BESTELLUNGEN+"("+ COLUMN_BESTELLUNG_ID +")," +
+            "FOREIGN KEY(" + COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT + ") " +
+            "REFERENCES " +TABLE_LAGER+"("+ COLUMN_PRODUCT_ID +"));";
+
     public static final String SQL_DROP_KUNDE = "DROP TABLE IF EXISTS " + TABLE_KUNDE;
     public static final String SQL_DROP_LAGER = "DROP TABLE IF EXISTS " + TABLE_LAGER;
+    public static final String SQL_DROP_LAGER_ZU_BESTELLUNGEN = "DROP TABLE IF EXISTS " + TABLE_LAGER_ZU_BESTELLUNGEN;
+    public static final String SQL_DROP_BESTELLUNGEN = "DROP TABLE IF EXISTS " + TABLE_BESTELLUNGEN;
 
     public DbHelper(Context context){
         super(context,DB_NAME, null,DB_VERSION);
@@ -49,16 +74,20 @@ public class DbHelper extends SQLiteOpenHelper {
         try {
             db.execSQL(SQL_CREATE_KUNDE);
             db.execSQL(SQL_CREATE_LAGER);
-            Log.d(TAG, "Die Tabelle wurde mit der Anweisung " + SQL_CREATE_KUNDE + " angelegt");
+            db.execSQL(SQL_CREATE_BESTELLUNGEN);
+            db.execSQL(SQL_CREATE_LAGER_ZU_BESTELLUNGEN);
+            Log.d(TAG, "Die Tabellen wurden angelegt");
         }catch (Exception e){
-            Log.d(TAG, "Fehler beim Anlegen der Tabelle " + e.getMessage());
+            Log.d(TAG, "Fehler beim Anlegen der Tabellen " + e.getMessage());
         }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL(SQL_DROP_KUNDE);
+        db.execSQL(SQL_DROP_LAGER_ZU_BESTELLUNGEN);
+        db.execSQL(SQL_DROP_BESTELLUNGEN);
         db.execSQL(SQL_DROP_LAGER);
+        db.execSQL(SQL_DROP_KUNDE);
         onCreate(db);
     }
 
