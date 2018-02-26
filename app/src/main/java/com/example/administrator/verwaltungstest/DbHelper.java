@@ -33,6 +33,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_LAGER_ZU_BESTELLUNG_ID = "_id";
     public static final String COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG = "bestellung";
     public static final String COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT = "product";
+    public static final String COLUMN_LAGER_ZU_BESTELLUNG_QUANTITY = "quantity";
 
     public static final String SQL_CREATE_KUNDE = "CREATE TABLE " + TABLE_KUNDE +
             "(" + COLUMN_KUNDE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -53,7 +54,8 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String SQL_CREATE_LAGER_ZU_BESTELLUNGEN = "CREATE TABLE " + TABLE_LAGER_ZU_BESTELLUNGEN +
             "(" + COLUMN_LAGER_ZU_BESTELLUNG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG + " INTEGER NOT NULL, " +
-            COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT + " INTEGER NOT NULL" +
+            COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT + " INTEGER NOT NULL, " +
+            COLUMN_LAGER_ZU_BESTELLUNG_QUANTITY + " INTEGER NOT NULL, " +
             "FOREIGN KEY(" + COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG + ") " +
             "REFERENCES " +TABLE_BESTELLUNGEN+"("+ COLUMN_BESTELLUNG_ID +")," +
             "FOREIGN KEY(" + COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT + ") " +

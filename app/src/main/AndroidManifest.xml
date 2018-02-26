@@ -45,6 +45,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ProductListeActivity" />
         </activity>
+        <activity android:name=".BestellungListeActivity" />
+        <activity android:name=".BestellungActivity"></activity>
     </application>
 
 </manifest>

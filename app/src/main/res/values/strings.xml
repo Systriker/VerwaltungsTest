@@ -9,6 +9,8 @@
     <string name="hint_adresse">Adresse</string>
     <string name="hint_quantity">Anzahl</string>
     <string name="hint_product_id">Produktnummer</string>
+    <string name="hint_bestellung_id">Bestellungsnummer</string>
+    <string name="hint_kundenname">Kundenname</string>
 
     <string name="editText_errorMessage">The field should not be empty</string>
     <string name="button_edit">Bearbeiten</string>
@@ -17,6 +19,8 @@
     <string name="hint_save">Speichern</string>
     <string name="kunde_editmode">EditMode</string>
     <string name="button_delete">Löschen</string>
+    <string name="button_bestellung_product_add">+</string>
+    <string name="button_bestellung_product_delete">-</string>
 
     <string-array name="kunden_arten">
         <item>Privatkunde</item>

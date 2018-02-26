@@ -29,6 +29,11 @@ public class Datasource {
             DbHelper.COLUMN_PRODUCT_QUANTITY,
     };
 
+    private String[] columns_Bestellung = {
+            DbHelper.COLUMN_BESTELLUNG_ID,
+            DbHelper.COLUMN_BESTELLUNG_KUNDE,
+    };
+
     public Datasource(Context context){
         Log.d(TAG, "Datasource erzeugt den dbHelper");
         dbHelper = new DbHelper(context);
@@ -209,6 +214,84 @@ public class Datasource {
         database.delete(DbHelper.TABLE_LAGER,
                 DbHelper.COLUMN_PRODUCT_ID + "=" + id, null);
         Log.d(TAG, "deleteKunde: Eintrag gelöscht" + id + " " + product.toString());
+    }
+
+    public Bestellung createBestellung(long id, int kunde_id){
+        ContentValues values = new ContentValues();
+        values.put(DbHelper.COLUMN_BESTELLUNG_KUNDE,kunde_id);
+
+        long insertId = database.insert(DbHelper.TABLE_BESTELLUNGEN,null,values);
+
+        Cursor cursor = database.query(DbHelper.TABLE_BESTELLUNGEN,columns_Bestellung,
+                DbHelper.COLUMN_BESTELLUNG_ID + "=" + insertId,
+                null,null,null,null);
+        cursor.moveToFirst();
+        Bestellung bestellung = cursorToBestellung(cursor);
+        cursor.close();
+        return bestellung;
+    }
+
+    public Bestellung getBestellung(long id){
+        Cursor cursor = database.query(DbHelper.TABLE_BESTELLUNGEN,columns_Bestellung,
+                DbHelper.COLUMN_BESTELLUNG_ID + " = " + id,null,null,null,null);
+        Bestellung bestellung;
+        cursor.moveToFirst();
+        bestellung = cursorToBestellung(cursor);
+        Log.d(TAG, "ID: " + bestellung.getId() + " Inhalt " + bestellung.toString());
+        cursor.close();
+        return  bestellung;
+    }
+
+    public List<Bestellung> getAllBestellungen(){
+        List<Bestellung> bestellungList = new ArrayList<>();
+        Cursor cursor = database.query(DbHelper.TABLE_BESTELLUNGEN,columns_Bestellung,
+                null,null,null,null,null);
+        cursor.moveToFirst();
+        Bestellung bestellung;
+        while (!cursor.isAfterLast()){
+            bestellung = cursorToBestellung(cursor);
+            bestellungList.add(bestellung);
+            Log.d(TAG, "ID: " + bestellung.getId() + " Inhalt " + bestellung.toString());
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return  bestellungList;
+    }
+
+    private Bestellung cursorToBestellung(Cursor cursor) {
+        int idIndex = cursor.getColumnIndex(DbHelper.COLUMN_BESTELLUNG_ID);
+        int idKunde = cursor.getColumnIndex(DbHelper.COLUMN_BESTELLUNG_KUNDE);
+
+
+        int kunde_id = cursor.getInt(idKunde);
+        long id = cursor.getLong(idIndex);
+
+        Bestellung bestellung = new Bestellung(id,kunde_id);
+        return bestellung;
+    }
+
+    public Bestellung updateBestellung(long id, int newKunde_id){
+        ContentValues values = new ContentValues();
+        values.put(DbHelper.COLUMN_BESTELLUNG_KUNDE,newKunde_id);
+
+
+        database.update(DbHelper.TABLE_BESTELLUNGEN,values,
+                DbHelper.COLUMN_BESTELLUNG_ID + "=" + id,null);
+        Cursor cursor = database.query(DbHelper.TABLE_BESTELLUNGEN,
+                columns_Bestellung,DbHelper.COLUMN_BESTELLUNG_ID + "=" + id,
+                null,null,null,null);
+        cursor.moveToFirst();
+        Bestellung bestellung = cursorToBestellung(cursor);
+        cursor.close();
+        return bestellung;
+    }
+
+    public void deleteBestellung(Bestellung bestellung){
+        long id = bestellung.getId();
+
+        database.delete(DbHelper.TABLE_BESTELLUNGEN,
+                DbHelper.COLUMN_BESTELLUNG_ID + "=" + id, null);
+        Log.d(TAG, "deleteKunde: Eintrag gelöscht" + id + " " + bestellung.toString());
     }
 
 }
