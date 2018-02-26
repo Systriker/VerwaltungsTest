@@ -1,8 +1,5 @@
 package com.example.administrator.verwaltungstest;
 
-/**
- * Created by Administrator on 22.02.2018.
- */
 
 public class Kunde {
     private long id;

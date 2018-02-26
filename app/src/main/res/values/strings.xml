@@ -7,6 +7,8 @@
     <string name="hint_kundennummer">Kundennummer</string>
     <string name="hint_name">Name</string>
     <string name="hint_adresse">Adresse</string>
+    <string name="hint_quantity">Anzahl</string>
+    <string name="hint_product_id">Produktnummer</string>
 
     <string name="editText_errorMessage">The field should not be empty</string>
     <string name="button_edit">Bearbeiten</string>

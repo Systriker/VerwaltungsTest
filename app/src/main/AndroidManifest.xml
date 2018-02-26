@@ -24,12 +24,21 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".KundeListeActivity" />
         </activity>
-        <activity android:name=".KundeListeActivity"
+        <activity
+            android:name=".KundeListeActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity
+            android:name=".ProductListeActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".ProductActivity"></activity>
     </application>
 
 </manifest>

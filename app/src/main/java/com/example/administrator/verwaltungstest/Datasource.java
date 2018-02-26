@@ -23,6 +23,12 @@ public class Datasource {
             DbHelper.COLUMN_KUNDE_KUNDETYP,
     };
 
+    private String[] columns_Lager = {
+            DbHelper.COLUMN_PRODUCT_ID,
+            DbHelper.COLUMN_PRODUCT_NAME,
+            DbHelper.COLUMN_PRODUCT_QUANTITY,
+    };
+
     public Datasource(Context context){
         Log.d(TAG, "Datasource erzeugt den dbHelper");
         dbHelper = new DbHelper(context);
@@ -121,6 +127,88 @@ public class Datasource {
         database.delete(DbHelper.TABLE_KUNDE,
                 DbHelper.COLUMN_KUNDE_ID + "=" + id, null);
         Log.d(TAG, "deleteKunde: Eintrag gelöscht" + id + " " + kunde.toString());
+    }
+
+    public Product createProduct(long id, String Name, int Quantity){
+        ContentValues values = new ContentValues();
+        values.put(DbHelper.COLUMN_PRODUCT_NAME,Name);
+        values.put(DbHelper.COLUMN_PRODUCT_QUANTITY,Quantity);
+
+        long insertId = database.insert(DbHelper.TABLE_LAGER,null,values);
+
+        Cursor cursor = database.query(DbHelper.TABLE_LAGER,columns_Lager,
+                DbHelper.COLUMN_PRODUCT_ID + "=" + insertId,
+                null,null,null,null);
+        cursor.moveToFirst();
+        Product product = cursorToProduct(cursor);
+        cursor.close();
+        return product;
+    }
+
+    public Product getProduct(long id){
+        Cursor cursor = database.query(DbHelper.TABLE_LAGER,columns_Lager,
+                DbHelper.COLUMN_PRODUCT_ID + " = " + id,null,null,null,null);
+        Product product;
+        cursor.moveToFirst();
+        product = cursorToProduct(cursor);
+        Log.d(TAG, "ID: " + product.getId() + " Inhalt " + product.toString());
+        cursor.close();
+        return  product;
+    }
+
+    public List<Product> getAllProducts(){
+        List<Product> productList = new ArrayList<>();
+        Cursor cursor = database.query(DbHelper.TABLE_LAGER,columns_Lager,
+                null,null,null,null,null);
+        cursor.moveToFirst();
+        Product product;
+        while (!cursor.isAfterLast()){
+            product = cursorToProduct(cursor);
+            productList.add(product);
+            Log.d(TAG, "ID: " + product.getId() + " Inhalt " + product.toString());
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return  productList;
+    }
+
+    private Product cursorToProduct(Cursor cursor) {
+        int idIndex = cursor.getColumnIndex(DbHelper.COLUMN_PRODUCT_ID);
+        int idName = cursor.getColumnIndex(DbHelper.COLUMN_PRODUCT_NAME);
+        int idQuantity = cursor.getColumnIndex(DbHelper.COLUMN_PRODUCT_QUANTITY);
+
+
+        String name = cursor.getString(idName);
+        int quantity = cursor.getInt(idQuantity);
+        long id = cursor.getLong(idIndex);
+
+        Product product = new Product(id,name,quantity);
+        return product;
+    }
+
+    public Product updateProduct(long id, String newName, int newQuantity){
+        ContentValues values = new ContentValues();
+        values.put(DbHelper.COLUMN_PRODUCT_NAME,newName);
+        values.put(DbHelper.COLUMN_PRODUCT_QUANTITY,newQuantity);
+
+
+        database.update(DbHelper.TABLE_LAGER,values,
+                DbHelper.COLUMN_PRODUCT_ID + "=" + id,null);
+        Cursor cursor = database.query(DbHelper.TABLE_LAGER,
+                columns,DbHelper.COLUMN_PRODUCT_ID + "=" + id,
+                null,null,null,null);
+        cursor.moveToFirst();
+        Product product = cursorToProduct(cursor);
+        cursor.close();
+        return product;
+    }
+
+    public void deleteProduct(Product product){
+        long id = product.getId();
+
+        database.delete(DbHelper.TABLE_LAGER,
+                DbHelper.COLUMN_PRODUCT_ID + "=" + id, null);
+        Log.d(TAG, "deleteKunde: Eintrag gelöscht" + id + " " + product.toString());
     }
 
 }

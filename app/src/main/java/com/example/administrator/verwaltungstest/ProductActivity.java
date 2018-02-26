@@ -10,13 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class KundeActivity extends AppCompatActivity {
+public class ProductActivity extends AppCompatActivity {
 
     private static final String TAG = KundeActivity.class.getSimpleName();
 
-    private Button bestellungenButton;
-    private EditText editTextKundenNummer, editTextName, editTextAdresse;
-    private Spinner spinnerKundeTyp;
+    private EditText editTextProductNummer, editTextName, editTextQuantity;
     private long id;
     private boolean editmode;
     private Datasource datasource;
@@ -24,24 +22,21 @@ public class KundeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kunden);
+        setContentView(R.layout.activity_product);
 
         datasource = new Datasource(this);
 
-        editTextKundenNummer = findViewById(R.id.edit_KundenNummer);
-        editTextName = findViewById(R.id.edit_Name);
-        editTextAdresse = findViewById(R.id.edit_Adresse);
-        spinnerKundeTyp = findViewById(R.id.spinner_KundeTyp);
+        editTextProductNummer = findViewById(R.id.edit_product_Id);
+        editTextName = findViewById(R.id.edit_product_Name);
+        editTextQuantity = findViewById(R.id.edit_product_Quantity);
 
-        bestellungenButton = findViewById(R.id.button_orders_kunden);
 
         editmode = getIntent().getBooleanExtra(getString(R.string.kunde_editmode),false);
-        id = getIntent().getLongExtra(DbHelper.COLUMN_KUNDE_ID,0L);
-        editTextKundenNummer.setEnabled(false);
+        id = getIntent().getLongExtra(DbHelper.COLUMN_PRODUCT_ID,0L);
+        editTextProductNummer.setEnabled(false);
 
         if (!editmode){
-            bestellungenButton.setEnabled(false);
-            findViewById(R.id.button_delete_kunden).setEnabled(false);
+            findViewById(R.id.button_delete_products).setEnabled(false);
         }
 
         activateButtons();
@@ -71,15 +66,14 @@ public class KundeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String Name = editTextName.getText().toString();
-                String Adresse = editTextAdresse.getText().toString();
-                String KundeTyp = spinnerKundeTyp.getSelectedItem().toString();
-                String KundenNummer = editTextKundenNummer.getText().toString();
-                Long KundenNummerLong;
+                String Quantity = editTextQuantity.getText().toString();
+                String ProductNummer = editTextProductNummer.getText().toString();
+                Long ProductNummerLong;
 
-                if (!KundenNummer.equals("")){
-                    KundenNummerLong = Long.parseLong(KundenNummer);
+                if (!ProductNummer.equals("")){
+                    ProductNummerLong = Long.parseLong(ProductNummer);
                 }else {
-                    KundenNummerLong = 1L;
+                    ProductNummerLong = 1L;
                 }
 
                 if (TextUtils.isEmpty(Name)){
@@ -88,35 +82,27 @@ public class KundeActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (TextUtils.isEmpty(Adresse)){
-                    editTextAdresse.setError(getString(R.string.editText_errorMessage));
-                    editTextAdresse.requestFocus();
+                if (TextUtils.isEmpty(Quantity)){
+                    editTextQuantity.setError(getString(R.string.editText_errorMessage));
+                    editTextQuantity.requestFocus();
                     return;
                 }
 
                 if (editmode){
-                    datasource.updateKunde(KundenNummerLong, Name, Adresse, KundeTyp);
+                    datasource.updateProduct(ProductNummerLong, Name, Integer.parseInt(Quantity));
                 }else {
-                    datasource.createKunde(KundenNummerLong, Name, Adresse, KundeTyp);
+                    datasource.createProduct(ProductNummerLong, Name, Integer.parseInt(Quantity));
                 }
                 finish();
             }
         });
 
-        TooltipCompat.setTooltipText(bestellungenButton,getString(R.string.hint_orders));
-        bestellungenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        Button deleteButton = findViewById(R.id.button_delete_kunden);
+        Button deleteButton = findViewById(R.id.button_delete_products);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Kunde kunde = datasource.getKunde(id);
-                datasource.deleteKunde(kunde);
+                Product product = datasource.getProduct(id);
+                datasource.deleteProduct(product);
                 finish();
             }
         });
@@ -125,11 +111,10 @@ public class KundeActivity extends AppCompatActivity {
     private void fillPage(){
 
         if (id != 0L){
-            Kunde kunde = datasource.getKunde(id);
-            editTextKundenNummer.setText(String.valueOf(id));
-            editTextName.setText(kunde.getName());
-            editTextAdresse.setText(kunde.getAdresse());
-            spinnerKundeTyp.setSelection(kunde.getKundenType().equals("Privatkunde")?0:1);
+            Product product = datasource.getProduct(id);
+            editTextProductNummer.setText(String.valueOf(id));
+            editTextName.setText(product.getName());
+            editTextQuantity.setText(product.getQuantity());
         }
     }
 }

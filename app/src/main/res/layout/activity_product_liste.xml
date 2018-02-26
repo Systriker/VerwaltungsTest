@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.verwaltungstest.ProductListeActivity">
+
+    <ListView
+        android:id="@+id/listview_products"
+        android:layout_width="match_parent"
+        android:layout_height="435dp"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listview_products">
+
+        <Button
+            android:id="@+id/button_add_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="productAnlegen"
+            android:text="@string/button_add" />
+
+        <Button
+            android:id="@+id/button_edit_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="productEdit"
+            android:text="@string/button_edit" />
+
+        <Button
+            android:id="@+id/button_delete_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="productDelete"
+            android:text="@string/button_delete" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

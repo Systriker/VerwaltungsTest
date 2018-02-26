@@ -14,11 +14,16 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final int DB_VERSION = 1;
 
     public static final String TABLE_KUNDE = "kunde";
+    public static final String TABLE_LAGER = "lager";
 
     public static final String COLUMN_KUNDE_ID = "_id";
     public static final String COLUMN_KUNDE_NAME = "name";
     public static final String COLUMN_KUNDE_ADRESSE = "adresse";
     public static final String COLUMN_KUNDE_KUNDETYP = "kundetyp";
+
+    public static final String COLUMN_PRODUCT_ID = "_id";
+    public static final String COLUMN_PRODUCT_NAME = "name";
+    public static final String COLUMN_PRODUCT_QUANTITY = "adresse";
 
     public static final String SQL_CREATE_KUNDE = "CREATE TABLE " + TABLE_KUNDE +
             "(" + COLUMN_KUNDE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -26,7 +31,13 @@ public class DbHelper extends SQLiteOpenHelper {
             COLUMN_KUNDE_ADRESSE + " TEXT NOT NULL, " +
             COLUMN_KUNDE_KUNDETYP + " TEXT NOT NULL);";
 
+    public static final String SQL_CREATE_LAGER = "CREATE TABLE " + TABLE_LAGER +
+            "(" + COLUMN_PRODUCT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COLUMN_PRODUCT_NAME + " TEXT NOT NULL, " +
+            COLUMN_PRODUCT_QUANTITY + " INTEGER NOT NULL);";
+
     public static final String SQL_DROP_KUNDE = "DROP TABLE IF EXISTS " + TABLE_KUNDE;
+    public static final String SQL_DROP_LAGER = "DROP TABLE IF EXISTS " + TABLE_LAGER;
 
     public DbHelper(Context context){
         super(context,DB_NAME, null,DB_VERSION);
@@ -37,6 +48,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         try {
             db.execSQL(SQL_CREATE_KUNDE);
+            db.execSQL(SQL_CREATE_LAGER);
             Log.d(TAG, "Die Tabelle wurde mit der Anweisung " + SQL_CREATE_KUNDE + " angelegt");
         }catch (Exception e){
             Log.d(TAG, "Fehler beim Anlegen der Tabelle " + e.getMessage());
@@ -46,6 +58,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL(SQL_DROP_KUNDE);
+        db.execSQL(SQL_DROP_LAGER);
         onCreate(db);
     }
 
