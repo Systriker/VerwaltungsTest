@@ -12,7 +12,7 @@ import android.widget.Spinner;
 
 public class ProductActivity extends AppCompatActivity {
 
-    private static final String TAG = KundeActivity.class.getSimpleName();
+    private static final String TAG = ProductActivity.class.getSimpleName();
 
     private EditText editTextProductNummer, editTextName, editTextQuantity;
     private long id;

@@ -264,9 +264,10 @@ public class Datasource {
 
 
         int kunde_id = cursor.getInt(idKunde);
+        Kunde kunde = getKunde(kunde_id);
         long id = cursor.getLong(idIndex);
 
-        Bestellung bestellung = new Bestellung(id,kunde_id);
+        Bestellung bestellung = new Bestellung(id,kunde);
         return bestellung;
     }
 

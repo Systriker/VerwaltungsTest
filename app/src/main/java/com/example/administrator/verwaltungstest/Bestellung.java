@@ -2,11 +2,12 @@ package com.example.administrator.verwaltungstest;
 
 public class Bestellung {
     private long id;
-    private long kunde_id;
 
-    public Bestellung(long id, long kunde_id) {
+    private Kunde kunde;
+
+    public Bestellung(long id, Kunde kunde) {
         this.id = id;
-        this.kunde_id = kunde_id;
+        this.kunde = kunde;
     }
 
     public long getId() {
@@ -17,19 +18,19 @@ public class Bestellung {
         this.id = id;
     }
 
-    public long getKunde_id() {
-        return kunde_id;
+    public Kunde getKunde() {
+        return kunde;
     }
 
-    public void setKunde_id(long kunde_id) {
-        this.kunde_id = kunde_id;
+    public void setKunde(Kunde kunde) {
+        this.kunde = kunde;
     }
 
     @Override
     public String toString() {
         return "Bestellung{" +
                 "id=" + id +
-                ", kunde_id=" + kunde_id +
+                ", kunde_id=" + kunde.getId() +
                 '}';
     }
 }
