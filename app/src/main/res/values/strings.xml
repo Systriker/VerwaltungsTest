@@ -14,6 +14,7 @@
     <string name="hint_orders">zeige Bestellungen</string>
     <string name="hint_save">Speichern</string>
     <string name="kunde_editmode">EditMode</string>
+    <string name="button_delete">Löschen</string>
 
     <string-array name="kunden_arten">
         <item>Privatkunde</item>

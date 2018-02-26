@@ -98,6 +98,7 @@ public class KundeActivity extends AppCompatActivity {
                 }else {
                     datasource.createKunde(KundenNummerLong, Name, Adresse, KundeTyp);
                 }
+                finish();
             }
         });
 
@@ -106,6 +107,16 @@ public class KundeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+            }
+        });
+
+        Button deleteButton = findViewById(R.id.button_delete_kunden);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Kunde kunde = datasource.getKunde(id);
+                datasource.deleteKunde(kunde);
+                finish();
             }
         });
     }

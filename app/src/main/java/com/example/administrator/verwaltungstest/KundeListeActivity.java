@@ -44,8 +44,10 @@ public class KundeListeActivity extends AppCompatActivity {
         showAllListEntries();
         if (slectedKunde == null){
             findViewById(R.id.button_edit_kunden).setEnabled(false);
+            findViewById(R.id.button_delete_kunde).setEnabled(false);
         }else {
             findViewById(R.id.button_edit_kunden).setEnabled(true);
+            findViewById(R.id.button_delete_kunde).setEnabled(true);
         }
     }
 
@@ -63,6 +65,7 @@ public class KundeListeActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 slectedKunde = (Kunde) adapterView.getItemAtPosition(i);
                 findViewById(R.id.button_edit_kunden).setEnabled(true);
+                findViewById(R.id.button_delete_kunde).setEnabled(true);
                 showAllListEntries();
             }
         });
@@ -88,5 +91,11 @@ public class KundeListeActivity extends AppCompatActivity {
         intent.putExtra(getString(R.string.kunde_editmode),true);
         intent.putExtra(DbHelper.COLUMN_KUNDE_ID,slectedKunde.getId());
         startActivity(intent);
+    }
+
+    public void kundeDelete(View view){
+        Kunde kunde = datasource.getKunde(slectedKunde.getId());
+        datasource.deleteKunde(kunde);
+        showAllListEntries();
     }
 }
