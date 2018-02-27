@@ -24,7 +24,7 @@ public class BestellungListeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bestellung_liste);
-        initializeKundeListView();
+        initializeBestellungListView();
         datasource = new Datasource(this);
     }
 
@@ -51,10 +51,10 @@ public class BestellungListeActivity extends AppCompatActivity {
         }
     }
 
-    private void initializeKundeListView() {
+    private void initializeBestellungListView() {
         List<Bestellung> emtyListForInitialisation = new ArrayList<>();
 
-        bestellungListView = findViewById(R.id.listview_products);
+        bestellungListView = findViewById(R.id.listview_bestellung);
         bestellungListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         ArrayAdapter<Bestellung> bestellungArrayAdapter = new ArrayAdapter<Bestellung>(this,
                 android.R.layout.simple_list_item_single_choice,emtyListForInitialisation);
@@ -80,20 +80,20 @@ public class BestellungListeActivity extends AppCompatActivity {
         bestellungArrayAdapter.notifyDataSetChanged();
     }
 
-    public void productAnlegen(View view){
+    public void bestellungAnlegen(View view){
         Intent intent = new Intent(this,BestellungActivity.class);
         intent.putExtra(getString(R.string.kunde_editmode),false);
         startActivity(intent);
     }
 
-    public void productEdit(View view){
+    public void bestellungEdit(View view){
         Intent intent = new Intent(this,BestellungActivity.class);
         intent.putExtra(getString(R.string.kunde_editmode),true);
         intent.putExtra(DbHelper.COLUMN_BESTELLUNG_ID,slectedBestellung.getId());
         startActivity(intent);
     }
 
-    public void productDelete(View view){
+    public void bestellungDelete(View view){
         Bestellung bestellung = datasource.getBestellung(slectedBestellung.getId());
         datasource.deleteBestellung(bestellung);
         showAllListEntries();

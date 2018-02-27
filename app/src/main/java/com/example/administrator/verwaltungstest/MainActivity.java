@@ -20,4 +20,8 @@ public class MainActivity extends AppCompatActivity {
     public void lagerClick(View view){
         startActivity(new Intent(this,ProductListeActivity.class));
     }
+
+    public void bestellungenClick(View view){
+        startActivity(new Intent(this,BestellungListeActivity.class));
+    }
 }

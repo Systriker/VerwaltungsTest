@@ -46,7 +46,8 @@
                 android:value=".ProductListeActivity" />
         </activity>
         <activity android:name=".BestellungListeActivity" />
-        <activity android:name=".BestellungActivity"></activity>
+        <activity android:name=".BestellungActivity" />
+        <activity android:name=".LagerZuBestellungActivity"></activity>
     </application>
 
 </manifest>

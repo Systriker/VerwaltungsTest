@@ -30,21 +30,21 @@
             android:id="@+id/button_add_bestellung"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="kundeAnlegen"
+            android:onClick="bestellungAnlegen"
             android:text="@string/button_add" />
 
         <Button
             android:id="@+id/button_edit_bestellung"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="kundeEdit"
+            android:onClick="bestellungEdit"
             android:text="@string/button_edit" />
 
         <Button
             android:id="@+id/button_delete_bestellung"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="kundeDelete"
+            android:onClick="bestellungDelete"
             android:text="@string/button_delete" />
     </LinearLayout>
 

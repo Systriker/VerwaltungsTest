@@ -330,10 +330,11 @@ public class Datasource {
         return  lagerZuBestellung;
     }
 
-    public List<LagerZuBestellung> getAllLager_zu_Bestellungen(){
+    public List<LagerZuBestellung> getAllLager_zu_Bestellungen(long bestellung_id){
         List<LagerZuBestellung> lagerZuBestellungList = new ArrayList<>();
         Cursor cursor = database.query(DbHelper.TABLE_LAGER_ZU_BESTELLUNGEN,columns_Lager_Zu_Bestellung,
-                null,null,null,null,null);
+                DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG + "=" + bestellung_id,
+                null,null,null,null);
         cursor.moveToFirst();
         LagerZuBestellung lagerZuBestellung;
         while (!cursor.isAfterLast()){
