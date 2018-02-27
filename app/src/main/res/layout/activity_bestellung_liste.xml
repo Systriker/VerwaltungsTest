@@ -13,7 +13,7 @@
     <ListView
         android:id="@+id/listview_bestellung"
         android:layout_width="match_parent"
-        android:layout_height="435dp"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"

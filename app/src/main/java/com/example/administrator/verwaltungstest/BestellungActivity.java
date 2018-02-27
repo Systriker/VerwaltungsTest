@@ -63,7 +63,6 @@ public class BestellungActivity extends AppCompatActivity {
         datasource.open();
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
         fillPage();
-        initializeBestellungListView();
     }
 
     private void activateButtons() {
@@ -140,6 +139,7 @@ public class BestellungActivity extends AppCompatActivity {
             if (editmode) {
                 kunde = bestellung.getKunde();
                 editTextKunde.setText(kunde.getName());
+                initializeBestellungListView();
             }
         }
     }
