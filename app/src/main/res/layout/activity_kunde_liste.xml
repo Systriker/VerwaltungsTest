@@ -15,9 +15,14 @@
         android:id="@+id/listview_kunden"
         android:layout_width="match_parent"
         android:layout_height="435dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="true"

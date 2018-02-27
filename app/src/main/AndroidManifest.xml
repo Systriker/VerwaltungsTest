@@ -45,9 +45,27 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ProductListeActivity" />
         </activity>
-        <activity android:name=".BestellungListeActivity" />
-        <activity android:name=".BestellungActivity" />
-        <activity android:name=".LagerZuBestellungActivity"></activity>
+        <activity
+            android:name=".BestellungListeActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".BestellungActivity"
+            android:parentActivityName=".BestellungListeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".BestellungListeActivity" />
+        </activity>
+        <activity
+            android:name=".LagerZuBestellungActivity"
+            android:parentActivityName=".BestellungActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".BestellungActivity" />
+        </activity>
     </application>
 
 </manifest>
