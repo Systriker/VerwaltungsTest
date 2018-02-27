@@ -6,32 +6,42 @@ import android.support.v7.widget.TooltipCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BestellungActivity extends AppCompatActivity {
 
     private static final String TAG = ProductActivity.class.getSimpleName();
 
     private EditText editTextBestellunngsNummer, editTextKunde;
+    private ListView listView;
     private long id;
     private boolean editmode;
     private Datasource datasource;
     private Kunde kunde;
+    private LagerZuBestellung slectedProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product);
+        setContentView(R.layout.activity_bestellung);
 
         datasource = new Datasource(this);
 
         editTextBestellunngsNummer = findViewById(R.id.edit_product_Id);
         editTextKunde = findViewById(R.id.edit_product_Name);
+        listView = findViewById(R.id.listview_bestellung_products);
 
         editmode = getIntent().getBooleanExtra(getString(R.string.kunde_editmode),false);
         id = getIntent().getLongExtra(DbHelper.COLUMN_BESTELLUNG_ID,0L);
         editTextBestellunngsNummer.setEnabled(false);
+        findViewById(R.id.button_bestellung_product_delete).setEnabled(false);
 
         if (!editmode){
             findViewById(R.id.button_delete_bestellung).setEnabled(false);
@@ -54,6 +64,7 @@ public class BestellungActivity extends AppCompatActivity {
         datasource.open();
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
         fillPage();
+        initializeBestellungListView();
     }
 
     private void activateButtons() {
@@ -107,7 +118,37 @@ public class BestellungActivity extends AppCompatActivity {
             if (editmode) {
                 kunde = bestellung.getKunde();
                 editTextKunde.setText(kunde.getName());
+
+
             }
         }
+    }
+
+    private void initializeBestellungListView() {
+        List<LagerZuBestellung> emtyListForInitialisation = new ArrayList<>();
+
+        listView = findViewById(R.id.listview_products);
+        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        ArrayAdapter<LagerZuBestellung> productArrayAdapter = new ArrayAdapter<LagerZuBestellung>(this,
+                android.R.layout.simple_list_item_single_choice,emtyListForInitialisation);
+        listView.setAdapter(productArrayAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                slectedProduct = (LagerZuBestellung) adapterView.getItemAtPosition(i);
+                findViewById(R.id.button_bestellung_product_delete).setEnabled(true);
+                showAllListEntries();
+            }
+        });
+    }
+
+    private void showAllListEntries() {
+        List<LagerZuBestellung> productList = datasource.getAllLager_zu_Bestellungen();
+        ArrayAdapter<LagerZuBestellung> productArrayAdapter =
+                (ArrayAdapter<LagerZuBestellung>) listView.getAdapter();
+        productArrayAdapter.clear();
+        productArrayAdapter.addAll(productList);
+        productArrayAdapter.notifyDataSetChanged();
     }
 }

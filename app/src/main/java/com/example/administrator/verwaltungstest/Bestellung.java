@@ -2,7 +2,6 @@ package com.example.administrator.verwaltungstest;
 
 public class Bestellung {
     private long id;
-
     private Kunde kunde;
 
     public Bestellung(long id, Kunde kunde) {
@@ -28,9 +27,6 @@ public class Bestellung {
 
     @Override
     public String toString() {
-        return "Bestellung{" +
-                "id=" + id +
-                ", kunde_id=" + kunde.getId() +
-                '}';
+        return id + " " + kunde.getName();
     }
 }

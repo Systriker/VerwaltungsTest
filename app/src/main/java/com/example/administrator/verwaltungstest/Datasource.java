@@ -34,6 +34,13 @@ public class Datasource {
             DbHelper.COLUMN_BESTELLUNG_KUNDE,
     };
 
+    private String[] columns_Lager_Zu_Bestellung = {
+            DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_ID,
+            DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG,
+            DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT,
+            DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_QUANTITY,
+    };
+
     public Datasource(Context context){
         Log.d(TAG, "Datasource erzeugt den dbHelper");
         dbHelper = new DbHelper(context);
@@ -293,6 +300,94 @@ public class Datasource {
         database.delete(DbHelper.TABLE_BESTELLUNGEN,
                 DbHelper.COLUMN_BESTELLUNG_ID + "=" + id, null);
         Log.d(TAG, "deleteKunde: Eintrag gelöscht" + id + " " + bestellung.toString());
+    }
+
+    public LagerZuBestellung createLager_zu_Bestellung(long id, int bestellung_id, int product_id, int quantity){
+        ContentValues values = new ContentValues();
+        values.put(DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG,bestellung_id);
+        values.put(DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT,product_id);
+        values.put(DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_QUANTITY,quantity);
+
+        long insertId = database.insert(DbHelper.TABLE_LAGER_ZU_BESTELLUNGEN,null,values);
+
+        Cursor cursor = database.query(DbHelper.TABLE_LAGER_ZU_BESTELLUNGEN,columns_Lager_Zu_Bestellung,
+                DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_ID + "=" + insertId,
+                null,null,null,null);
+        cursor.moveToFirst();
+        LagerZuBestellung lagerZuBestellung = cursorToLager_zu_Bestellung(cursor);
+        cursor.close();
+        return lagerZuBestellung;
+    }
+
+    public LagerZuBestellung getLager_zu_Bestellung(long id){
+        Cursor cursor = database.query(DbHelper.TABLE_LAGER_ZU_BESTELLUNGEN,columns_Lager_Zu_Bestellung,
+                DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_ID + " = " + id,null,null,null,null);
+        LagerZuBestellung lagerZuBestellung;
+        cursor.moveToFirst();
+        lagerZuBestellung = cursorToLager_zu_Bestellung(cursor);
+        Log.d(TAG, "ID: " + lagerZuBestellung.getId() + " Inhalt " + lagerZuBestellung.toString());
+        cursor.close();
+        return  lagerZuBestellung;
+    }
+
+    public List<LagerZuBestellung> getAllLager_zu_Bestellungen(){
+        List<LagerZuBestellung> lagerZuBestellungList = new ArrayList<>();
+        Cursor cursor = database.query(DbHelper.TABLE_LAGER_ZU_BESTELLUNGEN,columns_Lager_Zu_Bestellung,
+                null,null,null,null,null);
+        cursor.moveToFirst();
+        LagerZuBestellung lagerZuBestellung;
+        while (!cursor.isAfterLast()){
+            lagerZuBestellung = cursorToLager_zu_Bestellung(cursor);
+            lagerZuBestellungList.add(lagerZuBestellung);
+            Log.d(TAG, "ID: " + lagerZuBestellung.getId() + " Inhalt " + lagerZuBestellung.toString());
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return  lagerZuBestellungList;
+    }
+
+    private LagerZuBestellung cursorToLager_zu_Bestellung(Cursor cursor) {
+        int idIndex = cursor.getColumnIndex(DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_ID);
+        int idBestellung = cursor.getColumnIndex(DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG);
+        int idProduct = cursor.getColumnIndex(DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT);
+        int idQuantity = cursor.getColumnIndex(DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_QUANTITY);
+
+
+        int bestellung_id = cursor.getInt(idBestellung);
+        Bestellung bestellung = getBestellung(bestellung_id);
+        int product_id = cursor.getInt(idProduct);
+        Product product = getProduct(product_id);
+        long id = cursor.getLong(idIndex);
+        int quantity = cursor.getInt(idQuantity);
+
+        LagerZuBestellung lagerZuBestellung = new LagerZuBestellung(id,bestellung,product,quantity);
+        return lagerZuBestellung;
+    }
+
+    public LagerZuBestellung updateLager_zu_Bestellung(long id, int newBestellung_id, int newProduct_id, int newQuantity){
+        ContentValues values = new ContentValues();
+        values.put(DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG,newBestellung_id);
+        values.put(DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT,newProduct_id);
+        values.put(DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_QUANTITY,newQuantity);
+
+
+        database.update(DbHelper.TABLE_LAGER_ZU_BESTELLUNGEN,values,
+                DbHelper.COLUMN_BESTELLUNG_ID + "=" + id,null);
+        Cursor cursor = database.query(DbHelper.TABLE_LAGER_ZU_BESTELLUNGEN,
+                columns_Lager_Zu_Bestellung,DbHelper.COLUMN_BESTELLUNG_ID + "=" + id,
+                null,null,null,null);
+        cursor.moveToFirst();
+        LagerZuBestellung lagerZuBestellung = cursorToLager_zu_Bestellung(cursor);
+        cursor.close();
+        return lagerZuBestellung;
+    }
+
+    public void deleteLager_zu_Bestellung(LagerZuBestellung lagerZuBestellung){
+        long id = lagerZuBestellung.getId();
+
+        database.delete(DbHelper.TABLE_LAGER_ZU_BESTELLUNGEN,
+                DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_ID + "=" + id, null);
+        Log.d(TAG, "deleteKunde: Eintrag gelöscht" + id + " " + lagerZuBestellung.toString());
     }
 
 }
