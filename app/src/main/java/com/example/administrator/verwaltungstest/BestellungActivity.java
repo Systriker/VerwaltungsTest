@@ -27,6 +27,7 @@ public class BestellungActivity extends AppCompatActivity {
     private Datasource datasource;
     private Kunde kunde;
     private LagerZuBestellung selectedProduct;
+    public static final int REQUESTCODE = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +95,16 @@ public class BestellungActivity extends AppCompatActivity {
                     datasource.createBestellung(ProductNummerLong, (int)kunde.getId());
                 }
                 finish();
+            }
+        });
+
+        Button selectKundeButton = findViewById(R.id.button_select_kunde);
+        selectKundeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(),KundeListeActivity.class);
+                intent.putExtra("selectFlag",123);
+                startActivityForResult(intent, REQUESTCODE);
             }
         });
 
@@ -170,5 +181,13 @@ public class BestellungActivity extends AppCompatActivity {
         productArrayAdapter.clear();
         productArrayAdapter.addAll(productList);
         productArrayAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        long id = data.getLongExtra("KundeId",0);
+        datasource.open();
+        kunde = datasource.getKunde(id);
+        editTextKunde.setText(kunde.getName());
     }
 }

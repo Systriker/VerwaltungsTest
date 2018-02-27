@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class KundeListeActivity extends AppCompatActivity {
     private ListView kundeListView;
     private Datasource datasource;
     private Kunde slectedKunde;
+    private int selectFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class KundeListeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_kunde_liste);
         initializeKundeListView();
         datasource = new Datasource(this);
+        selectFlag = getIntent().getIntExtra("selectFlag",0);
     }
 
     @Override
@@ -42,12 +45,20 @@ public class KundeListeActivity extends AppCompatActivity {
         datasource.open();
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
         showAllListEntries();
-        if (slectedKunde == null){
+        if (selectFlag == 123){
             findViewById(R.id.button_edit_kunden).setEnabled(false);
             findViewById(R.id.button_delete_kunde).setEnabled(false);
+            findViewById(R.id.button_edit_kunden).setVisibility(Button.INVISIBLE);
+            findViewById(R.id.button_delete_kunde).setVisibility(Button.INVISIBLE);
+            ((Button)findViewById(R.id.button_add_kunde)).setText("Ok");
         }else {
-            findViewById(R.id.button_edit_kunden).setEnabled(true);
-            findViewById(R.id.button_delete_kunde).setEnabled(true);
+            if (slectedKunde == null) {
+                findViewById(R.id.button_edit_kunden).setEnabled(false);
+                findViewById(R.id.button_delete_kunde).setEnabled(false);
+            } else {
+                findViewById(R.id.button_edit_kunden).setEnabled(true);
+                findViewById(R.id.button_delete_kunde).setEnabled(true);
+            }
         }
     }
 
@@ -81,9 +92,13 @@ public class KundeListeActivity extends AppCompatActivity {
     }
 
     public void kundeAnlegen(View view){
-        Intent intent = new Intent(this,KundeActivity.class);
-        intent.putExtra(getString(R.string.kunde_editmode),false);
-        startActivity(intent);
+        if (selectFlag == 123){
+            selectKunde();
+        }else {
+            Intent intent = new Intent(this, KundeActivity.class);
+            intent.putExtra(getString(R.string.kunde_editmode), false);
+            startActivity(intent);
+        }
     }
 
     public void kundeEdit(View view){
@@ -97,5 +112,13 @@ public class KundeListeActivity extends AppCompatActivity {
         Kunde kunde = datasource.getKunde(slectedKunde.getId());
         datasource.deleteKunde(kunde);
         showAllListEntries();
+    }
+
+    public void selectKunde(){
+        long id = slectedKunde.getId();
+        Intent intent = new Intent();
+        intent.putExtra("KundeId",id);
+        setResult(RESULT_OK,intent);
+        finish();
     }
 }

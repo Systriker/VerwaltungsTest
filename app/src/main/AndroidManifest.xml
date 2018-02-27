@@ -54,7 +54,8 @@
         </activity>
         <activity
             android:name=".BestellungActivity"
-            android:parentActivityName=".BestellungListeActivity">
+            android:parentActivityName=".BestellungListeActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BestellungListeActivity" />
