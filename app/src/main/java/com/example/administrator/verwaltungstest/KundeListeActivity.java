@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,7 +111,11 @@ public class KundeListeActivity extends AppCompatActivity {
 
     public void kundeDelete(View view){
         Kunde kunde = datasource.getKunde(slectedKunde.getId());
-        datasource.deleteKunde(kunde);
+        if(datasource.getAllBestellungen(kunde.getId()).size() == 0){
+            datasource.deleteKunde(kunde);
+        }else{
+            Toast.makeText(KundeListeActivity.this, "Es sind noch Bestellungen für diesen Kunden vorhanden!", Toast.LENGTH_SHORT).show();
+        }
         showAllListEntries();
     }
 

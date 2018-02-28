@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class KundeActivity extends AppCompatActivity {
 
@@ -116,8 +117,12 @@ public class KundeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Kunde kunde = datasource.getKunde(id);
-                datasource.deleteKunde(kunde);
-                finish();
+                if (datasource.getAllBestellungen(id).size() == 0) {
+                    datasource.deleteKunde(kunde);
+                    finish();
+                }else{
+                    Toast.makeText(KundeActivity.this, "Es sind noch Bestellungen für diesen Kunden vorhanden!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

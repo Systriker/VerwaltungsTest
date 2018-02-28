@@ -64,6 +64,7 @@ public class BestellungActivity extends AppCompatActivity {
         datasource.open();
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
         fillPage();
+        showAllListEntries();
     }
 
     private void activateButtons() {
@@ -114,6 +115,7 @@ public class BestellungActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(),LagerZuBestellungActivity.class);
                 intent.putExtra(getString(R.string.kunde_editmode),false);
+                intent.putExtra("Bestellung",id);
                 startActivity(intent);
                 showAllListEntries();
             }
@@ -143,10 +145,13 @@ public class BestellungActivity extends AppCompatActivity {
 
         editTextBestellunngsNummer.setEnabled(false);
         findViewById(R.id.button_bestellung_product_delete).setEnabled(false);
+        findViewById(R.id.button_bestellung_product_add).setEnabled(false);
+        editTextKunde.setEnabled(false);
 
         if (id != 0L){
             Bestellung bestellung = datasource.getBestellung(id);
             editTextBestellunngsNummer.setText(String.valueOf(id));
+            findViewById(R.id.button_bestellung_product_add).setEnabled(true);
             if (editmode) {
                 kunde = bestellung.getKunde();
                 editTextKunde.setText(kunde.getName());
