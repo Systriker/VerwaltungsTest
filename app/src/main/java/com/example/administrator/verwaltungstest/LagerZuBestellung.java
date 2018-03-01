@@ -47,6 +47,6 @@ public class LagerZuBestellung {
 
     @Override
     public String toString() {
-        return product.getName() + " " + quantity;
+        return product.getName() + " " + quantity + " Preis:" + (product.getPreis() * quantity) + "€";
     }
 }

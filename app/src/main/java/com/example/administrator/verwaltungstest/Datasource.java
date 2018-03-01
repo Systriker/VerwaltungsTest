@@ -27,6 +27,7 @@ public class Datasource {
             DbHelper.COLUMN_PRODUCT_ID,
             DbHelper.COLUMN_PRODUCT_NAME,
             DbHelper.COLUMN_PRODUCT_QUANTITY,
+            DbHelper.COLUMN_PRODUCT_PREIS,
     };
 
     private String[] columns_Bestellung = {
@@ -141,10 +142,11 @@ public class Datasource {
         Log.d(TAG, "deleteKunde: Eintrag gelöscht" + id + " " + kunde.toString());
     }
 
-    public Product createProduct(long id, String Name, int Quantity){
+    public Product createProduct(long id, String Name, int Quantity, double preis){
         ContentValues values = new ContentValues();
         values.put(DbHelper.COLUMN_PRODUCT_NAME,Name);
         values.put(DbHelper.COLUMN_PRODUCT_QUANTITY,Quantity);
+        values.put(DbHelper.COLUMN_PRODUCT_PREIS,preis);
 
         long insertId = database.insert(DbHelper.TABLE_LAGER,null,values);
 
@@ -188,21 +190,23 @@ public class Datasource {
         int idIndex = cursor.getColumnIndex(DbHelper.COLUMN_PRODUCT_ID);
         int idName = cursor.getColumnIndex(DbHelper.COLUMN_PRODUCT_NAME);
         int idQuantity = cursor.getColumnIndex(DbHelper.COLUMN_PRODUCT_QUANTITY);
+        int idPreis = cursor.getColumnIndex(DbHelper.COLUMN_PRODUCT_PREIS);
 
 
         String name = cursor.getString(idName);
         int quantity = cursor.getInt(idQuantity);
         long id = cursor.getLong(idIndex);
+        double preis = cursor.getDouble(idPreis);
 
-        Product product = new Product(id,name,quantity);
+        Product product = new Product(id,name,quantity,preis);
         return product;
     }
 
-    public Product updateProduct(long id, String newName, int newQuantity){
+    public Product updateProduct(long id, String newName, int newQuantity, double newPreis){
         ContentValues values = new ContentValues();
         values.put(DbHelper.COLUMN_PRODUCT_NAME,newName);
         values.put(DbHelper.COLUMN_PRODUCT_QUANTITY,newQuantity);
-
+        values.put(DbHelper.COLUMN_PRODUCT_PREIS,newPreis);
 
         database.update(DbHelper.TABLE_LAGER,values,
                 DbHelper.COLUMN_PRODUCT_ID + "=" + id,null);

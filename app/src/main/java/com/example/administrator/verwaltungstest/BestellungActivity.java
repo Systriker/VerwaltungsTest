@@ -20,7 +20,7 @@ public class BestellungActivity extends AppCompatActivity {
 
     private static final String TAG = ProductActivity.class.getSimpleName();
 
-    private EditText editTextBestellunngsNummer, editTextKunde;
+    private EditText editTextBestellunngsNummer, editTextKunde, editTextPreis;
     private ListView listView;
     private long id;
     private boolean editmode;
@@ -38,10 +38,12 @@ public class BestellungActivity extends AppCompatActivity {
 
         editTextBestellunngsNummer = findViewById(R.id.edit_BestellunngsNummer);
         editTextKunde = findViewById(R.id.edit_Kunde);
+        editTextPreis = findViewById(R.id.editBestellungPreis);
         listView = findViewById(R.id.listview_bestellung_products);
 
         editmode = getIntent().getBooleanExtra(getString(R.string.kunde_editmode),false);
         id = getIntent().getLongExtra(DbHelper.COLUMN_BESTELLUNG_ID,0L);
+        editTextPreis.setEnabled(false);
 
         if (!editmode){
             findViewById(R.id.button_delete_bestellung).setEnabled(false);
@@ -64,7 +66,9 @@ public class BestellungActivity extends AppCompatActivity {
         datasource.open();
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
         fillPage();
-        showAllListEntries();
+        if (editmode) {
+            showAllListEntries();
+        }
     }
 
     private void activateButtons() {
@@ -186,6 +190,11 @@ public class BestellungActivity extends AppCompatActivity {
         productArrayAdapter.clear();
         productArrayAdapter.addAll(productList);
         productArrayAdapter.notifyDataSetChanged();
+        double preis = 0;
+        for (LagerZuBestellung lzb : productList){
+            preis += (lzb.getProduct().getPreis() * lzb.getQuantity());
+        }
+        editTextPreis.setText(String.valueOf(preis) + "€");
     }
 
     @Override

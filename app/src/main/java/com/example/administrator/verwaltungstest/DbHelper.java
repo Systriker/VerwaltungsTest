@@ -26,6 +26,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PRODUCT_ID = "_id";
     public static final String COLUMN_PRODUCT_NAME = "name";
     public static final String COLUMN_PRODUCT_QUANTITY = "quantity";
+    public static final String COLUMN_PRODUCT_PREIS = "preis";
 
     public static final String COLUMN_BESTELLUNG_ID = "_id";
     public static final String COLUMN_BESTELLUNG_KUNDE = "kunde";
@@ -44,7 +45,8 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String SQL_CREATE_LAGER = "CREATE TABLE " + TABLE_LAGER +
             "(" + COLUMN_PRODUCT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_PRODUCT_NAME + " TEXT NOT NULL, " +
-            COLUMN_PRODUCT_QUANTITY + " INTEGER NOT NULL);";
+            COLUMN_PRODUCT_QUANTITY + " INTEGER NOT NULL, " +
+            COLUMN_PRODUCT_PREIS + " DOUBLE NOT NULL);";
 
     public static final String SQL_CREATE_BESTELLUNGEN = "CREATE TABLE " + TABLE_BESTELLUNGEN +
             "(" + COLUMN_BESTELLUNG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +

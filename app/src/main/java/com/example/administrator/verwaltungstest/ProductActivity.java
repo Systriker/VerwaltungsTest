@@ -3,7 +3,9 @@ package com.example.administrator.verwaltungstest;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.TooltipCompat;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,14 +13,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+
 public class ProductActivity extends AppCompatActivity {
 
     private static final String TAG = ProductActivity.class.getSimpleName();
 
-    private EditText editTextProductNummer, editTextName, editTextQuantity;
+    private EditText editTextProductNummer, editTextName, editTextQuantity, editTextPreis;
     private long id;
     private boolean editmode;
     private Datasource datasource;
+    private String current = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +36,7 @@ public class ProductActivity extends AppCompatActivity {
         editTextProductNummer = findViewById(R.id.edit_product_Id);
         editTextName = findViewById(R.id.edit_product_Name);
         editTextQuantity = findViewById(R.id.edit_product_Quantity);
-
+        editTextPreis = findViewById(R.id.editProductPreis);
 
         editmode = getIntent().getBooleanExtra(getString(R.string.kunde_editmode),false);
         id = getIntent().getLongExtra(DbHelper.COLUMN_PRODUCT_ID,0L);
@@ -69,6 +75,8 @@ public class ProductActivity extends AppCompatActivity {
                 String Name = editTextName.getText().toString();
                 String Quantity = editTextQuantity.getText().toString();
                 String ProductNummer = editTextProductNummer.getText().toString();
+                String Preis = editTextPreis.getText().toString();
+                Double PreisDouble = Double.parseDouble(Preis);
                 Long ProductNummerLong;
 
                 if (!ProductNummer.equals("")){
@@ -89,10 +97,16 @@ public class ProductActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (TextUtils.isEmpty(Preis)){
+                    editTextPreis.setError(getString(R.string.editText_errorMessage));
+                    editTextPreis.requestFocus();
+                    return;
+                }
+
                 if (editmode){
-                    datasource.updateProduct(ProductNummerLong, Name, Integer.parseInt(Quantity));
+                    datasource.updateProduct(ProductNummerLong, Name, Integer.parseInt(Quantity),PreisDouble);
                 }else {
-                    datasource.createProduct(ProductNummerLong, Name, Integer.parseInt(Quantity));
+                    datasource.createProduct(ProductNummerLong, Name, Integer.parseInt(Quantity),PreisDouble);
                 }
                 finish();
             }
@@ -120,6 +134,7 @@ public class ProductActivity extends AppCompatActivity {
             editTextProductNummer.setText(String.valueOf(id));
             editTextName.setText(product.getName());
             editTextQuantity.setText(String.valueOf(product.getQuantity()));
+            editTextPreis.setText(String.valueOf(product.getPreis()));
         }
     }
 }
