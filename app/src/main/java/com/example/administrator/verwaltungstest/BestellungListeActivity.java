@@ -82,10 +82,8 @@ public class BestellungListeActivity extends AppCompatActivity {
         List<Bestellung> bestellungtList;
         if (selectMode){
             bestellungtList = datasource.getAllBestellungen(kunde_id);
-            getActionBar().setTitle(datasource.getKunde(kunde_id).getName() + ": Bestellungen");
         }else {
             bestellungtList = datasource.getAllBestellungen();
-            getActionBar().setTitle("Bestellungen");
         }
         ArrayAdapter<Bestellung> bestellungArrayAdapter =
                 (ArrayAdapter<Bestellung>) bestellungListView.getAdapter();
