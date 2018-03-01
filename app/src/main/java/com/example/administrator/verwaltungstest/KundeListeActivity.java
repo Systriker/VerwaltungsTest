@@ -30,6 +30,7 @@ public class KundeListeActivity extends AppCompatActivity {
         initializeKundeListView();
         datasource = new Datasource(this);
         selectFlag = getIntent().getIntExtra("selectFlag",0);
+        getActionBar().setTitle("Kunden");
     }
 
     @Override

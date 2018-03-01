@@ -44,6 +44,7 @@ public class BestellungActivity extends AppCompatActivity {
         editmode = getIntent().getBooleanExtra(getString(R.string.kunde_editmode),false);
         id = getIntent().getLongExtra(DbHelper.COLUMN_BESTELLUNG_ID,0L);
         editTextPreis.setEnabled(false);
+        getActionBar().setTitle("Bestellung");
 
         if (!editmode){
             findViewById(R.id.button_delete_bestellung).setEnabled(false);

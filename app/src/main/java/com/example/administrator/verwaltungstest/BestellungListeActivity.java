@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,7 +21,7 @@ public class BestellungListeActivity extends AppCompatActivity {
     private Datasource datasource;
     private Bestellung slectedBestellung;
     private boolean selectMode;
-    private int kunde_id;
+    private long kunde_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class BestellungListeActivity extends AppCompatActivity {
         datasource = new Datasource(this);
 
         selectMode = getIntent().getBooleanExtra("SelectMode",false);
-        kunde_id = getIntent().getIntExtra("KundeId",0);
+        kunde_id = getIntent().getLongExtra("KundeId",0);
 
     }
 
@@ -81,8 +82,10 @@ public class BestellungListeActivity extends AppCompatActivity {
         List<Bestellung> bestellungtList;
         if (selectMode){
             bestellungtList = datasource.getAllBestellungen(kunde_id);
+            getActionBar().setTitle(datasource.getKunde(kunde_id).getName() + ": Bestellungen");
         }else {
             bestellungtList = datasource.getAllBestellungen();
+            getActionBar().setTitle("Bestellungen");
         }
         ArrayAdapter<Bestellung> bestellungArrayAdapter =
                 (ArrayAdapter<Bestellung>) bestellungListView.getAdapter();
@@ -109,4 +112,16 @@ public class BestellungListeActivity extends AppCompatActivity {
         datasource.deleteBestellung(bestellung);
         showAllListEntries();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

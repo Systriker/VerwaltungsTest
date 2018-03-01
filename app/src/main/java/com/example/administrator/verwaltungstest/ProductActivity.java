@@ -140,6 +140,7 @@ public class ProductActivity extends AppCompatActivity {
     private void fillPage(){
 
         if (id != 0L){
+            getActionBar().setTitle("Produkt: " + id);
             Product product = datasource.getProduct(id);
             editTextProductNummer.setText(String.valueOf(id));
             editTextName.setText(product.getName());
