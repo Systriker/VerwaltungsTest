@@ -19,6 +19,7 @@ public class BestellungListeActivity extends AppCompatActivity {
     private ListView bestellungListView;
     private Datasource datasource;
     private Bestellung slectedBestellung;
+    private boolean selectMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,9 @@ public class BestellungListeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bestellung_liste);
         initializeBestellungListView();
         datasource = new Datasource(this);
+
+        selectMode = getIntent().getBooleanExtra("Select",false);
+
     }
 
     @Override
@@ -72,7 +76,12 @@ public class BestellungListeActivity extends AppCompatActivity {
     }
 
     private void showAllListEntries() {
-        List<Bestellung> bestellungtList = datasource.getAllBestellungen();
+        List<Bestellung> bestellungtList;
+        if (selectMode){
+            bestellungtList = datasource.getAllBestellungen();
+        }else {
+            bestellungtList = datasource.getAllBestellungen();
+        }
         ArrayAdapter<Bestellung> bestellungArrayAdapter =
                 (ArrayAdapter<Bestellung>) bestellungListView.getAdapter();
         bestellungArrayAdapter.clear();

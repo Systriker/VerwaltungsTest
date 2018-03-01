@@ -42,6 +42,16 @@ public class ProductActivity extends AppCompatActivity {
         id = getIntent().getLongExtra(DbHelper.COLUMN_PRODUCT_ID,0L);
         editTextProductNummer.setEnabled(false);
 
+        editTextPreis.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                String text = editTextPreis.getText().toString();
+                if(!text.substring(text.length() - 1).equals("€")){
+                    editTextPreis.setText(text + "€");
+                }
+            }
+        });
+
         if (!editmode){
             findViewById(R.id.button_delete_products).setEnabled(false);
         }
@@ -76,7 +86,7 @@ public class ProductActivity extends AppCompatActivity {
                 String Quantity = editTextQuantity.getText().toString();
                 String ProductNummer = editTextProductNummer.getText().toString();
                 String Preis = editTextPreis.getText().toString();
-                Double PreisDouble = Double.parseDouble(Preis);
+                Double PreisDouble = Double.parseDouble(Preis.substring(0,Preis.length() - 1));
                 Long ProductNummerLong;
 
                 if (!ProductNummer.equals("")){
@@ -134,7 +144,7 @@ public class ProductActivity extends AppCompatActivity {
             editTextProductNummer.setText(String.valueOf(id));
             editTextName.setText(product.getName());
             editTextQuantity.setText(String.valueOf(product.getQuantity()));
-            editTextPreis.setText(String.valueOf(product.getPreis()));
+            editTextPreis.setText(String.valueOf(product.getPreis()) + "€");
         }
     }
 }
