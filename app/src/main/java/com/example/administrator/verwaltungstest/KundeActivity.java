@@ -1,5 +1,6 @@
 package com.example.administrator.verwaltungstest;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.TooltipCompat;
@@ -108,7 +109,10 @@ public class KundeActivity extends AppCompatActivity {
         bestellungenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(KundeActivity.this,BestellungListeActivity.class);
+                intent.putExtra("SelectMode",true);
+                intent.putExtra("KundeId",id);
+                startActivity(intent);
             }
         });
 

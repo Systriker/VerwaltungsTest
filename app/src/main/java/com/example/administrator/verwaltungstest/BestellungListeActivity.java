@@ -20,6 +20,7 @@ public class BestellungListeActivity extends AppCompatActivity {
     private Datasource datasource;
     private Bestellung slectedBestellung;
     private boolean selectMode;
+    private int kunde_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,8 @@ public class BestellungListeActivity extends AppCompatActivity {
         initializeBestellungListView();
         datasource = new Datasource(this);
 
-        selectMode = getIntent().getBooleanExtra("Select",false);
+        selectMode = getIntent().getBooleanExtra("SelectMode",false);
+        kunde_id = getIntent().getIntExtra("KundeId",0);
 
     }
 
@@ -78,7 +80,7 @@ public class BestellungListeActivity extends AppCompatActivity {
     private void showAllListEntries() {
         List<Bestellung> bestellungtList;
         if (selectMode){
-            bestellungtList = datasource.getAllBestellungen();
+            bestellungtList = datasource.getAllBestellungen(kunde_id);
         }else {
             bestellungtList = datasource.getAllBestellungen();
         }
