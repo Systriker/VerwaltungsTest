@@ -46,6 +46,7 @@ public class ProductListeActivity extends AppCompatActivity {
         Log.d(TAG, "onResume: Die Datenquelle wird geöffnet");
         datasource.open();
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
+        getSupportActionBar().setTitle("Produkte");
         showAllListEntries();
         if (selectFlag == 123){
             findViewById(R.id.button_edit_product).setEnabled(false);

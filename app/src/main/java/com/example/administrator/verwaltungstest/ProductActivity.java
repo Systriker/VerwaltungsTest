@@ -138,9 +138,11 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void fillPage(){
+        getSupportActionBar().setTitle("Neues Produkt");
 
         if (id != 0L){
             Product product = datasource.getProduct(id);
+            getSupportActionBar().setTitle("Produkt: " + id);
             editTextProductNummer.setText(String.valueOf(id));
             editTextName.setText(product.getName());
             editTextQuantity.setText(String.valueOf(product.getQuantity()));

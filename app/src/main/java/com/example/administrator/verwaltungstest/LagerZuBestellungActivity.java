@@ -117,7 +117,7 @@ public class LagerZuBestellungActivity extends AppCompatActivity {
     private void fillPage(){
 
         bestellung = datasource.getBestellung(getIntent().getLongExtra("Bestellung",0));
-
+        getSupportActionBar().setTitle("Produkt");
         if (id != 0L){
             LagerZuBestellung lagerZuBestellung = datasource.getLager_zu_Bestellung(id);
             product = datasource.getProduct(lagerZuBestellung.getProduct().getId());

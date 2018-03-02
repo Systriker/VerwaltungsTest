@@ -151,9 +151,11 @@ public class BestellungActivity extends AppCompatActivity {
         findViewById(R.id.button_bestellung_product_delete).setEnabled(false);
         findViewById(R.id.button_bestellung_product_add).setEnabled(false);
         editTextKunde.setEnabled(false);
+        getSupportActionBar().setTitle("Neue Bestellung");
 
         if (id != 0L){
             Bestellung bestellung = datasource.getBestellung(id);
+            getSupportActionBar().setTitle("Bestellung: " + id);
             editTextBestellunngsNummer.setText(String.valueOf(id));
             findViewById(R.id.button_bestellung_product_add).setEnabled(true);
             if (editmode) {

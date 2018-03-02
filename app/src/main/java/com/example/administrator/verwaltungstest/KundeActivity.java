@@ -132,9 +132,10 @@ public class KundeActivity extends AppCompatActivity {
     }
 
     private void fillPage(){
-
+        getSupportActionBar().setTitle("Neuer Kunde");
         if (id != 0L){
             Kunde kunde = datasource.getKunde(id);
+            getSupportActionBar().setTitle("Kunde: " + id);
             editTextKundenNummer.setText(String.valueOf(id));
             editTextName.setText(kunde.getName());
             editTextAdresse.setText(kunde.getAdresse());

@@ -46,6 +46,7 @@ public class KundeListeActivity extends AppCompatActivity {
         Log.d(TAG, "onResume: Die Datenquelle wird geöffnet");
         datasource.open();
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
+        getSupportActionBar().setTitle("Kunden");
         showAllListEntries();
         if (selectFlag == 123){
             findViewById(R.id.button_edit_kunden).setEnabled(false);
