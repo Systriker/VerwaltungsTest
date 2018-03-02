@@ -37,6 +37,7 @@ public class Bestellung {
 
     @Override
     public String toString() {
-        return id + " " + kunde.getName();
+        return id + " " + kunde.getName() +
+                "\nStatus: " + (booked?"gebucht":"offen");
     }
 }
