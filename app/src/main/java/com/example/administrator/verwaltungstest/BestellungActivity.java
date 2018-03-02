@@ -156,11 +156,10 @@ public class BestellungActivity extends AppCompatActivity {
                     for (LagerZuBestellung lzb: productList){
                         if (!(lzb.getQuantity()<=lzb.getProduct().getQuantity())){
                             canBook = false;
-                        }else {
                             Toast.makeText(BestellungActivity.this,
                                     "Es sind nicht genügend Produkte vom Typ:" +
-                                    lzb.getProduct().getName() +
-                                    "vorhanden!", Toast.LENGTH_SHORT).show();
+                                            lzb.getProduct().getName() +
+                                            " vorhanden!", Toast.LENGTH_SHORT).show();
                             return;
                         }
                     }
