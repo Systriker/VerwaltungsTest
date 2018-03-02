@@ -49,9 +49,9 @@ public class Product {
 
     @Override
     public String toString() {
-        return id +
+        return "Nr.:" + id +
                 " " + name +
-                ", Preis:" + preis + "€" +
+                "\nPreis:" + preis + "€" +
                 ", Anzahl:" + quantity;
     }
 }
