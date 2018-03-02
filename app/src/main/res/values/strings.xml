@@ -12,7 +12,7 @@
     <string name="hint_bestellung_id">Bestellungsnummer</string>
     <string name="hint_kundenname">Kundenname</string>
 
-    <string name="editText_errorMessage">The field should not be empty</string>
+    <string name="editText_errorMessage">Dieses Feld darf nicht leer sein!</string>
     <string name="button_edit">Bearbeiten</string>
     <string name="button_add">Anlegen</string>
     <string name="hint_orders">zeige Bestellungen</string>
