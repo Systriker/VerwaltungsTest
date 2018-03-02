@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.Date;
+
 
 public class DbHelper extends SQLiteOpenHelper {
 
@@ -30,6 +32,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public static final String COLUMN_BESTELLUNG_ID = "_id";
     public static final String COLUMN_BESTELLUNG_KUNDE = "kunde";
+    public static final String COLUMN_BESTELLUNG_BOOKED = "booked";
 
     public static final String COLUMN_LAGER_ZU_BESTELLUNG_ID = "_id";
     public static final String COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG = "bestellung";
@@ -50,7 +53,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public static final String SQL_CREATE_BESTELLUNGEN = "CREATE TABLE " + TABLE_BESTELLUNGEN +
             "(" + COLUMN_BESTELLUNG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            COLUMN_BESTELLUNG_KUNDE + " INTEGER NOT NULL," +
+            COLUMN_BESTELLUNG_KUNDE + " INTEGER NOT NULL, " +
+            COLUMN_BESTELLUNG_BOOKED + " BOOLEAN NOT NULL," +
             "FOREIGN KEY(" + COLUMN_BESTELLUNG_KUNDE + ") REFERENCES " +TABLE_KUNDE+"("+ COLUMN_KUNDE_ID +"));";
 
     public static final String SQL_CREATE_LAGER_ZU_BESTELLUNGEN = "CREATE TABLE " + TABLE_LAGER_ZU_BESTELLUNGEN +

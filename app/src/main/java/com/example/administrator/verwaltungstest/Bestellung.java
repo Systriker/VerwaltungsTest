@@ -3,10 +3,12 @@ package com.example.administrator.verwaltungstest;
 public class Bestellung {
     private long id;
     private Kunde kunde;
+    private boolean booked;
 
-    public Bestellung(long id, Kunde kunde) {
+    public Bestellung(long id, Kunde kunde, boolean booked) {
         this.id = id;
         this.kunde = kunde;
+        this.booked = booked;
     }
 
     public long getId() {
@@ -23,6 +25,14 @@ public class Bestellung {
 
     public void setKunde(Kunde kunde) {
         this.kunde = kunde;
+    }
+
+    public boolean isBooked() {
+        return booked;
+    }
+
+    public void setBooked(boolean booked) {
+        this.booked = booked;
     }
 
     @Override

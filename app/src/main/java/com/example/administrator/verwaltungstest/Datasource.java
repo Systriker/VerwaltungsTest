@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Datasource {
@@ -33,6 +35,7 @@ public class Datasource {
     private String[] columns_Bestellung = {
             DbHelper.COLUMN_BESTELLUNG_ID,
             DbHelper.COLUMN_BESTELLUNG_KUNDE,
+            DbHelper.COLUMN_BESTELLUNG_BOOKED,
     };
 
     private String[] columns_Lager_Zu_Bestellung = {
@@ -227,9 +230,10 @@ public class Datasource {
         Log.d(TAG, "deleteKunde: Eintrag gelöscht" + id + " " + product.toString());
     }
 
-    public Bestellung createBestellung(long id, int kunde_id){
+    public Bestellung createBestellung(long id, int kunde_id,int booked){
         ContentValues values = new ContentValues();
         values.put(DbHelper.COLUMN_BESTELLUNG_KUNDE,kunde_id);
+        values.put(DbHelper.COLUMN_BESTELLUNG_BOOKED,booked);
 
         long insertId = database.insert(DbHelper.TABLE_BESTELLUNGEN,null,values);
 
@@ -288,19 +292,22 @@ public class Datasource {
     private Bestellung cursorToBestellung(Cursor cursor) {
         int idIndex = cursor.getColumnIndex(DbHelper.COLUMN_BESTELLUNG_ID);
         int idKunde = cursor.getColumnIndex(DbHelper.COLUMN_BESTELLUNG_KUNDE);
+        int idBooked = cursor.getColumnIndex(DbHelper.COLUMN_BESTELLUNG_BOOKED);
 
 
         int kunde_id = cursor.getInt(idKunde);
         Kunde kunde = getKunde(kunde_id);
         long id = cursor.getLong(idIndex);
+        Boolean booked = cursor.getInt(idBooked)==1;
 
-        Bestellung bestellung = new Bestellung(id,kunde);
+        Bestellung bestellung = new Bestellung(id,kunde,booked);
         return bestellung;
     }
 
-    public Bestellung updateBestellung(long id, int newKunde_id){
+    public Bestellung updateBestellung(long id, int newKunde_id,int newBooked){
         ContentValues values = new ContentValues();
         values.put(DbHelper.COLUMN_BESTELLUNG_KUNDE,newKunde_id);
+        values.put(DbHelper.COLUMN_BESTELLUNG_BOOKED,newBooked);
 
 
         database.update(DbHelper.TABLE_BESTELLUNGEN,values,

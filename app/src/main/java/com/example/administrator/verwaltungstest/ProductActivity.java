@@ -46,7 +46,7 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View view, boolean b) {
                 String text = editTextPreis.getText().toString();
-                if(!text.substring(text.length() - 1).equals("€")){
+                if(!(text.length() == 0) &&!text.substring(text.length() - 1).equals("€")){
                     editTextPreis.setText(text + "€");
                 }
             }
