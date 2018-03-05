@@ -82,12 +82,16 @@ public class ProductActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveButton.requestFocus();
                 String Name = editTextName.getText().toString();
                 String Quantity = editTextQuantity.getText().toString();
                 String ProductNummer = editTextProductNummer.getText().toString();
                 String Preis = editTextPreis.getText().toString();
-                Double PreisDouble = Double.parseDouble(Preis.substring(0,Preis.length() - 1));
+                Double PreisDouble;
+                if(Preis.length() == 1){
+                    PreisDouble = Double.parseDouble(Preis);
+                }else {
+                    PreisDouble = Double.parseDouble(Preis.substring(0, Preis.length() - 1));
+                }
                 Long ProductNummerLong;
 
                 if (!ProductNummer.equals("")){
