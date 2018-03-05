@@ -1,6 +1,6 @@
 package com.example.administrator.verwaltungstest;
 
-
+//Code-Seitige-Darstellung eines Kunden in der Datenbank
 public class Kunde {
     private long id;
     private String name;

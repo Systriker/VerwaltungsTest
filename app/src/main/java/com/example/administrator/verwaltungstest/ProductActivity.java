@@ -76,12 +76,13 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void activateButtons() {
-        Button saveButton = findViewById(R.id.button_save_products);
+        final Button saveButton = findViewById(R.id.button_save_products);
 
         TooltipCompat.setTooltipText(saveButton,getString(R.string.hint_save));
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                saveButton.requestFocus();
                 String Name = editTextName.getText().toString();
                 String Quantity = editTextQuantity.getText().toString();
                 String ProductNummer = editTextProductNummer.getText().toString();

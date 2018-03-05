@@ -7,38 +7,45 @@ import android.util.Log;
 
 import java.util.Date;
 
-
+//Klasse mit Hilfsmitteln zu erstellung und nutzung der Datenbank
 public class DbHelper extends SQLiteOpenHelper {
 
     private static final String TAG = DbHelper.class.getSimpleName();
 
+    // DB-Basics
     public static final String DB_NAME = "verwaltung.db";
     public static final int DB_VERSION = 1;
 
+    // Tabellen der DB
     public static final String TABLE_KUNDE = "kunde";
     public static final String TABLE_LAGER = "lager";
     public static final String TABLE_BESTELLUNGEN = "bestellungen";
     public static final String TABLE_LAGER_ZU_BESTELLUNGEN = "lager_zu_bestellungen";
 
+    // Fleder der "kunde"-Tabelle
     public static final String COLUMN_KUNDE_ID = "_id";
     public static final String COLUMN_KUNDE_NAME = "name";
     public static final String COLUMN_KUNDE_ADRESSE = "adresse";
     public static final String COLUMN_KUNDE_KUNDETYP = "kundetyp";
 
+    // Fleder der "lager"-Tabelle
     public static final String COLUMN_PRODUCT_ID = "_id";
     public static final String COLUMN_PRODUCT_NAME = "name";
     public static final String COLUMN_PRODUCT_QUANTITY = "quantity";
     public static final String COLUMN_PRODUCT_PREIS = "preis";
 
+    // Fleder der "bestellungen"-Tabelle
     public static final String COLUMN_BESTELLUNG_ID = "_id";
     public static final String COLUMN_BESTELLUNG_KUNDE = "kunde";
     public static final String COLUMN_BESTELLUNG_BOOKED = "booked";
 
+    // Fleder der "lager_zu_bestellungen"-Tabelle
     public static final String COLUMN_LAGER_ZU_BESTELLUNG_ID = "_id";
     public static final String COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG = "bestellung";
     public static final String COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT = "product";
     public static final String COLUMN_LAGER_ZU_BESTELLUNG_QUANTITY = "quantity";
 
+    // SQL-Befehle zum erstellen der Tabellen
     public static final String SQL_CREATE_KUNDE = "CREATE TABLE " + TABLE_KUNDE +
             "(" + COLUMN_KUNDE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_KUNDE_NAME + " TEXT NOT NULL, " +
@@ -67,6 +74,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "FOREIGN KEY(" + COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT + ") " +
             "REFERENCES " +TABLE_LAGER+"("+ COLUMN_PRODUCT_ID +"));";
 
+    // SQL-Befehle zum löschen der Tabellen
     public static final String SQL_DROP_KUNDE = "DROP TABLE IF EXISTS " + TABLE_KUNDE;
     public static final String SQL_DROP_LAGER = "DROP TABLE IF EXISTS " + TABLE_LAGER;
     public static final String SQL_DROP_LAGER_ZU_BESTELLUNGEN = "DROP TABLE IF EXISTS " + TABLE_LAGER_ZU_BESTELLUNGEN;

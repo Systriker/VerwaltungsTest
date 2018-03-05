@@ -1,6 +1,6 @@
 package com.example.administrator.verwaltungstest;
 
-
+//Code-Seitige-Darstellung eines Produktes in der Datenbank
 public class Product {
 
     private long id;

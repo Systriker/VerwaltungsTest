@@ -13,6 +13,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+//Klasse zur anzeige und auswahl von Bestellungen in einer Liste
 public class BestellungListeActivity extends AppCompatActivity {
 
     private static final String TAG = ProductListeActivity.class.getSimpleName();
@@ -30,6 +31,7 @@ public class BestellungListeActivity extends AppCompatActivity {
         initializeBestellungListView();
         datasource = new Datasource(this);
 
+        //wenn die Liste zur auswahl einer Bestellung genutzt wird
         selectMode = getIntent().getBooleanExtra("SelectMode",false);
         kunde_id = getIntent().getLongExtra("KundeId",0);
 
@@ -50,6 +52,7 @@ public class BestellungListeActivity extends AppCompatActivity {
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
         getSupportActionBar().setTitle("Bestellungen");
         showAllListEntries();
+        //aktiviere bearbeiten und löschen wenn eine bereits vorhande Bestellung ausgewählt wurde
         if (slectedBestellung == null){
             findViewById(R.id.button_edit_bestellung).setEnabled(false);
             findViewById(R.id.button_delete_bestellung).setEnabled(false);
@@ -99,6 +102,7 @@ public class BestellungListeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //öfnnen der BestellungActivity im editierbaren Modus
     public void bestellungEdit(View view){
         Intent intent = new Intent(this,BestellungActivity.class);
         intent.putExtra(getString(R.string.kunde_editmode),true);
@@ -114,7 +118,8 @@ public class BestellungListeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        //setzen des Home-Buttons so das er immer auf die letze Aktivty zurückkehrt
+        // da es mehrere Wege gibt um auf diese Aktivity zuzugreifen
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();

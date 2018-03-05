@@ -1,5 +1,7 @@
 package com.example.administrator.verwaltungstest;
 
+
+//Code-Seitige-Darstellung einer Bestellung in der Datenbank
 public class Bestellung {
     private long id;
     private Kunde kunde;
