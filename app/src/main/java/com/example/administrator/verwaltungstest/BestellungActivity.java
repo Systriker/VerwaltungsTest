@@ -181,6 +181,7 @@ public class BestellungActivity extends AppCompatActivity {
         findViewById(R.id.button_bestellung_product_add).setEnabled(false);
         editTextKunde.setEnabled(false);
         getSupportActionBar().setTitle("Neue Bestellung");
+        findViewById(R.id.buttonBuchen).setEnabled(false);
 
         if (id != 0L){
             Bestellung bestellung = datasource.getBestellung(id);
@@ -192,10 +193,10 @@ public class BestellungActivity extends AppCompatActivity {
                 editTextKunde.setText(kunde.getName());
                 initializeBestellungListView();
                 isBooked = bestellung.isBooked();
+                findViewById(R.id.buttonBuchen).setEnabled(true);
                 if(isBooked) {
                     findViewById(R.id.button_bestellung_product_add).setEnabled(false);
                     findViewById(R.id.button_select_kunde).setEnabled(false);
-                    findViewById(R.id.buttonBuchen).setEnabled(false);
                     findViewById(R.id.buttonBuchen).setEnabled(false);
                 }
             }
