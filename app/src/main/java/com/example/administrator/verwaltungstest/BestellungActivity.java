@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -115,7 +116,7 @@ public class BestellungActivity extends AppCompatActivity {
             }
         });
 
-        Button addProductButton = findViewById(R.id.button_bestellung_product_add);
+        ImageButton addProductButton = findViewById(R.id.button_bestellung_product_add);
         addProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,7 +128,7 @@ public class BestellungActivity extends AppCompatActivity {
             }
         });
 
-        Button deleteProductButton = findViewById(R.id.button_bestellung_product_delete);
+        ImageButton deleteProductButton = findViewById(R.id.button_bestellung_product_delete);
         deleteProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,11 +152,9 @@ public class BestellungActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (id != 0L){
-                    Boolean canBook = true;
                     List<LagerZuBestellung> productList = datasource.getAllLager_zu_Bestellungen(id);
                     for (LagerZuBestellung lzb: productList){
                         if (!(lzb.getQuantity()<=lzb.getProduct().getQuantity())){
-                            canBook = false;
                             Toast.makeText(BestellungActivity.this,
                                     "Es sind nicht genügend Produkte vom Typ:" +
                                             lzb.getProduct().getName() +
@@ -163,15 +162,13 @@ public class BestellungActivity extends AppCompatActivity {
                             return;
                         }
                     }
-                    if (canBook) {
-                        for (LagerZuBestellung lzb: productList){
-                            datasource.updateProduct(lzb.getProduct().getId(),lzb.getProduct().getName(),
-                                    lzb.getProduct().getQuantity() - lzb.getQuantity(),
-                                    lzb.getProduct().getPreis());
-                        }
-                        datasource.updateBestellung(id, (int) kunde.getId(), 1);
-                        finish();
+                    for (LagerZuBestellung lzb: productList){
+                        datasource.updateProduct(lzb.getProduct().getId(),lzb.getProduct().getName(),
+                                lzb.getProduct().getQuantity() - lzb.getQuantity(),
+                                lzb.getProduct().getPreis());
                     }
+                    datasource.updateBestellung(id, (int) kunde.getId(), 1);
+                    finish();
                 }
             }
         });
@@ -242,9 +239,13 @@ public class BestellungActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        long id = data.getLongExtra("KundeId",0);
-        datasource.open();
-        kunde = datasource.getKunde(id);
-        editTextKunde.setText(kunde.getName());
+        if(!(resultCode == 0)) {
+            long id = data.getLongExtra("KundeId", 0);
+            if (!(id == 0)) {
+                datasource.open();
+                kunde = datasource.getKunde(id);
+                editTextKunde.setText(kunde.getName());
+            }
+        }
     }
 }

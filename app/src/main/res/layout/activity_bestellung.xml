@@ -53,23 +53,25 @@
 
         </ListView>
 
-        <Button
+        <ImageButton
             android:id="@+id/button_bestellung_product_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_bestellung_product_add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/listview_bestellung_products"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_input_add" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_bestellung_product_delete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/button_bestellung_product_delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/listview_bestellung_products"
-            app:layout_constraintTop_toBottomOf="@+id/button_bestellung_product_add" />
+            app:layout_constraintTop_toBottomOf="@+id/button_bestellung_product_add"
+            app:srcCompat="@android:drawable/ic_delete" />
 
     </android.support.constraint.ConstraintLayout>
 

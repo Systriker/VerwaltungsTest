@@ -128,9 +128,13 @@ public class LagerZuBestellungActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        long id = data.getLongExtra("ProductId",0);
-        datasource.open();
-        product = datasource.getProduct(id);
-        edit_lager_zu_bestellung_product.setText(product.getName());
+        if(!(resultCode==0)) {
+            long id = data.getLongExtra("ProductId", 0);
+            if(!(id==0)) {
+                datasource.open();
+                product = datasource.getProduct(id);
+                edit_lager_zu_bestellung_product.setText(product.getName());
+            }
+        }
     }
 }
