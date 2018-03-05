@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+//Klasse zur anzeige und auswahl von Produkten in einer Liste
 public class ProductListeActivity extends AppCompatActivity {
 
     private static final String TAG = ProductListeActivity.class.getSimpleName();
@@ -30,6 +31,8 @@ public class ProductListeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_liste);
         initializeKundeListView();
         datasource = new Datasource(this);
+
+        //wenn die Liste zur auswahl eines Produktes genutzt wird
         selectFlag = getIntent().getIntExtra("selectFlag",0);
     }
 
@@ -48,6 +51,8 @@ public class ProductListeActivity extends AppCompatActivity {
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
         getSupportActionBar().setTitle("Produkte");
         showAllListEntries();
+        //wenn die Liste zur auswahl genutzt wird werden die editier und löschen Buttons ausgeblendet
+        //und der hinzufügen Button als bestätigungs Button verwendet
         if (selectFlag == 123){
             findViewById(R.id.button_edit_product).setEnabled(false);
             findViewById(R.id.button_delete_product).setEnabled(false);
@@ -55,6 +60,7 @@ public class ProductListeActivity extends AppCompatActivity {
             findViewById(R.id.button_delete_product).setVisibility(Button.INVISIBLE);
             ((Button)findViewById(R.id.button_add_product)).setText("Ok");
         }else {
+            //aktiviere bearbeiten und löschen wenn ein bereits vorhandes Produkt ausgewählt wurde
             if (slectedProduct == null) {
                 findViewById(R.id.button_edit_product).setEnabled(false);
                 findViewById(R.id.button_delete_product).setEnabled(false);
@@ -95,6 +101,8 @@ public class ProductListeActivity extends AppCompatActivity {
     }
 
     public void productAnlegen(View view){
+        //wenn die Liste zur auswahl genutzt wird, wird der
+        //hinzufügen Button als bestätigungs Button verwendet
         if (selectFlag == 123) {
             selectProduct();
         }else {
@@ -104,6 +112,7 @@ public class ProductListeActivity extends AppCompatActivity {
         }
     }
 
+    //öfnnen der ProduktActivity im editierbaren Modus
     public void productEdit(View view){
         Intent intent = new Intent(this,ProductActivity.class);
         intent.putExtra(getString(R.string.kunde_editmode),true);
@@ -113,6 +122,7 @@ public class ProductListeActivity extends AppCompatActivity {
 
     public void productDelete(View view){
         Product product = datasource.getProduct(slectedProduct.getId());
+        //Prüfung auf noch vorhandende Bestellungen zu diesem Produkt
         if(datasource.getAllLager_zu_Bestellungen_Product(product.getId()).size() == 0) {
             datasource.deleteProduct(product);
         }else{
@@ -131,7 +141,8 @@ public class ProductListeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        //setzen des Home-Buttons so das er immer auf die letze Aktivty zurückkehrt
+        // da es mehrere Wege gibt um auf diese Aktivity zuzugreifen
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();

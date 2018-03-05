@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+//Klasse zur anzeige und auswahl von Kunden in einer Liste
 public class KundeListeActivity extends AppCompatActivity {
 
     private static final String TAG = KundeListeActivity.class.getSimpleName();
@@ -30,6 +31,8 @@ public class KundeListeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_kunde_liste);
         initializeKundeListView();
         datasource = new Datasource(this);
+
+        //wenn die Liste zur auswahl eines Kunden genutzt wird
         selectFlag = getIntent().getIntExtra("selectFlag",0);
     }
 
@@ -48,6 +51,8 @@ public class KundeListeActivity extends AppCompatActivity {
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
         getSupportActionBar().setTitle("Kunden");
         showAllListEntries();
+        //wenn die Liste zur auswahl genutzt wird werden die editier und löschen Buttons ausgeblendet
+        //und der hinzufügen Button als bestätigungs Button verwendet
         if (selectFlag == 123){
             findViewById(R.id.button_edit_kunden).setEnabled(false);
             findViewById(R.id.button_delete_kunde).setEnabled(false);
@@ -55,6 +60,7 @@ public class KundeListeActivity extends AppCompatActivity {
             findViewById(R.id.button_delete_kunde).setVisibility(Button.INVISIBLE);
             ((Button)findViewById(R.id.button_add_kunde)).setText("Ok");
         }else {
+            //aktiviere bearbeiten und löschen wenn ein bereits vorhander Kunde ausgewählt wurde
             if (slectedKunde == null) {
                 findViewById(R.id.button_edit_kunden).setEnabled(false);
                 findViewById(R.id.button_delete_kunde).setEnabled(false);
@@ -95,6 +101,8 @@ public class KundeListeActivity extends AppCompatActivity {
     }
 
     public void kundeAnlegen(View view){
+        //wenn die Liste zur auswahl genutzt wird, wird der
+        //hinzufügen Button als bestätigungs Button verwendet
         if (selectFlag == 123){
             selectKunde();
         }else {
@@ -104,6 +112,7 @@ public class KundeListeActivity extends AppCompatActivity {
         }
     }
 
+    //öfnnen der KundeActivity im editierbaren Modus
     public void kundeEdit(View view){
         Intent intent = new Intent(this,KundeActivity.class);
         intent.putExtra(getString(R.string.kunde_editmode),true);
@@ -113,6 +122,7 @@ public class KundeListeActivity extends AppCompatActivity {
 
     public void kundeDelete(View view){
         Kunde kunde = datasource.getKunde(slectedKunde.getId());
+        //Prüfung auf noch vorhandende Bestellungen zu diesem Kunden
         if(datasource.getAllBestellungen(kunde.getId()).size() == 0){
             datasource.deleteKunde(kunde);
         }else{
@@ -131,7 +141,8 @@ public class KundeListeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        //setzen des Home-Buttons so das er immer auf die letze Aktivty zurückkehrt
+        // da es mehrere Wege gibt um auf diese Aktivity zuzugreifen
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
