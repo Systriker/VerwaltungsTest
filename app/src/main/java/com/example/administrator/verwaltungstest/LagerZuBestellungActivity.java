@@ -15,7 +15,6 @@ public class LagerZuBestellungActivity extends AppCompatActivity {
 
     private static final String TAG = LagerZuBestellungActivity.class.getSimpleName();
 
-    private Button button_lager_zu_bestellung_select_product;
     private EditText edit_lager_zu_bestellung_product,edit_lager_zu_bestellung_quantity;
     private Bestellung bestellung;
     private Product product;
@@ -32,8 +31,6 @@ public class LagerZuBestellungActivity extends AppCompatActivity {
 
         edit_lager_zu_bestellung_product = findViewById(R.id.edit_lager_zu_bestellung_product);
         edit_lager_zu_bestellung_quantity = findViewById(R.id.edit_lager_zu_bestellung_quantity);
-
-        button_lager_zu_bestellung_select_product = findViewById(R.id.button_lager_zu_bestellung_select_product);
 
         editmode = getIntent().getBooleanExtra(getString(R.string.kunde_editmode),false);
         id = getIntent().getLongExtra(DbHelper.COLUMN_KUNDE_ID,0L);
