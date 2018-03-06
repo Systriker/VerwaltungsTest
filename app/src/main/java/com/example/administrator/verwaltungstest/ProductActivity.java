@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 
+//Klasse für die genauere Ansicht/das Bearbeiten eines Produktes
 public class ProductActivity extends AppCompatActivity {
 
     private static final String TAG = ProductActivity.class.getSimpleName();

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+//Klasse für die genauere Ansicht/das Bearbeiten einer Bestellung
 public class BestellungActivity extends AppCompatActivity {
 
     private static final String TAG = ProductActivity.class.getSimpleName();
@@ -48,6 +49,7 @@ public class BestellungActivity extends AppCompatActivity {
         id = getIntent().getLongExtra(DbHelper.COLUMN_BESTELLUNG_ID,0L);
         editTextPreis.setEnabled(false);
 
+        //beim anlegen kann noch nicht gelöscht werden
         if (!editmode){
             findViewById(R.id.button_delete_bestellung).setEnabled(false);
         }

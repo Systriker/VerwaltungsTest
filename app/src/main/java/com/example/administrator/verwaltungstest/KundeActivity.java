@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+//Klasse für die genauere Ansicht/das Bearbeiten eines Kunden
 public class KundeActivity extends AppCompatActivity {
 
     private static final String TAG = KundeActivity.class.getSimpleName();

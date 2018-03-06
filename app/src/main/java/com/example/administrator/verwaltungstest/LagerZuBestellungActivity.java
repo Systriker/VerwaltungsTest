@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+//Klasse für das Hinzufügen eines Produktes auf einer Bestellung
 public class LagerZuBestellungActivity extends AppCompatActivity {
 
     private static final String TAG = LagerZuBestellungActivity.class.getSimpleName();
