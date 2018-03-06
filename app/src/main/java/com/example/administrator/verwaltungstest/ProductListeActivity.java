@@ -49,7 +49,7 @@ public class ProductListeActivity extends AppCompatActivity {
         Log.d(TAG, "onResume: Die Datenquelle wird geöffnet");
         datasource.open();
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
-        getSupportActionBar().setTitle("Produkte");
+        getSupportActionBar().setTitle(getResources().getString(R.string.titleProdukte));
         showAllListEntries();
         //wenn die Liste zur auswahl genutzt wird werden die editier und löschen Buttons ausgeblendet
         //und der hinzufügen Button als bestätigungs Button verwendet
@@ -126,7 +126,7 @@ public class ProductListeActivity extends AppCompatActivity {
         if(datasource.getAllLager_zu_Bestellungen_Product(product.getId()).size() == 0) {
             datasource.deleteProduct(product);
         }else{
-            Toast.makeText(ProductListeActivity.this, "Es sind noch Bestellungen für dieses Produkt vorhanden!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProductListeActivity.this, getResources().getString(R.string.ProduktDeleteError), Toast.LENGTH_SHORT).show();
         }
         showAllListEntries();
     }

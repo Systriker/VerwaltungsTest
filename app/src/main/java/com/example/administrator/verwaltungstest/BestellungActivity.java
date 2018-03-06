@@ -142,7 +142,12 @@ public class BestellungActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bestellung bestellung = datasource.getBestellung(id);
-                datasource.deleteBestellung(bestellung);
+                if(datasource.getAllLager_zu_Bestellungen(bestellung.getId()).size() == 0){
+                    datasource.deleteBestellung(bestellung);
+                }else{
+                    Toast.makeText(BestellungActivity.this,
+                            getResources().getString(R.string.BestellungDeleteError), Toast.LENGTH_SHORT).show();
+                }
                 finish();
             }
         });
@@ -156,9 +161,8 @@ public class BestellungActivity extends AppCompatActivity {
                     for (LagerZuBestellung lzb: productList){
                         if (!(lzb.getQuantity()<=lzb.getProduct().getQuantity())){
                             Toast.makeText(BestellungActivity.this,
-                                    "Es sind nicht genügend Produkte vom Typ:" +
-                                            lzb.getProduct().getName() +
-                                            " vorhanden!", Toast.LENGTH_SHORT).show();
+                                    String.format(getResources().getString(R.string.BestellungEditError),
+                                            lzb.getProduct().getName()), Toast.LENGTH_SHORT).show();
                             return;
                         }
                     }
@@ -180,12 +184,12 @@ public class BestellungActivity extends AppCompatActivity {
         findViewById(R.id.button_bestellung_product_delete).setEnabled(false);
         findViewById(R.id.button_bestellung_product_add).setEnabled(false);
         editTextKunde.setEnabled(false);
-        getSupportActionBar().setTitle("Neue Bestellung");
+        getSupportActionBar().setTitle(getResources().getString(R.string.neueBestellung));
         findViewById(R.id.buttonBuchen).setEnabled(false);
 
         if (id != 0L){
             Bestellung bestellung = datasource.getBestellung(id);
-            getSupportActionBar().setTitle("Bestellung: " + id);
+            getSupportActionBar().setTitle(getResources().getString(R.string.titleBestellung)+": " + id);
             editTextBestellunngsNummer.setText(String.valueOf(id));
             findViewById(R.id.button_bestellung_product_add).setEnabled(true);
             if (editmode) {

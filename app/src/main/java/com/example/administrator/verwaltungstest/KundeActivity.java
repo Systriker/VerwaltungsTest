@@ -125,17 +125,17 @@ public class KundeActivity extends AppCompatActivity {
                     datasource.deleteKunde(kunde);
                     finish();
                 }else{
-                    Toast.makeText(KundeActivity.this, "Es sind noch Bestellungen für diesen Kunden vorhanden!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(KundeActivity.this, getResources().getString(R.string.KundeDeleteError), Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
     private void fillPage(){
-        getSupportActionBar().setTitle("Neuer Kunde");
+        getSupportActionBar().setTitle(getResources().getString(R.string.neuerKunde));
         if (id != 0L){
             Kunde kunde = datasource.getKunde(id);
-            getSupportActionBar().setTitle("Kunde: " + id);
+            getSupportActionBar().setTitle(getResources().getString(R.string.titleKunde)+": " + id);
             editTextKundenNummer.setText(String.valueOf(id));
             editTextName.setText(kunde.getName());
             editTextAdresse.setText(kunde.getAdresse());

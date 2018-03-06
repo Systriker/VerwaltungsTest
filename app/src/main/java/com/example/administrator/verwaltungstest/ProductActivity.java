@@ -136,18 +136,18 @@ public class ProductActivity extends AppCompatActivity {
                     datasource.deleteProduct(product);
                     finish();
                 }else{
-                    Toast.makeText(ProductActivity.this, "Es sind noch Bestellungen für dieses Produkt vorhanden!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProductActivity.this, getResources().getString(R.string.ProduktDeleteError), Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
     private void fillPage(){
-        getSupportActionBar().setTitle("Neues Produkt");
+        getSupportActionBar().setTitle(getResources().getString(R.string.neuesProdukt));
 
         if (id != 0L){
             Product product = datasource.getProduct(id);
-            getSupportActionBar().setTitle("Produkt: " + id);
+            getSupportActionBar().setTitle(getResources().getString(R.string.titleProdukt)+": " + id);
             editTextProductNummer.setText(String.valueOf(id));
             editTextName.setText(product.getName());
             editTextQuantity.setText(String.valueOf(product.getQuantity()));

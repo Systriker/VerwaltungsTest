@@ -22,6 +22,40 @@
     <string name="button_bestellung_product_add">+</string>
     <string name="button_bestellung_product_delete">-</string>
 
+    <string name="titleBestellung">Bestellung</string>
+    <string name="neueBestellung">Neue Bestellung</string>
+    <string name="BestellungEditError">Es sind nicht genügend Produkte vom Typ: %s vorhanden!</string>
+    <string name="BestellungDeleteError">Es sind noch Prodkte auf dieser Bestellung vorhanden!</string>
+
+    <string name="titleKunde">Kunde</string>
+    <string name="neuerKunde">Neuer Kunde</string>
+    <string name="KundeDeleteError">Es sind noch Bestellungen für diesen Kunden vorhanden!</string>
+
+    <string name="titleProdukt">Produkt</string>
+    <string name="titleProdukte">Produkte</string>
+    <string name="neuesProdukt">Neues Produkt</string>
+    <string name="ProduktDeleteError">Es sind noch Bestellungen für dieses Produkt vorhanden!</string>
+
+    <string name="button_select">Auswahl</string>
+    <string name="hint_preis">0,00€</string>
+    <string name="bestellung_text_bestellnummer">Bestellungsnr.:</string>
+    <string name="bestellung_text_kunde">Kunde:</string>
+    <string name="bestellung_text_preis">Preis:</string>
+    <string name="bestellung_button_buchen">Buchen</string>
+    <string name="kunde_text_nummer">Nr.:</string>
+    <string name="kunde_text_name">Name:</string>
+    <string name="kunde_text_adresse">Adresse:</string>
+    <string name="kunde_text_art">Art:</string>
+    <string name="produkt_hiint_preis">0,00€</string>
+    <string name="produkt_text_nummer">Nr.:</string>
+    <string name="produkt_text_name">Name:</string>
+    <string name="produkt_text_imLager">Im Lager:</string>
+    <string name="produkt_text_preis">Preis:</string>
+    <string name="lager_zu_bestellung_hint_produkt">Produkt</string>
+    <string name="lager_zu_bestellung_hint_anzahl">Anzahl</string>
+    <string name="lager_zu_bestellung_text_produkt">Produkt:</string>
+    <string name="lager_zu_bestellung_text_menge">Menge:</string>
+
     <string-array name="kunden_arten">
         <item>Privatkunde</item>
         <item>Firmenkunde</item>

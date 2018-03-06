@@ -49,7 +49,7 @@ public class KundeListeActivity extends AppCompatActivity {
         Log.d(TAG, "onResume: Die Datenquelle wird geöffnet");
         datasource.open();
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
-        getSupportActionBar().setTitle("Kunden");
+        getSupportActionBar().setTitle(getResources().getString(R.string.button_kunden));
         showAllListEntries();
         //wenn die Liste zur auswahl genutzt wird werden die editier und löschen Buttons ausgeblendet
         //und der hinzufügen Button als bestätigungs Button verwendet
@@ -126,7 +126,7 @@ public class KundeListeActivity extends AppCompatActivity {
         if(datasource.getAllBestellungen(kunde.getId()).size() == 0){
             datasource.deleteKunde(kunde);
         }else{
-            Toast.makeText(KundeListeActivity.this, "Es sind noch Bestellungen für diesen Kunden vorhanden!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(KundeListeActivity.this, getResources().getString(R.string.KundeDeleteError), Toast.LENGTH_SHORT).show();
         }
         showAllListEntries();
     }

@@ -51,7 +51,7 @@ public class BestellungListeActivity extends AppCompatActivity {
         Log.d(TAG, "onResume: Die Datenquelle wird geöffnet");
         datasource.open();
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
-        getSupportActionBar().setTitle("Bestellungen");
+        getSupportActionBar().setTitle(getResources().getString(R.string.button_bestellungen));
         showAllListEntries();
         //aktiviere bearbeiten und löschen wenn eine bereits vorhande Bestellung ausgewählt wurde
         if (slectedBestellung == null){
@@ -117,7 +117,8 @@ public class BestellungListeActivity extends AppCompatActivity {
         if(datasource.getAllLager_zu_Bestellungen(bestellung.getId()).size() == 0){
             datasource.deleteBestellung(bestellung);
         }else{
-            Toast.makeText(BestellungListeActivity.this, "Es sind noch Prodkte auf dieser Bestellung vorhanden!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(BestellungListeActivity.this,
+                    getResources().getString(R.string.BestellungDeleteError), Toast.LENGTH_SHORT).show();
         }
         showAllListEntries();
     }
