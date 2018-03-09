@@ -1,6 +1,8 @@
 package com.example.administrator.verwaltungstest;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.TooltipCompat;
@@ -23,6 +25,7 @@ public class KundeActivity extends AppCompatActivity {
     private long id;
     private boolean editmode;
     private Datasource datasource;
+    private Adresse adresse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +44,15 @@ public class KundeActivity extends AppCompatActivity {
         editmode = getIntent().getBooleanExtra(getString(R.string.kunde_editmode),false);
         id = getIntent().getLongExtra(DbHelper.COLUMN_KUNDE_ID,0L);
         editTextKundenNummer.setEnabled(false);
+        editTextAdresse.setEnabled(false);
 
         if (!editmode){
             bestellungenButton.setEnabled(false);
-            findViewById(R.id.button_delete_kunden).setEnabled(false);
+            findViewById(R.id.button_kunde_delete).setEnabled(false);
+            bestellungenButton.getBackground()
+                    .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            (findViewById(R.id.button_kunde_delete)).getBackground()
+                    .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
         }
 
         activateButtons();
@@ -98,9 +106,9 @@ public class KundeActivity extends AppCompatActivity {
                 }
 
                 if (editmode){
-                    datasource.updateKunde(KundenNummerLong, Name, Adresse, KundeTyp);
+                    datasource.updateKunde(KundenNummerLong, Name, adresse.getId(), KundeTyp);
                 }else {
-                    datasource.createKunde(KundenNummerLong, Name, Adresse, KundeTyp);
+                    datasource.createKunde(KundenNummerLong, Name, adresse.getId(), KundeTyp);
                 }
                 finish();
             }
@@ -117,7 +125,7 @@ public class KundeActivity extends AppCompatActivity {
             }
         });
 
-        Button deleteButton = findViewById(R.id.button_delete_kunden);
+        Button deleteButton = findViewById(R.id.button_kunde_delete);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,6 +138,16 @@ public class KundeActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Button selectAdresse = findViewById(R.id.button_kunde_select_adresse);
+        selectAdresse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(),AdressListeActivity.class);
+                intent.putExtra(getString(R.string.kunde_editmode),false);
+                startActivityForResult(intent,123);
+            }
+        });
     }
 
     private void fillPage(){
@@ -139,8 +157,25 @@ public class KundeActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(getResources().getString(R.string.titleKunde)+": " + id);
             editTextKundenNummer.setText(String.valueOf(id));
             editTextName.setText(kunde.getName());
-            editTextAdresse.setText(kunde.getAdresse());
+            Adresse anzeigeAdresse = datasource.getAdresse(kunde.getAdresse());
+            if(adresse != null){
+                editTextAdresse.setText(adresse.toString());
+            }else {
+                editTextAdresse.setText(anzeigeAdresse.toString());
+            }
             spinnerKundeTyp.setSelection(kunde.getKundenType().equals("Privatkunde")?0:1);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(!(resultCode==0)) {
+            long id = data.getLongExtra("AdresseId", 0);
+            if(!(id==0)) {
+                datasource.open();
+                adresse = datasource.getAdresse(id);
+                editTextAdresse.setText(adresse.toString());
+            }
         }
     }
 }

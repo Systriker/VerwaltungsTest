@@ -1,6 +1,8 @@
 package com.example.administrator.verwaltungstest;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -64,9 +66,15 @@ public class ProductListeActivity extends AppCompatActivity {
             if (slectedProduct == null) {
                 findViewById(R.id.button_edit_product).setEnabled(false);
                 findViewById(R.id.button_delete_product).setEnabled(false);
+                (findViewById(R.id.button_edit_product)).getBackground()
+                        .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                (findViewById(R.id.button_delete_product)).getBackground()
+                        .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             } else {
                 findViewById(R.id.button_edit_product).setEnabled(true);
                 findViewById(R.id.button_delete_product).setEnabled(true);
+                (findViewById(R.id.button_edit_product)).getBackground().setColorFilter(null);
+                (findViewById(R.id.button_delete_product)).getBackground().setColorFilter(null);
             }
         }
     }
@@ -77,7 +85,7 @@ public class ProductListeActivity extends AppCompatActivity {
         productListView = findViewById(R.id.listview_products);
         productListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         ArrayAdapter<Kunde> productArrayAdapter = new ArrayAdapter<Kunde>(this,
-                android.R.layout.simple_list_item_single_choice,emtyListForInitialisation);
+               R.layout.list_item_basis,emtyListForInitialisation);
         productListView.setAdapter(productArrayAdapter);
 
         productListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -86,6 +94,8 @@ public class ProductListeActivity extends AppCompatActivity {
                 slectedProduct = (Product) adapterView.getItemAtPosition(i);
                 findViewById(R.id.button_edit_product).setEnabled(true);
                 findViewById(R.id.button_delete_product).setEnabled(true);
+                (findViewById(R.id.button_edit_product)).getBackground().setColorFilter(null);
+                (findViewById(R.id.button_delete_product)).getBackground().setColorFilter(null);
                 showAllListEntries();
             }
         });

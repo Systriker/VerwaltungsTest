@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorBackgroundDark"
     tools:context="com.example.administrator.verwaltungstest.ProductListeActivity">
 
     <ListView
@@ -15,6 +16,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
+        android:divider="@color/colorButtonDark"
+        android:dividerHeight="2dp"
+        android:listSelector="@color/colorBackgroundDarkSelected"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,21 +40,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="productAnlegen"
-            android:text="@string/button_add" />
+            android:text="@string/button_add"
+            android:backgroundTint="@color/colorButtonDark"
+            android:textColor="@color/colorText"/>
 
         <Button
             android:id="@+id/button_edit_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="productEdit"
-            android:text="@string/button_edit" />
+            android:text="@string/button_edit"
+            android:backgroundTint="@color/colorButtonDark"
+            android:textColor="@color/colorText"/>
 
         <Button
             android:id="@+id/button_delete_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="productDelete"
-            android:text="@string/button_delete" />
+            android:text="@string/button_delete"
+            android:backgroundTint="@color/colorButtonDark"
+            android:textColor="@color/colorText"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

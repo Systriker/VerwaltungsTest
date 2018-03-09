@@ -50,6 +50,16 @@ public class Datasource {
             DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_QUANTITY,
     };
 
+    // Fleder der "adresse"-Tabelle
+    private String[] columns_Adresse = {
+            DbHelper.COLUMN_ADRESSE_ID,
+            DbHelper.COLUMN_ADRESSE_STRASSE,
+            DbHelper.COLUMN_ADRESSE_HAUSNUMMER,
+            DbHelper.COLUMN_ADRESSE_ZUSATZ,
+            DbHelper.COLUMN_ADRESSE_ORT,
+            DbHelper.COLUMN_ADRESSE_PLZ,
+    };
+
     public Datasource(Context context){
         Log.d(TAG, "Datasource erzeugt den dbHelper");
         dbHelper = new DbHelper(context);
@@ -68,7 +78,7 @@ public class Datasource {
 
     // Funktionen die Kunden betreffen
     // erstellen eines neuen Kunde-Objektes und zugehörigem Datensatz
-    public Kunde createKunde(long id, String Name, String Adresse, String KundeTyp){
+    public Kunde createKunde(long id, String Name, long Adresse, String KundeTyp){
         ContentValues values = new ContentValues();
         values.put(DbHelper.COLUMN_KUNDE_NAME,Name);
         values.put(DbHelper.COLUMN_KUNDE_ADRESSE,Adresse);
@@ -114,6 +124,25 @@ public class Datasource {
         return  kundeList;
     }
 
+    // rückgabe einer Liste die alle Kunden-Datensätze die eine bestimmte Adresse haben
+    // als Kunde-Objekte enthält
+    public List<Kunde> getAllKunden(long adresse_id){
+        List<Kunde> kundeList = new ArrayList<>();
+        Cursor cursor = database.query(DbHelper.TABLE_KUNDE,columns,
+                DbHelper.COLUMN_KUNDE_ADRESSE + "=" + adresse_id,null,
+                null,null,null);
+        cursor.moveToFirst();
+        Kunde kunde;
+        while (!cursor.isAfterLast()){
+            kunde = cursorToKunde(cursor);
+            kundeList.add(kunde);
+            Log.d(TAG, "ID: " + kunde.getId() + " Inhalt " + kunde.toString());
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return  kundeList;
+    }
+
     // wandelt einen Kunde-Datensatz in ein Kunde-Objekt um
     private Kunde cursorToKunde(Cursor cursor) {
         int idIndex = cursor.getColumnIndex(DbHelper.COLUMN_KUNDE_ID);
@@ -122,7 +151,7 @@ public class Datasource {
         int idKundeTyp = cursor.getColumnIndex(DbHelper.COLUMN_KUNDE_KUNDETYP);
 
         String name = cursor.getString(idName);
-        String adresse = cursor.getString(idAdresse);
+        long adresse = cursor.getLong(idAdresse);
         String kundeTyp = cursor.getString(idKundeTyp);
         long id = cursor.getLong(idIndex);
 
@@ -131,7 +160,7 @@ public class Datasource {
     }
 
     // bearbeiten eines Kunde-Datensatzes
-    public Kunde updateKunde(long id, String newName, String newAdresse, String newKundeTyp){
+    public Kunde updateKunde(long id, String newName, long newAdresse, String newKundeTyp){
         ContentValues values = new ContentValues();
         values.put(DbHelper.COLUMN_KUNDE_NAME,newName);
         values.put(DbHelper.COLUMN_KUNDE_ADRESSE,newAdresse);
@@ -474,6 +503,109 @@ public class Datasource {
         database.delete(DbHelper.TABLE_LAGER_ZU_BESTELLUNGEN,
                 DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_ID + "=" + id, null);
         Log.d(TAG, "deleteKunde: Eintrag gelöscht" + id + " " + lagerZuBestellung.toString());
+    }
+
+
+    //Funktionen die Adressen betreffen
+    // erstellen eines neuen Adresse-Objektes und zugehörigem Datensatz
+    public Adresse createAdresse(long id, String strasse,int hausnummer,String zusatz, String ort, long plz){
+        ContentValues values = new ContentValues();
+        values.put(DbHelper.COLUMN_ADRESSE_STRASSE,strasse);
+        values.put(DbHelper.COLUMN_ADRESSE_HAUSNUMMER,hausnummer);
+        values.put(DbHelper.COLUMN_ADRESSE_ZUSATZ,zusatz);
+        values.put(DbHelper.COLUMN_ADRESSE_ORT,ort);
+        values.put(DbHelper.COLUMN_ADRESSE_PLZ,plz);
+
+        long insertId = database.insert(DbHelper.TABLE_ADRESSE,null,values);
+
+        Cursor cursor = database.query(DbHelper.TABLE_ADRESSE,columns_Adresse,
+                DbHelper.COLUMN_ADRESSE_ID + "=" + insertId,
+                null,null,null,null);
+        cursor.moveToFirst();
+        Adresse adresse = cursorToAdresse(cursor);
+        cursor.close();
+        return adresse;
+    }
+
+    // auswahl eines Adresse-Datensatzes anhand der Id und erstellen eines zugehörigen Objektes
+    public Adresse getAdresse(long id){
+        Cursor cursor = database.query(DbHelper.TABLE_ADRESSE,columns_Adresse,
+                DbHelper.COLUMN_ADRESSE_ID + " = " + id,null,null,null,null);
+        Adresse adresse;
+        cursor.moveToFirst();
+        adresse = cursorToAdresse(cursor);
+        Log.d(TAG, "ID: " + adresse.getId() + " Inhalt " + adresse.toString());
+        cursor.close();
+        return  adresse;
+    }
+
+    // rückgabe einer Liste die alle Adresse-Datensätze der DB als Adresse-Objekte enthält
+    public List<Adresse> getAllArdesse(){
+        List<Adresse> adresseList = new ArrayList<>();
+        Cursor cursor = database.query(DbHelper.TABLE_ADRESSE,columns_Adresse,
+                null,null,null,null,null);
+        cursor.moveToFirst();
+        Adresse adresse;
+        while (!cursor.isAfterLast()){
+            adresse = cursorToAdresse(cursor);
+            adresseList.add(adresse);
+            Log.d(TAG, "ID: " + adresse.getId() + adresse + adresse.toString());
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return  adresseList;
+    }
+
+    // wandelt einen Adresse-Datensatz in ein Adresse-Objekt um
+    private Adresse cursorToAdresse(Cursor cursor) {
+        int idIndex = cursor.getColumnIndex(DbHelper.COLUMN_ADRESSE_ID);
+        int idStrasse = cursor.getColumnIndex(DbHelper.COLUMN_ADRESSE_STRASSE);
+        int idHausnummer = cursor.getColumnIndex(DbHelper.COLUMN_ADRESSE_HAUSNUMMER);
+        int idZusatz = cursor.getColumnIndex(DbHelper.COLUMN_ADRESSE_ZUSATZ);
+        int idOrt = cursor.getColumnIndex(DbHelper.COLUMN_ADRESSE_ORT);
+        int idPLZ = cursor.getColumnIndex(DbHelper.COLUMN_ADRESSE_PLZ);
+
+        long id = cursor.getLong(idIndex);
+        String strasse = cursor.getString(idStrasse);
+        int hausnummer = cursor.getInt(idHausnummer);
+        String zusatz = cursor.getString(idZusatz);
+        String ort = cursor.getString(idOrt);
+        long plz = cursor.getLong(idPLZ);
+
+
+        Adresse adresse = new Adresse(id,strasse,ort,plz,hausnummer,zusatz);
+        return adresse;
+    }
+
+    // bearbeiten eines Adresse-Datensatzes
+    public Adresse updateAdresse(long id, String newStrasse,int newHausnummer,String newZusatz,
+                                    String newOrt, long newPlz){
+        ContentValues values = new ContentValues();
+        values.put(DbHelper.COLUMN_ADRESSE_STRASSE,newStrasse);
+        values.put(DbHelper.COLUMN_ADRESSE_HAUSNUMMER,newHausnummer);
+        values.put(DbHelper.COLUMN_ADRESSE_ZUSATZ,newZusatz);
+        values.put(DbHelper.COLUMN_ADRESSE_ORT,newOrt);
+        values.put(DbHelper.COLUMN_ADRESSE_PLZ,newPlz);
+
+
+        database.update(DbHelper.TABLE_ADRESSE,values,
+                DbHelper.COLUMN_ADRESSE_ID + "=" + id,null);
+        Cursor cursor = database.query(DbHelper.TABLE_ADRESSE,
+                columns_Adresse,DbHelper.COLUMN_ADRESSE_ID+ "=" + id,
+                null,null,null,null);
+        cursor.moveToFirst();
+        Adresse adresse = cursorToAdresse(cursor);
+        cursor.close();
+        return adresse;
+    }
+
+    // löschen eines Adresse-Datensatzes
+    public void deleteAdresse(Adresse adresse){
+        long id = adresse.getId();
+
+        database.delete(DbHelper.TABLE_ADRESSE,
+                DbHelper.COLUMN_ADRESSE_ID + "=" + id, null);
+        Log.d(TAG, "deleteKunde: Eintrag gelöscht" + id + " " + adresse.toString());
     }
 
 }

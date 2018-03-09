@@ -1,6 +1,8 @@
 package com.example.administrator.verwaltungstest;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.TooltipCompat;
@@ -39,6 +41,8 @@ public class LagerZuBestellungActivity extends AppCompatActivity {
 
         if (!editmode){
             findViewById(R.id.button_delete_lager_zu_bestellung).setEnabled(false);
+            (findViewById(R.id.button_delete_lager_zu_bestellung)).getBackground()
+                    .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
         }
 
         activateButtons();

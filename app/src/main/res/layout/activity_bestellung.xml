@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackgroundDark"
     tools:context="com.example.administrator.verwaltungstest.BestellungActivity">
 
     <EditText
@@ -17,7 +18,9 @@
         android:inputType="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"/>
 
     <EditText
         android:id="@+id/edit_Kunde"
@@ -29,7 +32,9 @@
         android:inputType="none"
         app:layout_constraintEnd_toStartOf="@+id/button_select_kunde"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/edit_BestellunngsNummer" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_BestellunngsNummer"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"/>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -46,6 +51,9 @@
             android:id="@+id/listview_bestellung_products"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:divider="@color/colorButtonDark"
+            android:dividerHeight="2dp"
+            android:listSelector="@color/colorBackgroundDarkSelected"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button_bestellung_product_add"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +69,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/listview_bestellung_products"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_input_add" />
+            app:srcCompat="@android:drawable/ic_input_add"
+            android:backgroundTint="@color/colorButtonDark"
+            android:textColor="@color/colorText"/>
 
         <ImageButton
             android:id="@+id/button_bestellung_product_delete"
@@ -71,7 +81,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/listview_bestellung_products"
             app:layout_constraintTop_toBottomOf="@+id/button_bestellung_product_add"
-            app:srcCompat="@android:drawable/ic_delete" />
+            app:srcCompat="@android:drawable/ic_delete"
+            android:backgroundTint="@color/colorButtonDark"
+            android:textColor="@color/colorText"/>
 
     </android.support.constraint.ConstraintLayout>
 
@@ -86,7 +98,9 @@
         android:text="@string/button_save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_delete_bestellung"
-        app:layout_constraintTop_toBottomOf="@+id/editBestellungPreis" />
+        app:layout_constraintTop_toBottomOf="@+id/editBestellungPreis"
+        android:backgroundTint="@color/colorButtonDark"
+        android:textColor="@color/colorText"/>
 
     <Button
         android:id="@+id/button_delete_bestellung"
@@ -98,7 +112,9 @@
         android:text="@string/button_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editBestellungPreis" />
+        app:layout_constraintTop_toBottomOf="@+id/editBestellungPreis"
+        android:backgroundTint="@color/colorButtonDark"
+        android:textColor="@color/colorText"/>
 
     <Button
         android:id="@+id/button_select_kunde"
@@ -107,7 +123,9 @@
         android:layout_marginTop="16dp"
         android:text="@string/button_select"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_BestellunngsNummer" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_BestellunngsNummer"
+        android:backgroundTint="@color/colorButtonDark"
+        android:textColor="@color/colorText"/>
 
     <EditText
         android:id="@+id/editBestellungPreis"
@@ -121,7 +139,9 @@
         app:layout_constraintBottom_toTopOf="@+id/button_save_bestellung"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"/>
 
     <TextView
         android:id="@+id/textView"
@@ -135,7 +155,8 @@
         app:layout_constraintBottom_toTopOf="@+id/edit_Kunde"
         app:layout_constraintEnd_toStartOf="@+id/edit_BestellunngsNummer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/colorTextHint"/>
 
     <TextView
         android:id="@+id/textView2"
@@ -149,7 +170,8 @@
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toStartOf="@+id/edit_Kunde"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:textColor="@color/colorTextHint"/>
 
     <TextView
         android:id="@+id/textView3"
@@ -162,7 +184,8 @@
         app:layout_constraintBottom_toTopOf="@+id/button_delete_bestellung"
         app:layout_constraintEnd_toStartOf="@+id/editBestellungPreis"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        android:textColor="@color/colorTextHint"/>
 
     <Button
         android:id="@+id/buttonBuchen"
@@ -174,6 +197,8 @@
         android:text="@string/bestellung_button_buchen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editBestellungPreis" />
+        app:layout_constraintTop_toBottomOf="@+id/editBestellungPreis"
+        android:backgroundTint="@color/colorButtonDark"
+        android:textColor="@color/colorText"/>
 
 </android.support.constraint.ConstraintLayout>

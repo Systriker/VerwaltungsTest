@@ -1,6 +1,8 @@
 package com.example.administrator.verwaltungstest;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -64,9 +66,15 @@ public class KundeListeActivity extends AppCompatActivity {
             if (slectedKunde == null) {
                 findViewById(R.id.button_edit_kunden).setEnabled(false);
                 findViewById(R.id.button_delete_kunde).setEnabled(false);
+                (findViewById(R.id.button_edit_kunden)).getBackground()
+                        .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+                (findViewById(R.id.button_delete_kunde)).getBackground()
+                        .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
             } else {
                 findViewById(R.id.button_edit_kunden).setEnabled(true);
                 findViewById(R.id.button_delete_kunde).setEnabled(true);
+                (findViewById(R.id.button_edit_kunden)).getBackground().setColorFilter(null);
+                (findViewById(R.id.button_delete_kunde)).getBackground().setColorFilter(null);
             }
         }
     }
@@ -77,7 +85,7 @@ public class KundeListeActivity extends AppCompatActivity {
         kundeListView = findViewById(R.id.listview_kunden);
         kundeListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         ArrayAdapter<Kunde> kundeArrayAdapter = new ArrayAdapter<Kunde>(this,
-                android.R.layout.simple_list_item_single_choice,emtyListForInitialisation);
+                R.layout.list_item_basis,emtyListForInitialisation);
         kundeListView.setAdapter(kundeArrayAdapter);
 
         kundeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -86,6 +94,8 @@ public class KundeListeActivity extends AppCompatActivity {
                 slectedKunde = (Kunde) adapterView.getItemAtPosition(i);
                 findViewById(R.id.button_edit_kunden).setEnabled(true);
                 findViewById(R.id.button_delete_kunde).setEnabled(true);
+                (findViewById(R.id.button_edit_kunden)).getBackground().setColorFilter(null);
+                (findViewById(R.id.button_delete_kunde)).getBackground().setColorFilter(null);
                 showAllListEntries();
             }
         });

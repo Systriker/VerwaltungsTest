@@ -51,4 +51,8 @@
     <string name="lager_zu_bestellung_text_produkt">Product:</string>
     <string name="lager_zu_bestellung_text_menge">Count:</string>
     <string name="bestellung_button_buchen">Book</string>
+    <string name="titleAdresse">Adress</string>
+    <string name="neueAdresse">new Adress</string>
+    <string name="AdresseDeleteError">There are still Costumer\'s with this Adress!</string>
+    <string name="titleAdressen">Adresses</string>
 </resources>

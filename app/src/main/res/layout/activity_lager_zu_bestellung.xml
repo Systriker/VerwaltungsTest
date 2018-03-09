@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackgroundDark"
     tools:context="com.example.administrator.verwaltungstest.LagerZuBestellungActivity">
 
 
@@ -18,7 +19,9 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/button_lager_zu_bestellung_select_product"
         app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"/>
 
     <EditText
         android:id="@+id/edit_lager_zu_bestellung_quantity"
@@ -31,7 +34,9 @@
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/edit_lager_zu_bestellung_product" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_lager_zu_bestellung_product"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"/>
 
     <Button
         android:id="@+id/button_lager_zu_bestellung_select_product"
@@ -41,7 +46,9 @@
         android:layout_marginTop="8dp"
         android:text="@string/button_select"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="@color/colorButtonDark"
+        android:textColor="@color/colorText"/>
 
     <Button
         android:id="@+id/button_save_lager_zu_bestellung"
@@ -51,7 +58,9 @@
         android:layout_marginStart="16dp"
         android:text="@string/button_save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_delete_lager_zu_bestellung" />
+        app:layout_constraintStart_toEndOf="@+id/button_delete_lager_zu_bestellung"
+        android:backgroundTint="@color/colorButtonDark"
+        android:textColor="@color/colorText"/>
 
     <Button
         android:id="@+id/button_delete_lager_zu_bestellung"
@@ -61,7 +70,9 @@
         android:layout_marginStart="16dp"
         android:text="@string/button_delete"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/colorButtonDark"
+        android:textColor="@color/colorText"/>
 
     <TextView
         android:id="@+id/textView8"
@@ -75,7 +86,8 @@
         app:layout_constraintBottom_toTopOf="@+id/edit_lager_zu_bestellung_quantity"
         app:layout_constraintEnd_toStartOf="@+id/edit_lager_zu_bestellung_product"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/colorTextHint"/>
 
     <TextView
         android:id="@+id/textView9"
@@ -87,6 +99,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toStartOf="@+id/edit_lager_zu_bestellung_quantity"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        android:textColor="@color/colorTextHint"/>
 
 </android.support.constraint.ConstraintLayout>

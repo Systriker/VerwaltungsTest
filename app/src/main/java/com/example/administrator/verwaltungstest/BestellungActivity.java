@@ -1,6 +1,8 @@
 package com.example.administrator.verwaltungstest;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.TooltipCompat;
@@ -52,6 +54,8 @@ public class BestellungActivity extends AppCompatActivity {
         //beim anlegen kann noch nicht gelöscht werden
         if (!editmode){
             findViewById(R.id.button_delete_bestellung).setEnabled(false);
+            (findViewById(R.id.button_delete_bestellung)).getBackground()
+                    .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
         }
 
         activateButtons();
@@ -184,26 +188,40 @@ public class BestellungActivity extends AppCompatActivity {
 
         editTextBestellunngsNummer.setEnabled(false);
         findViewById(R.id.button_bestellung_product_delete).setEnabled(false);
+        (findViewById(R.id.button_bestellung_product_delete)).getBackground()
+                .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
         findViewById(R.id.button_bestellung_product_add).setEnabled(false);
+        (findViewById(R.id.button_bestellung_product_add)).getBackground()
+                .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
         editTextKunde.setEnabled(false);
         getSupportActionBar().setTitle(getResources().getString(R.string.neueBestellung));
         findViewById(R.id.buttonBuchen).setEnabled(false);
+        (findViewById(R.id.buttonBuchen)).getBackground()
+                .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
 
         if (id != 0L){
             Bestellung bestellung = datasource.getBestellung(id);
             getSupportActionBar().setTitle(getResources().getString(R.string.titleBestellung)+": " + id);
             editTextBestellunngsNummer.setText(String.valueOf(id));
             findViewById(R.id.button_bestellung_product_add).setEnabled(true);
+            (findViewById(R.id.button_bestellung_product_add)).getBackground().setColorFilter(null);
             if (editmode) {
                 kunde = bestellung.getKunde();
                 editTextKunde.setText(kunde.getName());
                 initializeBestellungListView();
                 isBooked = bestellung.isBooked();
                 findViewById(R.id.buttonBuchen).setEnabled(true);
+                (findViewById(R.id.buttonBuchen)).getBackground().setColorFilter(null);
                 if(isBooked) {
                     findViewById(R.id.button_bestellung_product_add).setEnabled(false);
+                    (findViewById(R.id.button_bestellung_product_add)).getBackground()
+                            .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
                     findViewById(R.id.button_select_kunde).setEnabled(false);
+                    (findViewById(R.id.button_select_kunde)).getBackground()
+                            .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
                     findViewById(R.id.buttonBuchen).setEnabled(false);
+                    (findViewById(R.id.buttonBuchen)).getBackground()
+                            .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
                 }
             }
         }
@@ -215,7 +233,7 @@ public class BestellungActivity extends AppCompatActivity {
         listView = findViewById(R.id.listview_bestellung_products);
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         ArrayAdapter<LagerZuBestellung> productArrayAdapter = new ArrayAdapter<LagerZuBestellung>(this,
-                android.R.layout.simple_list_item_single_choice,emtyListForInitialisation);
+                R.layout.list_item_basis,emtyListForInitialisation);
         listView.setAdapter(productArrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -224,6 +242,7 @@ public class BestellungActivity extends AppCompatActivity {
                 selectedProduct = (LagerZuBestellung) adapterView.getItemAtPosition(i);
                 if(!isBooked) {
                     findViewById(R.id.button_bestellung_product_delete).setEnabled(true);
+                    (findViewById(R.id.button_bestellung_product_delete)).getBackground().setColorFilter(null);
                 }
                 showAllListEntries();
             }

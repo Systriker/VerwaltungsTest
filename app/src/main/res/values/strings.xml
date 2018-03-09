@@ -36,6 +36,11 @@
     <string name="neuesProdukt">Neues Produkt</string>
     <string name="ProduktDeleteError">Es sind noch Bestellungen für dieses Produkt vorhanden!</string>
 
+    <string name="titleAdresse">Adresse</string>
+    <string name="titleAdressen">Adressen</string>
+    <string name="neueAdresse">Neue Adresse</string>
+    <string name="AdresseDeleteError">Es sind noch Kunden mit dieser Adresse vorhanden!</string>
+
     <string name="button_select">Auswahl</string>
     <string name="hint_preis">0,00€</string>
     <string name="bestellung_text_bestellnummer">Bestellungsnr.:</string>

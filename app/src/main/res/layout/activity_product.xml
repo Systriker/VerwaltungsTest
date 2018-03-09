@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackgroundDark"
     tools:context="com.example.administrator.verwaltungstest.ProductActivity">
 
     <Button
@@ -14,7 +15,9 @@
         android:layout_marginStart="16dp"
         android:text="@string/button_save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_delete_products" />
+        app:layout_constraintStart_toEndOf="@+id/button_delete_products"
+        android:backgroundTint="@color/colorButtonDark"
+        android:textColor="@color/colorText"/>
 
     <EditText
         android:id="@+id/edit_product_Id"
@@ -27,7 +30,9 @@
         android:inputType="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"/>
 
     <EditText
         android:id="@+id/edit_product_Name"
@@ -40,7 +45,9 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/edit_product_Id" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_product_Id"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"/>
 
     <EditText
         android:id="@+id/edit_product_Quantity"
@@ -53,7 +60,9 @@
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/edit_product_Name" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_product_Name"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"/>
 
     <Button
         android:id="@+id/button_delete_products"
@@ -63,7 +72,9 @@
         android:layout_marginStart="8dp"
         android:text="@string/button_delete"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/colorButtonDark"
+        android:textColor="@color/colorText"/>
 
     <EditText
         android:id="@+id/editProductPreis"
@@ -76,7 +87,9 @@
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/edit_product_Quantity" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_product_Quantity"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorTextHint"/>
 
     <TextView
         android:id="@+id/textView10"
@@ -90,7 +103,8 @@
         app:layout_constraintBottom_toTopOf="@+id/edit_product_Name"
         app:layout_constraintEnd_toStartOf="@+id/edit_product_Id"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/colorTextHint"/>
 
     <TextView
         android:id="@+id/textView11"
@@ -104,7 +118,8 @@
         app:layout_constraintBottom_toTopOf="@+id/edit_product_Quantity"
         app:layout_constraintEnd_toStartOf="@+id/edit_product_Name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_product_Id" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_product_Id"
+        android:textColor="@color/colorTextHint"/>
 
     <TextView
         android:id="@+id/textView12"
@@ -118,7 +133,8 @@
         app:layout_constraintBottom_toTopOf="@+id/editProductPreis"
         app:layout_constraintEnd_toStartOf="@+id/edit_product_Quantity"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_product_Name" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_product_Name"
+        android:textColor="@color/colorTextHint"/>
 
     <TextView
         android:id="@+id/textView13"
@@ -130,6 +146,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toStartOf="@+id/editProductPreis"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        android:textColor="@color/colorTextHint"/>
 
 </android.support.constraint.ConstraintLayout>

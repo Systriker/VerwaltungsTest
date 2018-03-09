@@ -4,10 +4,10 @@ package com.example.administrator.verwaltungstest;
 public class Kunde {
     private long id;
     private String name;
-    private String adresse;
+    private long adresse;
     private String kundenType;
 
-    public Kunde(long id, String name, String adresse, String kundenTyle) {
+    public Kunde(long id, String name, long adresse, String kundenTyle) {
         this.id = id;
         this.name = name;
         this.adresse = adresse;
@@ -30,11 +30,11 @@ public class Kunde {
         this.name = name;
     }
 
-    public String getAdresse() {
+    public long getAdresse() {
         return adresse;
     }
 
-    public void setAdresse(String adresse) {
+    public void setAdresse(long adresse) {
         this.adresse = adresse;
     }
 

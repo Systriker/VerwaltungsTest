@@ -1,5 +1,7 @@
 package com.example.administrator.verwaltungstest;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.TooltipCompat;
@@ -47,7 +49,7 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View view, boolean b) {
                 String text = editTextPreis.getText().toString();
-                if(!(text.length() == 0) &&!text.substring(text.length() - 1).equals("€")){
+                if((text.length() != 0) && !text.substring(text.length() - 1).equals("€")){
                     editTextPreis.setText(text + "€");
                 }
             }
@@ -55,6 +57,8 @@ public class ProductActivity extends AppCompatActivity {
 
         if (!editmode){
             findViewById(R.id.button_delete_products).setEnabled(false);
+            (findViewById(R.id.button_delete_products)).getBackground()
+                    .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
         }
 
         activateButtons();
@@ -91,7 +95,11 @@ public class ProductActivity extends AppCompatActivity {
                 if(Preis.length() == 1){
                     PreisDouble = Double.parseDouble(Preis);
                 }else {
-                    PreisDouble = Double.parseDouble(Preis.substring(0, Preis.length() - 1));
+                    if (Preis.substring(Preis.length() - 1).equals("€")) {
+                        PreisDouble = Double.parseDouble(Preis.substring(0, Preis.length() - 1));
+                    }else{
+                        PreisDouble = Double.parseDouble(Preis);
+                    }
                 }
                 Long ProductNummerLong;
 

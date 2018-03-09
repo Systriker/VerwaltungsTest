@@ -67,6 +67,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BestellungActivity" />
         </activity>
+        <activity
+            android:name=".AdresseActivity"
+            android:parentActivityName=".AdressListeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AdressListeActivity" />
+        </activity>
+        <activity
+            android:name=".AdressListeActivity"
+            android:parentActivityName=".KundeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".KundeActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -21,6 +21,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String TABLE_LAGER = "lager";
     public static final String TABLE_BESTELLUNGEN = "bestellungen";
     public static final String TABLE_LAGER_ZU_BESTELLUNGEN = "lager_zu_bestellungen";
+    public static final String TABLE_ADRESSE = "adresse";
 
     // Fleder der "kunde"-Tabelle
     public static final String COLUMN_KUNDE_ID = "_id";
@@ -45,12 +46,22 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT = "product";
     public static final String COLUMN_LAGER_ZU_BESTELLUNG_QUANTITY = "quantity";
 
+    // Felder der "adresse"-Tabelle
+    public static final String COLUMN_ADRESSE_ID = "_id";
+    public static final String COLUMN_ADRESSE_STRASSE = "strasse";
+    public static final String COLUMN_ADRESSE_HAUSNUMMER = "hausnummer";
+    public static final String COLUMN_ADRESSE_ZUSATZ = "zusatz";
+    public static final String COLUMN_ADRESSE_ORT = "ort";
+    public static final String COLUMN_ADRESSE_PLZ = "plz";
+
     // SQL-Befehle zum erstellen der Tabellen
     public static final String SQL_CREATE_KUNDE = "CREATE TABLE " + TABLE_KUNDE +
             "(" + COLUMN_KUNDE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_KUNDE_NAME + " TEXT NOT NULL, " +
-            COLUMN_KUNDE_ADRESSE + " TEXT NOT NULL, " +
-            COLUMN_KUNDE_KUNDETYP + " TEXT NOT NULL);";
+            COLUMN_KUNDE_ADRESSE + " INTEGER NOT NULL, " +
+            COLUMN_KUNDE_KUNDETYP + " TEXT NOT NULL," +
+            "FOREIGN KEY(" + COLUMN_KUNDE_ADRESSE + ") " +
+            "REFERENCES " +TABLE_ADRESSE+"("+ COLUMN_ADRESSE_ID +"));";
 
     public static final String SQL_CREATE_LAGER = "CREATE TABLE " + TABLE_LAGER +
             "(" + COLUMN_PRODUCT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -74,11 +85,20 @@ public class DbHelper extends SQLiteOpenHelper {
             "FOREIGN KEY(" + COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT + ") " +
             "REFERENCES " +TABLE_LAGER+"("+ COLUMN_PRODUCT_ID +"));";
 
+    public static final String SQL_CREATE_ADRESSE = "CREATE TABLE " + TABLE_ADRESSE +
+            "(" + COLUMN_ADRESSE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COLUMN_ADRESSE_STRASSE + " TEXT NOT NULL, " +
+            COLUMN_ADRESSE_HAUSNUMMER + " INTEGER NOT NULL, " +
+            COLUMN_ADRESSE_ZUSATZ + " TEXT NOT NULL, " +
+            COLUMN_ADRESSE_ORT + " TEXT NOT NULL, " +
+            COLUMN_ADRESSE_PLZ + " TEXT NOT NULL);";
+
     // SQL-Befehle zum löschen der Tabellen
     public static final String SQL_DROP_KUNDE = "DROP TABLE IF EXISTS " + TABLE_KUNDE;
     public static final String SQL_DROP_LAGER = "DROP TABLE IF EXISTS " + TABLE_LAGER;
     public static final String SQL_DROP_LAGER_ZU_BESTELLUNGEN = "DROP TABLE IF EXISTS " + TABLE_LAGER_ZU_BESTELLUNGEN;
     public static final String SQL_DROP_BESTELLUNGEN = "DROP TABLE IF EXISTS " + TABLE_BESTELLUNGEN;
+    public static final String SQL_DROP_ADRESSE = "DROP TABLE IF EXISTS " + TABLE_ADRESSE;
 
     public DbHelper(Context context){
         super(context,DB_NAME, null,DB_VERSION);
@@ -88,6 +108,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {
+            db.execSQL(SQL_CREATE_ADRESSE);
             db.execSQL(SQL_CREATE_KUNDE);
             db.execSQL(SQL_CREATE_LAGER);
             db.execSQL(SQL_CREATE_BESTELLUNGEN);
@@ -104,6 +125,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DROP_BESTELLUNGEN);
         db.execSQL(SQL_DROP_LAGER);
         db.execSQL(SQL_DROP_KUNDE);
+        db.execSQL(SQL_DROP_ADRESSE);
         onCreate(db);
     }
 

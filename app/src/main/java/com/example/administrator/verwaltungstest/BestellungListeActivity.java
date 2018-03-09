@@ -1,6 +1,8 @@
 package com.example.administrator.verwaltungstest;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,9 +59,15 @@ public class BestellungListeActivity extends AppCompatActivity {
         if (slectedBestellung == null){
             findViewById(R.id.button_edit_bestellung).setEnabled(false);
             findViewById(R.id.button_delete_bestellung).setEnabled(false);
+            (findViewById(R.id.button_edit_bestellung)).getBackground()
+                    .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
+            (findViewById(R.id.button_delete_bestellung)).getBackground()
+                    .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
         }else {
             findViewById(R.id.button_edit_bestellung).setEnabled(true);
             findViewById(R.id.button_delete_bestellung).setEnabled(true);
+            (findViewById(R.id.button_edit_bestellung)).getBackground().setColorFilter(null);
+            (findViewById(R.id.button_delete_bestellung)).getBackground().setColorFilter(null);
         }
     }
 
@@ -69,7 +77,7 @@ public class BestellungListeActivity extends AppCompatActivity {
         bestellungListView = findViewById(R.id.listview_bestellung);
         bestellungListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         ArrayAdapter<Bestellung> bestellungArrayAdapter = new ArrayAdapter<Bestellung>(this,
-                android.R.layout.simple_list_item_single_choice,emtyListForInitialisation);
+                R.layout.list_item_basis,emtyListForInitialisation);
         bestellungListView.setAdapter(bestellungArrayAdapter);
 
         bestellungListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -78,6 +86,8 @@ public class BestellungListeActivity extends AppCompatActivity {
                 slectedBestellung = (Bestellung) adapterView.getItemAtPosition(i);
                 findViewById(R.id.button_edit_bestellung).setEnabled(true);
                 findViewById(R.id.button_delete_bestellung).setEnabled(true);
+                (findViewById(R.id.button_edit_bestellung)).getBackground().setColorFilter(null);
+                (findViewById(R.id.button_delete_bestellung)).getBackground().setColorFilter(null);
                 showAllListEntries();
             }
         });
