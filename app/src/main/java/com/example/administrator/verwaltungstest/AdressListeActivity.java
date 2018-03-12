@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+//Klasse zur anzeige und auswahl von Adressen in einer Liste
 public class AdressListeActivity extends AppCompatActivity {
 
     private static final String TAG = AdressListeActivity.class.getSimpleName();

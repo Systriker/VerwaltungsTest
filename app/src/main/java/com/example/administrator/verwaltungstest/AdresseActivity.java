@@ -1,6 +1,5 @@
 package com.example.administrator.verwaltungstest;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
+//Klasse für die genauere Ansicht/das Bearbeiten einer Adresse
 public class AdresseActivity extends AppCompatActivity {
 
     private static final String TAG = AdresseActivity.class.getSimpleName();

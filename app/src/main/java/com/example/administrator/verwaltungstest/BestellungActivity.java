@@ -213,6 +213,7 @@ public class BestellungActivity extends AppCompatActivity {
                 isBooked = bestellung.isBooked();
                 findViewById(R.id.buttonBuchen).setEnabled(true);
                 (findViewById(R.id.buttonBuchen)).getBackground().setColorFilter(null);
+                // Sperre Bearbeitung wenn Bestellung bereits gebucht wurde
                 if(isBooked) {
                     findViewById(R.id.button_bestellung_product_add).setEnabled(false);
                     (findViewById(R.id.button_bestellung_product_add)).getBackground()
@@ -258,6 +259,7 @@ public class BestellungActivity extends AppCompatActivity {
         productArrayAdapter.addAll(productList);
         productArrayAdapter.notifyDataSetChanged();
         double preis = 0;
+        //Berechne Gesamtpreis der Bestellung
         for (LagerZuBestellung lzb : productList){
             preis += (lzb.getProduct().getPreis() * lzb.getQuantity());
         }

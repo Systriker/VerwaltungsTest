@@ -4,6 +4,7 @@ package com.example.administrator.verwaltungstest;
  * Created by Administrator on 06.03.2018.
  */
 
+//Code-Seitige-Darstellung einer Adresse in der Datenbank
 public class Adresse {
     private long id;
     private String straße;
