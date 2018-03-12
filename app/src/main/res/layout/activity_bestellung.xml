@@ -47,19 +47,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_Kunde">
 
-        <ListView
-            android:id="@+id/listview_bestellung_products"
+        <LinearLayout
+            android:id="@+id/listview_bestellung_products_layout"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:divider="@color/colorButtonDark"
-            android:dividerHeight="2dp"
-            android:listSelector="@color/colorBackgroundDarkSelected"
+            android:background="@color/colorButtonDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button_bestellung_product_add"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        </ListView>
+            <ListView
+                android:id="@+id/listview_bestellung_products"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/colorButtonDark"
+                android:dividerHeight="2dp"
+                android:listSelector="@color/colorBackgroundDarkSelected"
+                android:layout_margin="1dp"
+                android:background="@color/colorBackgroundDark">
+
+            </ListView>
+
+        </LinearLayout>
 
         <ImageButton
             android:id="@+id/button_bestellung_product_add"
@@ -67,7 +77,7 @@
             android:layout_height="wrap_content"
             android:text="@string/button_bestellung_product_add"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/listview_bestellung_products"
+            app:layout_constraintStart_toEndOf="@+id/listview_bestellung_products_layout"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/ic_input_add"
             android:backgroundTint="@color/colorButtonDark"
@@ -79,7 +89,7 @@
             android:layout_height="wrap_content"
             android:text="@string/button_bestellung_product_delete"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/listview_bestellung_products"
+            app:layout_constraintStart_toEndOf="@+id/listview_bestellung_products_layout"
             app:layout_constraintTop_toBottomOf="@+id/button_bestellung_product_add"
             app:srcCompat="@android:drawable/ic_delete"
             android:backgroundTint="@color/colorButtonDark"
