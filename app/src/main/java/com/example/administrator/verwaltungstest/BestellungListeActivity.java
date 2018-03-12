@@ -44,6 +44,7 @@ public class BestellungListeActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Log.d(TAG, "onPause: Die Datenquelle wird geschlossen");
+        slectedBestellung = null;
         datasource.close();
     }
 

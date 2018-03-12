@@ -36,6 +36,7 @@ public class AdressListeActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Log.d(TAG, "onPause: Die Datenquelle wird geschlossen");
+        slectedAdresse = null;
         datasource.close();
     }
 
