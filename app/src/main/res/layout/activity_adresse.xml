@@ -14,7 +14,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Straße"
+        android:hint="@string/hint_street"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/adresse_text_straße"
@@ -29,7 +29,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Hausnummer"
+        android:hint="@string/hint_hausnr"
         android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/edit_adresse_zusatz"
         app:layout_constraintStart_toEndOf="@+id/adresse_text_husnummer"
@@ -44,7 +44,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Ort"
+        android:hint="@string/hint_ort"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/adresse_text_ort"
@@ -60,7 +60,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Zusatz"
+        android:hint="@string/hint_zusatz"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edit_adresse_hausnr"
@@ -75,7 +75,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Postleitzahl"
+        android:hint="@string/hint_plz"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/adresse_text_plz"
@@ -83,7 +83,7 @@
         android:textColor="@color/colorText"
         android:textColorHint="@color/colorTextHint"/>
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/adresse_button_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -92,10 +92,10 @@
         android:text="@string/button_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:backgroundTint="@color/colorButtonDark"
+        app:backgroundTint="@color/colorButtonDark"
         android:textColor="@color/colorText"/>
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/adresse_button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
         android:text="@string/button_save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/adresse_button_delete"
-        android:backgroundTint="@color/colorButtonDark"
+        app:backgroundTint="@color/colorButtonDark"
         android:textColor="@color/colorText"/>
 
     <TextView
@@ -114,7 +114,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Straße:"
+        android:text="@string/adresse_text_street"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toTopOf="@+id/edit_adresse_hausnr"
         app:layout_constraintEnd_toStartOf="@+id/edit_adresse_straße"
@@ -128,7 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:text="Hausnr:."
+        android:text="@string/adresse_text_hausnr"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toStartOf="@+id/edit_adresse_hausnr"
         app:layout_constraintStart_toStartOf="parent"
@@ -141,7 +141,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:text="Ort:"
+        android:text="@string/adresse_text_ort"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toStartOf="@+id/edit_adresse_ort"
         app:layout_constraintStart_toStartOf="parent"
@@ -154,7 +154,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:text="PLZ:"
+        android:text="@string/adresse_text_plz"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toStartOf="@+id/edit_adresse_plz"
         app:layout_constraintStart_toStartOf="parent"

@@ -35,31 +35,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listview_bestellung">
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/button_add_bestellung"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="bestellungAnlegen"
             android:text="@string/button_add"
-            android:backgroundTint="@color/colorButtonDark"
+            app:backgroundTint="@color/colorButtonDark"
             android:textColor="@color/colorText"/>
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/button_edit_bestellung"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="bestellungEdit"
             android:text="@string/button_edit"
-            android:backgroundTint="@color/colorButtonDark"
+            app:backgroundTint="@color/colorButtonDark"
             android:textColor="@color/colorText"/>
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/button_delete_bestellung"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="bestellungDelete"
             android:text="@string/button_delete"
-            android:backgroundTint="@color/colorButtonDark"
+            app:backgroundTint="@color/colorButtonDark"
             android:textColor="@color/colorText"/>
     </LinearLayout>
 

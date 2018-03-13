@@ -7,7 +7,7 @@
     android:background="@color/colorBackgroundDark"
     tools:context="com.example.administrator.verwaltungstest.ProductActivity">
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/button_save_products"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         android:text="@string/button_save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_delete_products"
-        android:backgroundTint="@color/colorButtonDark"
+        app:backgroundTint="@color/colorButtonDark"
         android:textColor="@color/colorText"/>
 
     <EditText
@@ -64,7 +64,7 @@
         android:textColor="@color/colorText"
         android:textColorHint="@color/colorTextHint"/>
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/button_delete_products"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
         android:text="@string/button_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:backgroundTint="@color/colorButtonDark"
+        app:backgroundTint="@color/colorButtonDark"
         android:textColor="@color/colorText"/>
 
     <EditText

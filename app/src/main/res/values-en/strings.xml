@@ -55,4 +55,14 @@
     <string name="neueAdresse">new Adress</string>
     <string name="AdresseDeleteError">There are still Costumer\'s with this Adress!</string>
     <string name="titleAdressen">Adresses</string>
+    <string name="button_ok">Ok</string>
+    <string name="hint_street">Street</string>
+    <string name="hint_hausnr">Nr.</string>
+    <string name="hint_ort">City</string>
+    <string name="hint_zusatz">Extra</string>
+    <string name="adresse_text_street">Street:</string>
+    <string name="adresse_text_hausnr">Nr.:</string>
+    <string name="adresse_text_ort">City:</string>
+    <string name="hint_plz">Postcode</string>
+    <string name="adresse_text_plz">Postcode:</string>
 </resources>

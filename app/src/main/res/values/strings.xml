@@ -60,6 +60,16 @@
     <string name="lager_zu_bestellung_hint_anzahl">Anzahl</string>
     <string name="lager_zu_bestellung_text_produkt">Produkt:</string>
     <string name="lager_zu_bestellung_text_menge">Menge:</string>
+    <string name="button_ok">Ok</string>
+    <string name="hint_street">Straße</string>
+    <string name="hint_hausnr">Hausnummer</string>
+    <string name="hint_ort">Ort</string>
+    <string name="hint_zusatz">Zusatz</string>
+    <string name="hint_plz">Postleitzahl</string>
+    <string name="adresse_text_street">Straße:</string>
+    <string name="adresse_text_hausnr">Hausnr:.</string>
+    <string name="adresse_text_ort">Ort:</string>
+    <string name="adresse_text_plz">PLZ:</string>
 
     <string-array name="kunden_arten">
         <item>Privatkunde</item>

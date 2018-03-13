@@ -30,15 +30,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_AppName">
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/button_Kunden"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:backgroundTint="@color/colorButtonDark"
-            android:drawableLeft="@android:drawable/ic_menu_my_calendar"
-            android:gravity="left|center_vertical"
+            app:backgroundTint="@color/colorButtonDark"
+            android:drawableStart="@android:drawable/ic_menu_my_calendar"
+            android:gravity="start|center_vertical"
             android:onClick="kundeClick"
             android:text="@string/button_kunden"
             android:textColor="@color/colorText"
@@ -46,7 +46,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/button_Lager"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -55,9 +55,9 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/colorButtonDark"
-            android:drawableLeft="@android:drawable/ic_menu_sort_by_size"
-            android:gravity="left|center_vertical"
+            app:backgroundTint="@color/colorButtonDark"
+            android:drawableStart="@android:drawable/ic_menu_sort_by_size"
+            android:gravity="start|center_vertical"
             android:onClick="lagerClick"
             android:text="@string/button_lager"
             android:textColor="@color/colorText"
@@ -65,7 +65,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_Kunden" />
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/button_Orders"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -74,9 +74,9 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/colorButtonDark"
-            android:drawableLeft="@android:drawable/ic_menu_agenda"
-            android:gravity="left|center_vertical"
+            app:backgroundTint="@color/colorButtonDark"
+            android:drawableStart="@android:drawable/ic_menu_agenda"
+            android:gravity="start|center_vertical"
             android:onClick="bestellungenClick"
             android:text="@string/button_bestellungen"
             android:textColor="@color/colorText"

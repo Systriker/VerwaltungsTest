@@ -71,34 +71,34 @@
 
         </LinearLayout>
 
-        <ImageButton
+        <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/button_bestellung_product_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_bestellung_product_add"
+            android:contentDescription="@string/button_bestellung_product_add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/listview_bestellung_products_layout"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/ic_input_add"
-            android:backgroundTint="@color/colorButtonDark"
+            app:backgroundTint="@color/colorButtonDark"
             android:textColor="@color/colorText"/>
 
-        <ImageButton
+        <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/button_bestellung_product_delete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/button_bestellung_product_delete"
+            android:contentDescription="@string/button_bestellung_product_delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/listview_bestellung_products_layout"
             app:layout_constraintTop_toBottomOf="@+id/button_bestellung_product_add"
             app:srcCompat="@android:drawable/ic_delete"
-            android:backgroundTint="@color/colorButtonDark"
+            app:backgroundTint="@color/colorButtonDark"
             android:textColor="@color/colorText"/>
 
     </android.support.constraint.ConstraintLayout>
 
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/button_save_bestellung"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,10 +109,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_delete_bestellung"
         app:layout_constraintTop_toBottomOf="@+id/editBestellungPreis"
-        android:backgroundTint="@color/colorButtonDark"
+        app:backgroundTint="@color/colorButtonDark"
         android:textColor="@color/colorText"/>
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/button_delete_bestellung"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -123,10 +123,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editBestellungPreis"
-        android:backgroundTint="@color/colorButtonDark"
+        app:backgroundTint="@color/colorButtonDark"
         android:textColor="@color/colorText"/>
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/button_select_kunde"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
         android:text="@string/button_select"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_BestellunngsNummer"
-        android:backgroundTint="@color/colorButtonDark"
+        app:backgroundTint="@color/colorButtonDark"
         android:textColor="@color/colorText"/>
 
     <EditText
@@ -197,7 +197,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         android:textColor="@color/colorTextHint"/>
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/buttonBuchen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -208,7 +208,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editBestellungPreis"
-        android:backgroundTint="@color/colorButtonDark"
+        app:backgroundTint="@color/colorButtonDark"
         android:textColor="@color/colorText"/>
 
 </android.support.constraint.ConstraintLayout>
