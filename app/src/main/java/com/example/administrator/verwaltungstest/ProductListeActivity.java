@@ -52,7 +52,9 @@ public class ProductListeActivity extends AppCompatActivity {
         Log.d(TAG, "onResume: Die Datenquelle wird geöffnet");
         datasource.open();
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
-        getSupportActionBar().setTitle(getResources().getString(R.string.titleProdukte));
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.titleProdukte));
+        }
         showAllListEntries();
         //wenn die Liste zur auswahl genutzt wird werden die editier und löschen Buttons ausgeblendet
         //und der hinzufügen Button als bestätigungs Button verwendet
@@ -61,7 +63,7 @@ public class ProductListeActivity extends AppCompatActivity {
             findViewById(R.id.button_delete_product).setEnabled(false);
             findViewById(R.id.button_edit_product).setVisibility(Button.INVISIBLE);
             findViewById(R.id.button_delete_product).setVisibility(Button.INVISIBLE);
-            ((Button)findViewById(R.id.button_add_product)).setText("Ok");
+            ((Button)findViewById(R.id.button_add_product)).setText(R.string.button_ok);
         }else {
             //aktiviere bearbeiten und löschen wenn ein bereits vorhandes Produkt ausgewählt wurde
             if (slectedProduct == null) {
@@ -85,7 +87,7 @@ public class ProductListeActivity extends AppCompatActivity {
 
         productListView = findViewById(R.id.listview_products);
         productListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        ArrayAdapter<Kunde> productArrayAdapter = new ArrayAdapter<Kunde>(this,
+        ArrayAdapter<Kunde> productArrayAdapter = new ArrayAdapter<>(this,
                R.layout.list_item_basis,emtyListForInitialisation);
         productListView.setAdapter(productArrayAdapter);
 

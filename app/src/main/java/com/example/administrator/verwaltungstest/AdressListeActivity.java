@@ -47,7 +47,9 @@ public class AdressListeActivity extends AppCompatActivity {
         Log.d(TAG, "onResume: Die Datenquelle wird geöffnet");
         datasource.open();
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
-        getSupportActionBar().setTitle(getResources().getString(R.string.titleAdressen));
+        if (getSupportActionBar()!= null) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.titleAdressen));
+        }
         showAllListEntries();
         //aktiviere bearbeiten und löschen wenn eine bereits vorhande Adresse ausgewählt wurde
         if (slectedAdresse == null) {

@@ -3,13 +3,11 @@ package com.example.administrator.verwaltungstest;
 //Code-Seitige-Darstellung eines Produktes auf einer Bestellung in der Datenbank
 public class LagerZuBestellung {
     private long id;
-    private Bestellung bestellung;
     private Product product;
     private int quantity;
 
-    public LagerZuBestellung(long id, Bestellung bestellung, Product product, int quantity) {
+    LagerZuBestellung(long id, Product product, int quantity) {
         this.id = id;
-        this.bestellung = bestellung;
         this.product = product;
         this.quantity = quantity;
     }
@@ -22,28 +20,12 @@ public class LagerZuBestellung {
         this.id = id;
     }
 
-    public Bestellung getBestellung() {
-        return bestellung;
-    }
-
-    public void setBestellung(Bestellung bestellung) {
-        this.bestellung = bestellung;
-    }
-
-    public Product getProduct() {
+    Product getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public int getQuantity() {
+    int getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     @Override

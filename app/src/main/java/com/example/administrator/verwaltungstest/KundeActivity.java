@@ -108,7 +108,7 @@ public class KundeActivity extends AppCompatActivity {
                 if (editmode){
                     datasource.updateKunde(KundenNummerLong, Name, adresse.getId(), KundeTyp);
                 }else {
-                    datasource.createKunde(KundenNummerLong, Name, adresse.getId(), KundeTyp);
+                    datasource.createKunde(Name, adresse.getId(), KundeTyp);
                 }
                 finish();
             }
@@ -151,7 +151,9 @@ public class KundeActivity extends AppCompatActivity {
     }
 
     private void fillPage(){
-        getSupportActionBar().setTitle(getResources().getString(R.string.neuerKunde));
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.neuerKunde));
+        }
         if (id != 0L){
             Kunde kunde = datasource.getKunde(id);
             getSupportActionBar().setTitle(getResources().getString(R.string.titleKunde)+": " + id);

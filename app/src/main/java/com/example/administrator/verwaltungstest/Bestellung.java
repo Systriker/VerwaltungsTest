@@ -7,7 +7,7 @@ public class Bestellung {
     private Kunde kunde;
     private boolean booked;
 
-    public Bestellung(long id, Kunde kunde, boolean booked) {
+    Bestellung(long id, Kunde kunde, boolean booked) {
         this.id = id;
         this.kunde = kunde;
         this.booked = booked;
@@ -21,20 +21,12 @@ public class Bestellung {
         this.id = id;
     }
 
-    public Kunde getKunde() {
+    Kunde getKunde() {
         return kunde;
     }
 
-    public void setKunde(Kunde kunde) {
-        this.kunde = kunde;
-    }
-
-    public boolean isBooked() {
+    boolean isBooked() {
         return booked;
-    }
-
-    public void setBooked(boolean booked) {
-        this.booked = booked;
     }
 
     @Override

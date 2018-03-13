@@ -6,9 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 //Klasse die Funktionen zur verwaltung und nutzung der DB bereitstellt
@@ -78,7 +76,7 @@ public class Datasource {
 
     // Funktionen die Kunden betreffen
     // erstellen eines neuen Kunde-Objektes und zugehörigem Datensatz
-    public Kunde createKunde(long id, String Name, long Adresse, String KundeTyp){
+    void createKunde(String Name, long Adresse, String KundeTyp){
         ContentValues values = new ContentValues();
         values.put(DbHelper.COLUMN_KUNDE_NAME,Name);
         values.put(DbHelper.COLUMN_KUNDE_ADRESSE,Adresse);
@@ -90,13 +88,12 @@ public class Datasource {
                 DbHelper.COLUMN_KUNDE_ID + "=" + insertId,
                 null,null,null,null);
         cursor.moveToFirst();
-        Kunde kunde = cursorToKunde(cursor);
+        //Kunde kunde = cursorToKunde(cursor);
         cursor.close();
-        return kunde;
     }
 
     // auswahl eines Kunde-Datensatzes anhand der Id und erstellen eines zugehörigen Objektes
-    public Kunde getKunde(long id){
+    Kunde getKunde(long id){
         Cursor cursor = database.query(DbHelper.TABLE_KUNDE,columns,
                 DbHelper.COLUMN_KUNDE_ID + " = " + id,null,null,null,null);
         Kunde kunde;
@@ -108,7 +105,7 @@ public class Datasource {
     }
 
     // rückgabe einer Liste die alle Kunden-Datensätze der DB als Kunde-Objekte enthält
-    public List<Kunde> getAllKunde(){
+    List<Kunde> getAllKunde(){
         List<Kunde> kundeList = new ArrayList<>();
         Cursor cursor = database.query(DbHelper.TABLE_KUNDE,columns,
                 null,null,null,null,null);
@@ -126,7 +123,7 @@ public class Datasource {
 
     // rückgabe einer Liste die alle Kunden-Datensätze die eine bestimmte Adresse haben
     // als Kunde-Objekte enthält
-    public List<Kunde> getAllKunden(long adresse_id){
+    List<Kunde> getAllKunden(long adresse_id){
         List<Kunde> kundeList = new ArrayList<>();
         Cursor cursor = database.query(DbHelper.TABLE_KUNDE,columns,
                 DbHelper.COLUMN_KUNDE_ADRESSE + "=" + adresse_id,null,
@@ -155,12 +152,11 @@ public class Datasource {
         String kundeTyp = cursor.getString(idKundeTyp);
         long id = cursor.getLong(idIndex);
 
-        Kunde kunde = new Kunde(id,name,adresse,kundeTyp);
-        return kunde;
+        return new Kunde(id,name,adresse,kundeTyp);
     }
 
     // bearbeiten eines Kunde-Datensatzes
-    public Kunde updateKunde(long id, String newName, long newAdresse, String newKundeTyp){
+    void updateKunde(long id, String newName, long newAdresse, String newKundeTyp){
         ContentValues values = new ContentValues();
         values.put(DbHelper.COLUMN_KUNDE_NAME,newName);
         values.put(DbHelper.COLUMN_KUNDE_ADRESSE,newAdresse);
@@ -172,13 +168,12 @@ public class Datasource {
                 columns,DbHelper.COLUMN_KUNDE_ID + "=" + id,
                 null,null,null,null);
         cursor.moveToFirst();
-        Kunde kunde = cursorToKunde(cursor);
+        //Kunde kunde = cursorToKunde(cursor);
         cursor.close();
-        return kunde;
     }
 
     // löschen eines Kunde-Datensatzes
-    public void deleteKunde(Kunde kunde){
+    void deleteKunde(Kunde kunde){
         long id = kunde.getId();
 
         database.delete(DbHelper.TABLE_KUNDE,
@@ -189,7 +184,7 @@ public class Datasource {
 
     //Funktionen die Produkte betreffen
     // erstellen eines neuen Produkt-Objektes und zugehörigem Datensatz
-    public Product createProduct(long id, String Name, int Quantity, double preis){
+    void createProduct(String Name, int Quantity, double preis){
         ContentValues values = new ContentValues();
         values.put(DbHelper.COLUMN_PRODUCT_NAME,Name);
         values.put(DbHelper.COLUMN_PRODUCT_QUANTITY,Quantity);
@@ -201,13 +196,12 @@ public class Datasource {
                 DbHelper.COLUMN_PRODUCT_ID + "=" + insertId,
                 null,null,null,null);
         cursor.moveToFirst();
-        Product product = cursorToProduct(cursor);
+        //Product product = cursorToProduct(cursor);
         cursor.close();
-        return product;
     }
 
     // auswahl eines Produkt-Datensatzes anhand der Id und erstellen eines zugehörigen Objektes
-    public Product getProduct(long id){
+    Product getProduct(long id){
         Cursor cursor = database.query(DbHelper.TABLE_LAGER,columns_Lager,
                 DbHelper.COLUMN_PRODUCT_ID + " = " + id,null,null,null,null);
         Product product;
@@ -219,7 +213,7 @@ public class Datasource {
     }
 
     // rückgabe einer Liste die alle Produkt-Datensätze der DB als Produkt-Objekte enthält
-    public List<Product> getAllProducts(){
+    List<Product> getAllProducts(){
         List<Product> productList = new ArrayList<>();
         Cursor cursor = database.query(DbHelper.TABLE_LAGER,columns_Lager,
                 null,null,null,null,null);
@@ -248,12 +242,11 @@ public class Datasource {
         long id = cursor.getLong(idIndex);
         double preis = cursor.getDouble(idPreis);
 
-        Product product = new Product(id,name,quantity,preis);
-        return product;
+        return new Product(id,name,quantity,preis);
     }
 
     // bearbeiten eines Produkt-Datensatzes
-    public Product updateProduct(long id, String newName, int newQuantity, double newPreis){
+    void updateProduct(long id, String newName, int newQuantity, double newPreis){
         ContentValues values = new ContentValues();
         values.put(DbHelper.COLUMN_PRODUCT_NAME,newName);
         values.put(DbHelper.COLUMN_PRODUCT_QUANTITY,newQuantity);
@@ -265,13 +258,12 @@ public class Datasource {
                 columns_Lager,DbHelper.COLUMN_PRODUCT_ID + "=" + id,
                 null,null,null,null);
         cursor.moveToFirst();
-        Product product = cursorToProduct(cursor);
+        //Product product = cursorToProduct(cursor);
         cursor.close();
-        return product;
     }
 
     // löschen eines Produkt-Datensatzes
-    public void deleteProduct(Product product){
+    void deleteProduct(Product product){
         long id = product.getId();
 
         database.delete(DbHelper.TABLE_LAGER,
@@ -282,10 +274,10 @@ public class Datasource {
 
     //Funktionen die Bestellungen betreffen
     // erstellen eines neuen Bestellung-Objektes und zugehörigem Datensatz
-    public Bestellung createBestellung(long id, int kunde_id,int booked){
+    void createBestellung(int kunde_id){
         ContentValues values = new ContentValues();
         values.put(DbHelper.COLUMN_BESTELLUNG_KUNDE,kunde_id);
-        values.put(DbHelper.COLUMN_BESTELLUNG_BOOKED,booked);
+        values.put(DbHelper.COLUMN_BESTELLUNG_BOOKED,0);
 
         long insertId = database.insert(DbHelper.TABLE_BESTELLUNGEN,null,values);
 
@@ -293,13 +285,12 @@ public class Datasource {
                 DbHelper.COLUMN_BESTELLUNG_ID + "=" + insertId,
                 null,null,null,null);
         cursor.moveToFirst();
-        Bestellung bestellung = cursorToBestellung(cursor);
+        //Bestellung bestellung = cursorToBestellung(cursor);
         cursor.close();
-        return bestellung;
     }
 
     // auswahl eines Bestellung-Datensatzes anhand der Id und erstellen eines zugehörigen Objektes
-    public Bestellung getBestellung(long id){
+    Bestellung getBestellung(long id){
         Cursor cursor = database.query(DbHelper.TABLE_BESTELLUNGEN,columns_Bestellung,
                 DbHelper.COLUMN_BESTELLUNG_ID + " = " + id,null,null,null,null);
         Bestellung bestellung;
@@ -311,7 +302,7 @@ public class Datasource {
     }
 
     // rückgabe einer Liste die alle Bestellung-Datensätze der DB als Bestellung-Objekte enthält
-    public List<Bestellung> getAllBestellungen(){
+    List<Bestellung> getAllBestellungen(){
         List<Bestellung> bestellungList = new ArrayList<>();
         Cursor cursor = database.query(DbHelper.TABLE_BESTELLUNGEN,columns_Bestellung,
                 null,null,null,null,null);
@@ -329,7 +320,7 @@ public class Datasource {
 
     // rückgabe einer Liste die alle Bestellung-Datensätze die einem bestimmten Kunden zugeordnet sind
     // als Bestellung-Objekte enthält
-    public List<Bestellung> getAllBestellungen(long kunde_id){
+    List<Bestellung> getAllBestellungen(long kunde_id){
         List<Bestellung> bestellungList = new ArrayList<>();
         Cursor cursor = database.query(DbHelper.TABLE_BESTELLUNGEN,columns_Bestellung,
                 DbHelper.COLUMN_BESTELLUNG_KUNDE + "=" + kunde_id,null,null,null,null);
@@ -357,12 +348,11 @@ public class Datasource {
         long id = cursor.getLong(idIndex);
         Boolean booked = cursor.getInt(idBooked)==1;
 
-        Bestellung bestellung = new Bestellung(id,kunde,booked);
-        return bestellung;
+        return new Bestellung(id,kunde,booked);
     }
 
     // bearbeiten eines Bestellung-Datensatzes
-    public Bestellung updateBestellung(long id, int newKunde_id,int newBooked){
+    void updateBestellung(long id, int newKunde_id,int newBooked){
         ContentValues values = new ContentValues();
         values.put(DbHelper.COLUMN_BESTELLUNG_KUNDE,newKunde_id);
         values.put(DbHelper.COLUMN_BESTELLUNG_BOOKED,newBooked);
@@ -374,13 +364,12 @@ public class Datasource {
                 columns_Bestellung,DbHelper.COLUMN_BESTELLUNG_ID + "=" + id,
                 null,null,null,null);
         cursor.moveToFirst();
-        Bestellung bestellung = cursorToBestellung(cursor);
+        //Bestellung bestellung = cursorToBestellung(cursor);
         cursor.close();
-        return bestellung;
     }
 
     // löschen eines Bestellung-Datensatzes
-    public void deleteBestellung(Bestellung bestellung){
+    void deleteBestellung(Bestellung bestellung){
         long id = bestellung.getId();
 
         database.delete(DbHelper.TABLE_BESTELLUNGEN,
@@ -391,7 +380,7 @@ public class Datasource {
 
     //Funktionen die die Zuordnung von Produckten und Bestellungen betreffen
     // erstellen eines neuen LagerZuBestellung-Objektes und zugehörigem Datensatz
-    public LagerZuBestellung createLager_zu_Bestellung(long id, long bestellung_id, long product_id, int quantity){
+    void createLager_zu_Bestellung(long bestellung_id, long product_id, int quantity){
         ContentValues values = new ContentValues();
         values.put(DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG,bestellung_id);
         values.put(DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT,product_id);
@@ -403,13 +392,12 @@ public class Datasource {
                 DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_ID + "=" + insertId,
                 null,null,null,null);
         cursor.moveToFirst();
-        LagerZuBestellung lagerZuBestellung = cursorToLager_zu_Bestellung(cursor);
+        //LagerZuBestellung lagerZuBestellung = cursorToLager_zu_Bestellung(cursor);
         cursor.close();
-        return lagerZuBestellung;
     }
 
     // auswahl eines LagerZuBestellung-Datensatzes anhand der Id und erstellen eines zugehörigen Objektes
-    public LagerZuBestellung getLager_zu_Bestellung(long id){
+    LagerZuBestellung getLager_zu_Bestellung(long id){
         Cursor cursor = database.query(DbHelper.TABLE_LAGER_ZU_BESTELLUNGEN,columns_Lager_Zu_Bestellung,
                 DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_ID + " = " + id,null,null,null,null);
         LagerZuBestellung lagerZuBestellung;
@@ -422,7 +410,7 @@ public class Datasource {
 
     // rückgabe einer Liste die alle LagerZuBestellung-Datensätze die einer bestimmten Bestellung zugeordnet sind
     // als LagerZuBestellung-Objekte enthält
-    public List<LagerZuBestellung> getAllLager_zu_Bestellungen(long bestellung_id){
+    List<LagerZuBestellung> getAllLager_zu_Bestellungen(long bestellung_id){
         List<LagerZuBestellung> lagerZuBestellungList = new ArrayList<>();
         Cursor cursor = database.query(DbHelper.TABLE_LAGER_ZU_BESTELLUNGEN,columns_Lager_Zu_Bestellung,
                 DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG + "=" + bestellung_id,
@@ -441,7 +429,7 @@ public class Datasource {
 
     // rückgabe einer Liste die alle LagerZuBestellung-Datensätze die ein bestimmtes Produkt enthalten
     // als LagerZuBestellung-Objekte enthält
-    public List<LagerZuBestellung> getAllLager_zu_Bestellungen_Product(long product_id){
+    List<LagerZuBestellung> getAllLager_zu_Bestellungen_Product(long product_id){
         List<LagerZuBestellung> lagerZuBestellungList = new ArrayList<>();
         Cursor cursor = database.query(DbHelper.TABLE_LAGER_ZU_BESTELLUNGEN,columns_Lager_Zu_Bestellung,
                 DbHelper.COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT + "=" + product_id,
@@ -473,8 +461,7 @@ public class Datasource {
         long id = cursor.getLong(idIndex);
         int quantity = cursor.getInt(idQuantity);
 
-        LagerZuBestellung lagerZuBestellung = new LagerZuBestellung(id,bestellung,product,quantity);
-        return lagerZuBestellung;
+        return new LagerZuBestellung(id,product,quantity);
     }
 
     // bearbeiten eines LagerZuBestellung-Datensatzes
@@ -497,7 +484,7 @@ public class Datasource {
     }
 
     // löschen eines LagerZuBestellung-Datensatzes
-    public void deleteLager_zu_Bestellung(LagerZuBestellung lagerZuBestellung){
+    void deleteLager_zu_Bestellung(LagerZuBestellung lagerZuBestellung){
         long id = lagerZuBestellung.getId();
 
         database.delete(DbHelper.TABLE_LAGER_ZU_BESTELLUNGEN,
@@ -508,7 +495,7 @@ public class Datasource {
 
     //Funktionen die Adressen betreffen
     // erstellen eines neuen Adresse-Objektes und zugehörigem Datensatz
-    public Adresse createAdresse(long id, String strasse,int hausnummer,String zusatz, String ort, long plz){
+    void createAdresse(String strasse,int hausnummer,String zusatz, String ort, long plz){
         ContentValues values = new ContentValues();
         values.put(DbHelper.COLUMN_ADRESSE_STRASSE,strasse);
         values.put(DbHelper.COLUMN_ADRESSE_HAUSNUMMER,hausnummer);
@@ -522,13 +509,12 @@ public class Datasource {
                 DbHelper.COLUMN_ADRESSE_ID + "=" + insertId,
                 null,null,null,null);
         cursor.moveToFirst();
-        Adresse adresse = cursorToAdresse(cursor);
+        //Adresse adresse = cursorToAdresse(cursor);
         cursor.close();
-        return adresse;
     }
 
     // auswahl eines Adresse-Datensatzes anhand der Id und erstellen eines zugehörigen Objektes
-    public Adresse getAdresse(long id){
+    Adresse getAdresse(long id){
         Cursor cursor = database.query(DbHelper.TABLE_ADRESSE,columns_Adresse,
                 DbHelper.COLUMN_ADRESSE_ID + " = " + id,null,null,null,null);
         Adresse adresse;
@@ -540,7 +526,7 @@ public class Datasource {
     }
 
     // rückgabe einer Liste die alle Adresse-Datensätze der DB als Adresse-Objekte enthält
-    public List<Adresse> getAllArdesse(){
+    List<Adresse> getAllArdesse(){
         List<Adresse> adresseList = new ArrayList<>();
         Cursor cursor = database.query(DbHelper.TABLE_ADRESSE,columns_Adresse,
                 null,null,null,null,null);
@@ -572,13 +558,11 @@ public class Datasource {
         String ort = cursor.getString(idOrt);
         long plz = cursor.getLong(idPLZ);
 
-
-        Adresse adresse = new Adresse(id,strasse,ort,plz,hausnummer,zusatz);
-        return adresse;
+        return new Adresse(id,strasse,ort,plz,hausnummer,zusatz);
     }
 
     // bearbeiten eines Adresse-Datensatzes
-    public Adresse updateAdresse(long id, String newStrasse,int newHausnummer,String newZusatz,
+    void updateAdresse(long id, String newStrasse,int newHausnummer,String newZusatz,
                                     String newOrt, long newPlz){
         ContentValues values = new ContentValues();
         values.put(DbHelper.COLUMN_ADRESSE_STRASSE,newStrasse);
@@ -594,13 +578,12 @@ public class Datasource {
                 columns_Adresse,DbHelper.COLUMN_ADRESSE_ID+ "=" + id,
                 null,null,null,null);
         cursor.moveToFirst();
-        Adresse adresse = cursorToAdresse(cursor);
+        //Adresse adresse = cursorToAdresse(cursor);
         cursor.close();
-        return adresse;
     }
 
     // löschen eines Adresse-Datensatzes
-    public void deleteAdresse(Adresse adresse){
+    void deleteAdresse(Adresse adresse){
         long id = adresse.getId();
 
         database.delete(DbHelper.TABLE_ADRESSE,

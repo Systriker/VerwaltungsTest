@@ -7,7 +7,7 @@ public class Kunde {
     private long adresse;
     private String kundenType;
 
-    public Kunde(long id, String name, long adresse, String kundenTyle) {
+    Kunde(long id, String name, long adresse, String kundenTyle) {
         this.id = id;
         this.name = name;
         this.adresse = adresse;
@@ -30,20 +30,12 @@ public class Kunde {
         this.name = name;
     }
 
-    public long getAdresse() {
+    long getAdresse() {
         return adresse;
     }
 
-    public void setAdresse(long adresse) {
-        this.adresse = adresse;
-    }
-
-    public String getKundenType() {
+    String getKundenType() {
         return kundenType;
-    }
-
-    public void setKundenType(String kundenType) {
-        this.kundenType = kundenType;
     }
 
     @Override

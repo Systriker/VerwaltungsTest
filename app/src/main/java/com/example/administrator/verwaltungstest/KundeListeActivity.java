@@ -52,7 +52,10 @@ public class KundeListeActivity extends AppCompatActivity {
         Log.d(TAG, "onResume: Die Datenquelle wird geöffnet");
         datasource.open();
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
-        getSupportActionBar().setTitle(getResources().getString(R.string.button_kunden));
+        if (!(getSupportActionBar() == null)) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.button_kunden));
+        }
+        getSupportActionBar().setLogo(getResources().getDrawable(android.R.drawable.ic_menu_my_calendar));
         showAllListEntries();
         //wenn die Liste zur auswahl genutzt wird werden die editier und löschen Buttons ausgeblendet
         //und der hinzufügen Button als bestätigungs Button verwendet
@@ -61,7 +64,7 @@ public class KundeListeActivity extends AppCompatActivity {
             findViewById(R.id.button_delete_kunde).setEnabled(false);
             findViewById(R.id.button_edit_kunden).setVisibility(Button.INVISIBLE);
             findViewById(R.id.button_delete_kunde).setVisibility(Button.INVISIBLE);
-            ((Button)findViewById(R.id.button_add_kunde)).setText("Ok");
+            ((Button)findViewById(R.id.button_add_kunde)).setText(R.string.button_ok);
         }else {
             //aktiviere bearbeiten und löschen wenn ein bereits vorhander Kunde ausgewählt wurde
             if (slectedKunde == null) {
@@ -85,7 +88,7 @@ public class KundeListeActivity extends AppCompatActivity {
 
         kundeListView = findViewById(R.id.listview_kunden);
         kundeListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        ArrayAdapter<Kunde> kundeArrayAdapter = new ArrayAdapter<Kunde>(this,
+        ArrayAdapter<Kunde> kundeArrayAdapter = new ArrayAdapter<>(this,
                 R.layout.list_item_basis,emtyListForInitialisation);
         kundeListView.setAdapter(kundeArrayAdapter);
 

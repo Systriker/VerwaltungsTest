@@ -5,57 +5,55 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.util.Date;
-
 //Klasse mit Hilfsmitteln zu erstellung und nutzung der Datenbank
 public class DbHelper extends SQLiteOpenHelper {
 
     private static final String TAG = DbHelper.class.getSimpleName();
 
     // DB-Basics
-    public static final String DB_NAME = "verwaltung.db";
-    public static final int DB_VERSION = 1;
+    private static final String DB_NAME = "verwaltung.db";
+    private static final int DB_VERSION = 1;
 
     // Tabellen der DB
-    public static final String TABLE_KUNDE = "kunde";
-    public static final String TABLE_LAGER = "lager";
-    public static final String TABLE_BESTELLUNGEN = "bestellungen";
-    public static final String TABLE_LAGER_ZU_BESTELLUNGEN = "lager_zu_bestellungen";
-    public static final String TABLE_ADRESSE = "adresse";
+    static final String TABLE_KUNDE = "kunde";
+    static final String TABLE_LAGER = "lager";
+    static final String TABLE_BESTELLUNGEN = "bestellungen";
+    static final String TABLE_LAGER_ZU_BESTELLUNGEN = "lager_zu_bestellungen";
+    static final String TABLE_ADRESSE = "adresse";
 
     // Fleder der "kunde"-Tabelle
-    public static final String COLUMN_KUNDE_ID = "_id";
-    public static final String COLUMN_KUNDE_NAME = "name";
-    public static final String COLUMN_KUNDE_ADRESSE = "adresse";
-    public static final String COLUMN_KUNDE_KUNDETYP = "kundetyp";
+    static final String COLUMN_KUNDE_ID = "_id";
+    static final String COLUMN_KUNDE_NAME = "name";
+    static final String COLUMN_KUNDE_ADRESSE = "adresse";
+    static final String COLUMN_KUNDE_KUNDETYP = "kundetyp";
 
     // Fleder der "lager"-Tabelle
-    public static final String COLUMN_PRODUCT_ID = "_id";
-    public static final String COLUMN_PRODUCT_NAME = "name";
-    public static final String COLUMN_PRODUCT_QUANTITY = "quantity";
-    public static final String COLUMN_PRODUCT_PREIS = "preis";
+    static final String COLUMN_PRODUCT_ID = "_id";
+    static final String COLUMN_PRODUCT_NAME = "name";
+    static final String COLUMN_PRODUCT_QUANTITY = "quantity";
+    static final String COLUMN_PRODUCT_PREIS = "preis";
 
     // Fleder der "bestellungen"-Tabelle
-    public static final String COLUMN_BESTELLUNG_ID = "_id";
-    public static final String COLUMN_BESTELLUNG_KUNDE = "kunde";
-    public static final String COLUMN_BESTELLUNG_BOOKED = "booked";
+    static final String COLUMN_BESTELLUNG_ID = "_id";
+    static final String COLUMN_BESTELLUNG_KUNDE = "kunde";
+    static final String COLUMN_BESTELLUNG_BOOKED = "booked";
 
     // Fleder der "lager_zu_bestellungen"-Tabelle
-    public static final String COLUMN_LAGER_ZU_BESTELLUNG_ID = "_id";
-    public static final String COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG = "bestellung";
-    public static final String COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT = "product";
-    public static final String COLUMN_LAGER_ZU_BESTELLUNG_QUANTITY = "quantity";
+    static final String COLUMN_LAGER_ZU_BESTELLUNG_ID = "_id";
+    static final String COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG = "bestellung";
+    static final String COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT = "product";
+    static final String COLUMN_LAGER_ZU_BESTELLUNG_QUANTITY = "quantity";
 
     // Felder der "adresse"-Tabelle
-    public static final String COLUMN_ADRESSE_ID = "_id";
-    public static final String COLUMN_ADRESSE_STRASSE = "strasse";
-    public static final String COLUMN_ADRESSE_HAUSNUMMER = "hausnummer";
-    public static final String COLUMN_ADRESSE_ZUSATZ = "zusatz";
-    public static final String COLUMN_ADRESSE_ORT = "ort";
-    public static final String COLUMN_ADRESSE_PLZ = "plz";
+    static final String COLUMN_ADRESSE_ID = "_id";
+    static final String COLUMN_ADRESSE_STRASSE = "strasse";
+    static final String COLUMN_ADRESSE_HAUSNUMMER = "hausnummer";
+    static final String COLUMN_ADRESSE_ZUSATZ = "zusatz";
+    static final String COLUMN_ADRESSE_ORT = "ort";
+    static final String COLUMN_ADRESSE_PLZ = "plz";
 
     // SQL-Befehle zum erstellen der Tabellen
-    public static final String SQL_CREATE_KUNDE = "CREATE TABLE " + TABLE_KUNDE +
+    private static final String SQL_CREATE_KUNDE = "CREATE TABLE " + TABLE_KUNDE +
             "(" + COLUMN_KUNDE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_KUNDE_NAME + " TEXT NOT NULL, " +
             COLUMN_KUNDE_ADRESSE + " INTEGER NOT NULL, " +
@@ -63,19 +61,19 @@ public class DbHelper extends SQLiteOpenHelper {
             "FOREIGN KEY(" + COLUMN_KUNDE_ADRESSE + ") " +
             "REFERENCES " +TABLE_ADRESSE+"("+ COLUMN_ADRESSE_ID +"));";
 
-    public static final String SQL_CREATE_LAGER = "CREATE TABLE " + TABLE_LAGER +
+    private static final String SQL_CREATE_LAGER = "CREATE TABLE " + TABLE_LAGER +
             "(" + COLUMN_PRODUCT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_PRODUCT_NAME + " TEXT NOT NULL, " +
             COLUMN_PRODUCT_QUANTITY + " INTEGER NOT NULL, " +
             COLUMN_PRODUCT_PREIS + " DOUBLE NOT NULL);";
 
-    public static final String SQL_CREATE_BESTELLUNGEN = "CREATE TABLE " + TABLE_BESTELLUNGEN +
+    private static final String SQL_CREATE_BESTELLUNGEN = "CREATE TABLE " + TABLE_BESTELLUNGEN +
             "(" + COLUMN_BESTELLUNG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_BESTELLUNG_KUNDE + " INTEGER NOT NULL, " +
             COLUMN_BESTELLUNG_BOOKED + " BOOLEAN NOT NULL," +
             "FOREIGN KEY(" + COLUMN_BESTELLUNG_KUNDE + ") REFERENCES " +TABLE_KUNDE+"("+ COLUMN_KUNDE_ID +"));";
 
-    public static final String SQL_CREATE_LAGER_ZU_BESTELLUNGEN = "CREATE TABLE " + TABLE_LAGER_ZU_BESTELLUNGEN +
+    private static final String SQL_CREATE_LAGER_ZU_BESTELLUNGEN = "CREATE TABLE " + TABLE_LAGER_ZU_BESTELLUNGEN +
             "(" + COLUMN_LAGER_ZU_BESTELLUNG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_LAGER_ZU_BESTELLUNG_BESTELLUNG + " INTEGER NOT NULL, " +
             COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT + " INTEGER NOT NULL, " +
@@ -85,7 +83,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "FOREIGN KEY(" + COLUMN_LAGER_ZU_BESTELLUNG_PRODUCT + ") " +
             "REFERENCES " +TABLE_LAGER+"("+ COLUMN_PRODUCT_ID +"));";
 
-    public static final String SQL_CREATE_ADRESSE = "CREATE TABLE " + TABLE_ADRESSE +
+    private static final String SQL_CREATE_ADRESSE = "CREATE TABLE " + TABLE_ADRESSE +
             "(" + COLUMN_ADRESSE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_ADRESSE_STRASSE + " TEXT NOT NULL, " +
             COLUMN_ADRESSE_HAUSNUMMER + " INTEGER NOT NULL, " +
@@ -94,11 +92,11 @@ public class DbHelper extends SQLiteOpenHelper {
             COLUMN_ADRESSE_PLZ + " TEXT NOT NULL);";
 
     // SQL-Befehle zum löschen der Tabellen
-    public static final String SQL_DROP_KUNDE = "DROP TABLE IF EXISTS " + TABLE_KUNDE;
-    public static final String SQL_DROP_LAGER = "DROP TABLE IF EXISTS " + TABLE_LAGER;
-    public static final String SQL_DROP_LAGER_ZU_BESTELLUNGEN = "DROP TABLE IF EXISTS " + TABLE_LAGER_ZU_BESTELLUNGEN;
-    public static final String SQL_DROP_BESTELLUNGEN = "DROP TABLE IF EXISTS " + TABLE_BESTELLUNGEN;
-    public static final String SQL_DROP_ADRESSE = "DROP TABLE IF EXISTS " + TABLE_ADRESSE;
+    private static final String SQL_DROP_KUNDE = "DROP TABLE IF EXISTS " + TABLE_KUNDE;
+    private static final String SQL_DROP_LAGER = "DROP TABLE IF EXISTS " + TABLE_LAGER;
+    private static final String SQL_DROP_LAGER_ZU_BESTELLUNGEN = "DROP TABLE IF EXISTS " + TABLE_LAGER_ZU_BESTELLUNGEN;
+    private static final String SQL_DROP_BESTELLUNGEN = "DROP TABLE IF EXISTS " + TABLE_BESTELLUNGEN;
+    private static final String SQL_DROP_ADRESSE = "DROP TABLE IF EXISTS " + TABLE_ADRESSE;
 
     public DbHelper(Context context){
         super(context,DB_NAME, null,DB_VERSION);

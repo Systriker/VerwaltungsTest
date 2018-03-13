@@ -107,7 +107,7 @@ public class BestellungActivity extends AppCompatActivity {
                 if (editmode){
                     datasource.updateBestellung(BestellungNummerLong, (int)kunde.getId(),0);
                 }else {
-                    datasource.createBestellung(BestellungNummerLong, (int)kunde.getId(),0);
+                    datasource.createBestellung((int)kunde.getId());
                 }
                 finish();
             }
@@ -195,14 +195,18 @@ public class BestellungActivity extends AppCompatActivity {
         (findViewById(R.id.button_bestellung_product_add)).getBackground()
                 .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
         editTextKunde.setEnabled(false);
-        getSupportActionBar().setTitle(getResources().getString(R.string.neueBestellung));
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.neueBestellung));
+        }
         findViewById(R.id.buttonBuchen).setEnabled(false);
         (findViewById(R.id.buttonBuchen)).getBackground()
                 .setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_IN);
 
         if (id != 0L){
             Bestellung bestellung = datasource.getBestellung(id);
-            getSupportActionBar().setTitle(getResources().getString(R.string.titleBestellung)+": " + id);
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setTitle(getResources().getString(R.string.titleBestellung) + ": " + id);
+            }
             editTextBestellunngsNummer.setText(String.valueOf(id));
             findViewById(R.id.button_bestellung_product_add).setEnabled(true);
             (findViewById(R.id.button_bestellung_product_add)).getBackground().setColorFilter(null);
@@ -234,7 +238,7 @@ public class BestellungActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listview_bestellung_products);
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        ArrayAdapter<LagerZuBestellung> productArrayAdapter = new ArrayAdapter<LagerZuBestellung>(this,
+        ArrayAdapter<LagerZuBestellung> productArrayAdapter = new ArrayAdapter<>(this,
                 R.layout.list_item_basis,emtyListForInitialisation);
         listView.setAdapter(productArrayAdapter);
 
@@ -263,7 +267,8 @@ public class BestellungActivity extends AppCompatActivity {
         for (LagerZuBestellung lzb : productList){
             preis += (lzb.getProduct().getPreis() * lzb.getQuantity());
         }
-        editTextPreis.setText(String.valueOf(preis) + "€");
+        String text = String.valueOf(preis) + "€";
+        editTextPreis.setText(text);
     }
 
     @Override

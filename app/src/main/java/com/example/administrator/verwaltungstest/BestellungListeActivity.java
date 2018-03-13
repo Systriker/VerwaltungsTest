@@ -54,7 +54,9 @@ public class BestellungListeActivity extends AppCompatActivity {
         Log.d(TAG, "onResume: Die Datenquelle wird geöffnet");
         datasource.open();
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
-        getSupportActionBar().setTitle(getResources().getString(R.string.button_bestellungen));
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.button_bestellungen));
+        }
         showAllListEntries();
         //aktiviere bearbeiten und löschen wenn eine bereits vorhande Bestellung ausgewählt wurde
         if (slectedBestellung == null){
@@ -77,7 +79,7 @@ public class BestellungListeActivity extends AppCompatActivity {
 
         bestellungListView = findViewById(R.id.listview_bestellung);
         bestellungListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        ArrayAdapter<Bestellung> bestellungArrayAdapter = new ArrayAdapter<Bestellung>(this,
+        ArrayAdapter<Bestellung> bestellungArrayAdapter = new ArrayAdapter<>(this,
                 R.layout.list_item_basis,emtyListForInitialisation);
         bestellungListView.setAdapter(bestellungArrayAdapter);
 

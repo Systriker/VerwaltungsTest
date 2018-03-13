@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 //Klasse für das Hinzufügen eines Produktes auf einer Bestellung
 public class LagerZuBestellungActivity extends AppCompatActivity {
@@ -96,10 +95,8 @@ public class LagerZuBestellungActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (editmode){
-
-                }else {
-                    datasource.createLager_zu_Bestellung(id, bestellung.getId(), product.getId(),Integer.parseInt(quantity));
+                if (!editmode){
+                    datasource.createLager_zu_Bestellung(bestellung.getId(), product.getId(),Integer.parseInt(quantity));
                 }
                 finish();
             }
@@ -119,7 +116,9 @@ public class LagerZuBestellungActivity extends AppCompatActivity {
     private void fillPage(){
 
         bestellung = datasource.getBestellung(getIntent().getLongExtra("Bestellung",0));
-        getSupportActionBar().setTitle(getResources().getString(R.string.titleProdukt));
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.titleProdukt));
+        }
         if (id != 0L){
             LagerZuBestellung lagerZuBestellung = datasource.getLager_zu_Bestellung(id);
             product = datasource.getProduct(lagerZuBestellung.getProduct().getId());

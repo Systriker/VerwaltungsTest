@@ -60,7 +60,7 @@
     <string name="lager_zu_bestellung_hint_anzahl">Anzahl</string>
     <string name="lager_zu_bestellung_text_produkt">Produkt:</string>
     <string name="lager_zu_bestellung_text_menge">Menge:</string>
-    <string name="button_ok">Ok</string>
+    <string name="button_ok">OK</string>
     <string name="hint_street">Straße</string>
     <string name="hint_hausnr">Hausnummer</string>
     <string name="hint_ort">Ort</string>

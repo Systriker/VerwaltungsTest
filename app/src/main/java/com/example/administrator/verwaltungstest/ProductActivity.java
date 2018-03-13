@@ -5,18 +5,12 @@ import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.TooltipCompat;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
-
-import java.math.BigDecimal;
-import java.text.NumberFormat;
 
 //Klasse für die genauere Ansicht/das Bearbeiten eines Produktes
 public class ProductActivity extends AppCompatActivity {
@@ -27,7 +21,6 @@ public class ProductActivity extends AppCompatActivity {
     private long id;
     private boolean editmode;
     private Datasource datasource;
-    private String current = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +43,8 @@ public class ProductActivity extends AppCompatActivity {
             public void onFocusChange(View view, boolean b) {
                 String text = editTextPreis.getText().toString();
                 if((text.length() != 0) && !text.substring(text.length() - 1).equals("€")){
-                    editTextPreis.setText(text + "€");
+                    String displayText = text + "€";
+                    editTextPreis.setText(displayText);
                 }
             }
         });
@@ -130,7 +124,7 @@ public class ProductActivity extends AppCompatActivity {
                 if (editmode){
                     datasource.updateProduct(ProductNummerLong, Name, Integer.parseInt(Quantity),PreisDouble);
                 }else {
-                    datasource.createProduct(ProductNummerLong, Name, Integer.parseInt(Quantity),PreisDouble);
+                    datasource.createProduct(Name, Integer.parseInt(Quantity),PreisDouble);
                 }
                 finish();
             }
@@ -152,15 +146,20 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     private void fillPage(){
-        getSupportActionBar().setTitle(getResources().getString(R.string.neuesProdukt));
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.neuesProdukt));
+        }
 
         if (id != 0L){
             Product product = datasource.getProduct(id);
-            getSupportActionBar().setTitle(getResources().getString(R.string.titleProdukt)+": " + id);
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setTitle(getResources().getString(R.string.titleProdukt) + ": " + id);
+            }
             editTextProductNummer.setText(String.valueOf(id));
             editTextName.setText(product.getName());
             editTextQuantity.setText(String.valueOf(product.getQuantity()));
-            editTextPreis.setText(String.valueOf(product.getPreis()) + "€");
+            String text = String.valueOf(product.getPreis()) + "€";
+            editTextPreis.setText(text);
         }
     }
 }

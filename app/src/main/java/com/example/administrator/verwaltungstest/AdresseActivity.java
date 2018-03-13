@@ -21,7 +21,7 @@ public class AdresseActivity extends AppCompatActivity {
     private long id;
     private boolean editmode;
     private Datasource datasource;
-    private Adresse adresse;
+    private Adresse adresse = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +111,7 @@ public class AdresseActivity extends AppCompatActivity {
                 if (editmode){
                     datasource.updateAdresse(adresse.getId(), TextStraße, intHausnr, TextZusatz, TextOrt, longPLZ);
                 }else {
-                    datasource.createAdresse(id, TextStraße, intHausnr, TextZusatz, TextOrt, longPLZ);
+                    datasource.createAdresse(TextStraße, intHausnr, TextZusatz, TextOrt, longPLZ);
                 }
                 finish();
             }
@@ -133,7 +133,9 @@ public class AdresseActivity extends AppCompatActivity {
     }
 
     private void fillPage(){
-        getSupportActionBar().setTitle(getResources().getString(R.string.neueAdresse));
+        if (!(getSupportActionBar()==null)) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.neueAdresse));
+        }
         if (id != 0L){
             Adresse adresse = datasource.getAdresse(id);
             getSupportActionBar().setTitle(getResources().getString(R.string.titleAdresse)+": " + id);
