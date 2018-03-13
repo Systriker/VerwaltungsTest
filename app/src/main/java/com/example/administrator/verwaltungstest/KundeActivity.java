@@ -106,6 +106,9 @@ public class KundeActivity extends AppCompatActivity {
                 }
 
                 if (editmode){
+                    if (adresse == null){
+                        adresse = datasource.getAdresse(datasource.getKunde(id).getAdresse());
+                    }
                     datasource.updateKunde(KundenNummerLong, Name, adresse.getId(), KundeTyp);
                 }else {
                     datasource.createKunde(Name, adresse.getId(), KundeTyp);

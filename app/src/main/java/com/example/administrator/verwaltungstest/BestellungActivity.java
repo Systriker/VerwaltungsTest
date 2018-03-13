@@ -105,7 +105,11 @@ public class BestellungActivity extends AppCompatActivity {
                 }
 
                 if (editmode){
-                    datasource.updateBestellung(BestellungNummerLong, (int)kunde.getId(),0);
+                    if (datasource.getBestellung(id).isBooked()) {
+                        datasource.updateBestellung(BestellungNummerLong, (int) kunde.getId(), 1);
+                    }else {
+                        datasource.updateBestellung(BestellungNummerLong, (int) kunde.getId(), 0);
+                    }
                 }else {
                     datasource.createBestellung((int)kunde.getId());
                 }
