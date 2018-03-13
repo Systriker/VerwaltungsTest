@@ -56,6 +56,9 @@ public class BestellungListeActivity extends AppCompatActivity {
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.button_bestellungen));
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setLogo(android.R.drawable.ic_menu_agenda);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
         }
         showAllListEntries();
         //aktiviere bearbeiten und löschen wenn eine bereits vorhande Bestellung ausgewählt wurde

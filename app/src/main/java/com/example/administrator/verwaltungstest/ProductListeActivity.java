@@ -54,6 +54,9 @@ public class ProductListeActivity extends AppCompatActivity {
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.titleProdukte));
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setLogo(android.R.drawable.ic_menu_sort_by_size);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
         }
         showAllListEntries();
         //wenn die Liste zur auswahl genutzt wird werden die editier und löschen Buttons ausgeblendet

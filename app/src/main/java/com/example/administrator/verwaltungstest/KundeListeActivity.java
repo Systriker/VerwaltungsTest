@@ -54,8 +54,10 @@ public class KundeListeActivity extends AppCompatActivity {
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
         if (!(getSupportActionBar() == null)) {
             getSupportActionBar().setTitle(getResources().getString(R.string.button_kunden));
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setLogo(android.R.drawable.ic_menu_my_calendar);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
         }
-        getSupportActionBar().setLogo(getResources().getDrawable(android.R.drawable.ic_menu_my_calendar));
         showAllListEntries();
         //wenn die Liste zur auswahl genutzt wird werden die editier und löschen Buttons ausgeblendet
         //und der hinzufügen Button als bestätigungs Button verwendet

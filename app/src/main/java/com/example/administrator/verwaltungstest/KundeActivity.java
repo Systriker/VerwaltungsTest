@@ -156,6 +156,9 @@ public class KundeActivity extends AppCompatActivity {
     private void fillPage(){
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.neuerKunde));
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setLogo(android.R.drawable.ic_menu_my_calendar);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
         }
         if (id != 0L){
             Kunde kunde = datasource.getKunde(id);

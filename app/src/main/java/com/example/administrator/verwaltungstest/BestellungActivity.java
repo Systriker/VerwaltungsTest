@@ -201,6 +201,9 @@ public class BestellungActivity extends AppCompatActivity {
         editTextKunde.setEnabled(false);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.neueBestellung));
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setLogo(android.R.drawable.ic_menu_agenda);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
         }
         findViewById(R.id.buttonBuchen).setEnabled(false);
         (findViewById(R.id.buttonBuchen)).getBackground()

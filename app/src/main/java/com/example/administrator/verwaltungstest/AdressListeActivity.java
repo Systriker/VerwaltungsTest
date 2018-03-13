@@ -49,6 +49,9 @@ public class AdressListeActivity extends AppCompatActivity {
         Log.d(TAG, "folgende Einträge sind in der DB vorhanden: ");
         if (getSupportActionBar()!= null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.titleAdressen));
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setLogo(android.R.drawable.ic_menu_my_calendar);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
         }
         showAllListEntries();
         //aktiviere bearbeiten und löschen wenn eine bereits vorhande Adresse ausgewählt wurde

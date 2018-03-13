@@ -148,6 +148,9 @@ public class ProductActivity extends AppCompatActivity {
     private void fillPage(){
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.neuesProdukt));
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setLogo(android.R.drawable.ic_menu_sort_by_size);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
         }
 
         if (id != 0L){

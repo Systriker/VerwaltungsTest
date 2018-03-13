@@ -118,6 +118,9 @@ public class LagerZuBestellungActivity extends AppCompatActivity {
         bestellung = datasource.getBestellung(getIntent().getLongExtra("Bestellung",0));
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getResources().getString(R.string.titleProdukt));
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setLogo(android.R.drawable.ic_menu_sort_by_size);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
         }
         if (id != 0L){
             LagerZuBestellung lagerZuBestellung = datasource.getLager_zu_Bestellung(id);
