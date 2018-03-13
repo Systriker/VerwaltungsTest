@@ -77,7 +77,7 @@ public class AdressListeActivity extends AppCompatActivity {
 
         adresseListView = findViewById(R.id.listview_adresse);
         adresseListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        ArrayAdapter<Adresse> adresseArrayAdapter = new ArrayAdapter<Adresse>(this,
+        ArrayAdapter<Adresse> adresseArrayAdapter = new ArrayAdapter<>(this,
                 R.layout.list_item_basis,emtyListForInitialisation);
         adresseListView.setAdapter(adresseArrayAdapter);
 
